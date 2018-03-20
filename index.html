@@ -12,8 +12,12 @@
       _self.fontSize = 100;//默认字体大小
       _self.widthProportion = function(){
         var device_width = document.getElementsByTagName("html")[0].offsetWidth;
+        if (device_width > 480){
+          device_width = 480
+        }
         var p = device_width/_self.width;
         return p;
+
       };
       _self.changePage = function(){
         var rem = _self.widthProportion()*_self.fontSize;

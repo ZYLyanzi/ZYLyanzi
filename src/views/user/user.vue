@@ -1,0 +1,132 @@
+<style scoped>
+  .user-name{
+    color: #999999;
+    font-size: 0.28rem;
+    margin: 30px 0;
+  }
+  .options{
+    background-color: #ffffff;
+  }
+  .options .option-item{
+    background-color: #ffffff;
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .options .option-item .item-desc{
+    width: 80%;
+    margin-left: 10px;
+    position: relative;
+    text-align: left;
+  }
+  .option-item .item-desc .name{
+    padding-left: 30px;
+  }
+  .option-item .item-desc .my-apply-task{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    background-position: -67px -104px ;
+  }
+  .option-item .item-desc .checked-task{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    background-position: -1px -101px;
+  }
+  .option-item .item-desc .my-reward{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    background-position: -32px -35px ;
+  }
+  .option-item .item-desc .edit-password{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 5px;
+    background-position: -134px -35px ;
+  }
+  .options .option-item .item-ico{
+    width: 20%;
+    position: relative;
+  }
+  .item-ico .right-jiantou{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: -3px;
+    right: 0;
+    background-position: 0 -179px;
+  }
+</style>
+<template>
+	<section>
+    <mt-header title="个人中心">
+    </mt-header>
+    <div class="main">
+      <div class="user-name">账号：香蕉你个不拿拿</div>
+      <div class="options">
+        <ul>
+          <li class="option-item">
+            <span class="item-desc">
+              <i class="my-apply-task ico"></i>
+              <span class="name">我发布的任务</span>
+            </span>
+            <span class="item-ico"><i class="right-jiantou ico"></i> </span>
+          </li>
+          <li class="option-item">
+            <span class="item-desc">
+              <i class="checked-task ico"></i>
+              <span class="name">任务审核</span>
+            </span>
+            <span class="item-ico"><i class="right-jiantou ico"></i> </span>
+          </li>
+          <li class="option-item">
+            <span class="item-desc">
+              <i class="my-reward ico"></i>
+              <span class="name">我的奖励</span>
+            </span>
+            <span class="item-ico"><i class="right-jiantou ico"></i> </span>
+          </li>
+          <li class="option-item">
+            <span class="item-desc">
+              <i class="edit-password ico"></i>
+              <span class="name">修改密码</span>
+            </span>
+            <span class="item-ico"><i class="right-jiantou ico"></i> </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <bootomTap></bootomTap>
+	</section>
+</template>
+<script>
+// import { Loadmore } from 'mint-ui'
+import bootomTap from '@/common/components/bootom_tap.vue'
+import { mapState, mapGetters, mapActions } from 'vuex'
+export default {
+  components: {bootomTap},
+	data() {
+		return {
+      selected: 'user'
+		}
+	},
+	created() {
+	},
+	methods: {
+
+	},
+	computed:{
+	}
+
+}
+</script>

@@ -37,7 +37,7 @@
 </style>
 <template>
   <section>
-    <mt-header title="登录">
+    <mt-header title="注册">
       <router-link to="/" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
@@ -45,11 +45,12 @@
     <div class="page-part">
       <mt-field label="账号" placeholder="请输入账号" :attr="{maxlength:20}" type="tel" v-model="phone" :state='rules.phone.itState'></mt-field>
       <mt-field label="密码" placeholder="请输入密码" :attr="{maxlength:20}" v-model="code" :state='rules.code.itState'></mt-field>
+      <mt-field label="确认密码" placeholder="请确认密码" :attr="{maxlength:20}" v-model="confirmCode" :state='rules.code.itState'></mt-field>
     </div>
     <div class="login-bottom">
-      <mt-button size="large" type="primary" class="login-btn-login"  @click="toLogin">登录</mt-button>
-      <div class="line">----------------还没有账号---------------</div>
-      <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce"  @click="toLogin">注册</mt-button>
+      <mt-button size="large" type="primary" class="login-btn-login"  @click="toLogin">免费注册</mt-button>
+      <div class="line">----------------已有账号---------------</div>
+      <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce"  @click="toLogin">立即登录</mt-button>
 
     </div>
   </section>
@@ -57,8 +58,8 @@
 
 <script>
   import util from '@/common/utils/util'
-  //  import {getCode, login, getUserSignup} from '../../../resources/api'
-  //  import * as types from '../../../store/types'
+//  import {getCode, login, getUserSignup} from '../../../resources/api'
+//  import * as types from '../../../store/types'
   export default {
     data () {
       return {
@@ -67,6 +68,7 @@
         text: '获取验证码',
         phone: '',
         code: '',
+        confirmCode:'',
         token: '12345678',
         rules: {
           phone: {

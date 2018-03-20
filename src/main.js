@@ -9,6 +9,7 @@ import store from './store/store'
 import router from './router';
 import axios from './resources/interceptors/http_interceptors'
 import '../static/css/base.css';
+import '../static/css/style.css';
 
 Vue.config.productionTip = false;
 
