@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
+import store from '@/store/store'
+import * as types from '@/store/types'
 Vue.use(Router);
 
 const router = new Router({
@@ -21,6 +22,16 @@ const router = new Router({
       component: resolve => require([`@/views/login/register`],resolve)
     },
     {
+      path: '/edit_password',
+      name: 'register',
+      component: resolve => require([`@/views/login/edit_password`],resolve)
+    },
+    {
+      path: '/task/add',
+      name: 'task_add',
+      component: resolve => require([`@/views/task/add`],resolve)
+    },
+    {
       path: '/task/list',
       name: 'task_list',
       component: resolve => require([`@/views/task/list`],resolve)
@@ -29,6 +40,16 @@ const router = new Router({
       path: '/task/detail/:id',
       name: 'task_detail',
       component: resolve => require([`@/views/task/detail`],resolve)
+    },
+    {
+      path: '/task/reward',
+      name: 'reward_list',
+      component: resolve => require([`@/views/task/reward_list`],resolve)
+    },
+    {
+      path: '/task/check',
+      name: 'check',
+      component: resolve => require([`@/views/task/check_list`],resolve)
     },
     {
       path: '/user',

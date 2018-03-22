@@ -7,12 +7,15 @@ import Mint from 'mint-ui';
 import App from './app'
 import store from './store/store'
 import router from './router';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 import axios from './resources/interceptors/http_interceptors'
 import '../static/css/base.css';
 import '../static/css/style.css';
 
 Vue.config.productionTip = false;
 
+Vue.use(ElementUI)
 Vue.use(Mint);
 new Vue({
   el: '#app',

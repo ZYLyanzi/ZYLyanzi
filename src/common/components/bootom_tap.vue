@@ -1,5 +1,27 @@
 <style>
   /*.bootom-tap*/
+  .bootom-tap{
+    width: 100%;
+    height: 45px;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top: 1px solid #e7e7eb;
+    background: #f2f2f2;
+    /*background: #d9d9d9;*/
+  }
+  @media (min-width: 481px){
+    .bootom-tap {
+      width: 480px;
+    }
+  }
+
+  .bootom-tap .tap-item{
+    width: 33.333333%;
+    margin-top: 6px;
+  }
   .bootom-tap .tap-box{
     position: relative;
   }
@@ -26,44 +48,47 @@
   .bootom-tap .tap-box .user{
     background-position: -1px 0 ;
   }
-  .bootom-tap .tap-box .home.home-selected{
+  .bootom-tap .selected{
+    color: #1d97da;
+  }
+  .bootom-tap .selected .home{
     background-position: -103px -83px;
   }
-  .bootom-tap .tap-box .add.add-selected{
+  .bootom-tap .selected .add{
     background-position: -103px -118px;
   }
-  .bootom-tap .tap-box .user.user-selected{
+  .bootom-tap .selected .user{
     background-position: -1px -16px;
   }
 </style>
 <template>
-    <mt-tabbar v-model="selected" class="bootom-tap">
-      <mt-tab-item class="rw-tab" id="home">
-        <div class="tap-box one" @click="tochangeTab(1)">
-          <i class="home ico" :class="{'home-selected': selected=='home' }"></i>
+    <div class="bootom-tap" >
+      <div class="tap-item" :class="{'selected': tapName=='home' }" @click="tochangeTab(1)">
+        <div class="tap-box one">
+          <i class="home ico"></i>
           <div class="text">首页</div>
-        </div>
-      </mt-tab-item>
-      <mt-tab-item class="rw-tab"  id="add">
-        <div class="tap-box one" @click="tochangeTab(2)">
-          <i class="add ico" :class="{'add-selected': selected=='add' }"></i>
+      </div>
+      </div>
+      <div class="tap-item" :class="{'selected': tapName=='add' }"  @click="tochangeTab(2)">
+        <div class="tap-box one">
+          <i class="add ico"></i>
           <div class="text">发布</div>
         </div>
-      </mt-tab-item>
-      <mt-tab-item class="rw-tab" id="user">
-        <div class="tap-box one"  @click="tochangeTab(3)">
-          <i class="user ico" :class="{'user-selected': selected=='user' }"></i>
+      </div>
+      <div class="tap-item" :class="{'selected': tapName=='user' }" @click="tochangeTab(3)">
+        <div class="tap-box one">
+          <i class="user ico"></i>
           <div class="text">我的</div>
         </div>
-      </mt-tab-item>
-    </mt-tabbar>
+      </div>
+    </div>
 </template>
 <script>
 export default {
   name: 'bootomTap',
+  props:["tapName"],
 	data() {
 		return {
-      selected: 'home'
 		}
 	},
 	created() {
@@ -76,8 +101,9 @@ export default {
         });
       }
       if (id == 2){
+
         this.$router.replace({
-          path: '/',
+          path: '/task/add',
         });
       }
       if (id == 3){
@@ -85,6 +111,8 @@ export default {
           path: '/user',
         });
       }
+
+      console.log("this.selected", this.selected)
     }
 
 	},

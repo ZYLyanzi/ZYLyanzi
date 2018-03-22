@@ -75,28 +75,28 @@
       <div class="user-name">账号：香蕉你个不拿拿</div>
       <div class="options">
         <ul>
-          <li class="option-item">
+          <li class="option-item" @click="gotoPage(1)">
             <span class="item-desc">
               <i class="my-apply-task ico"></i>
               <span class="name">我发布的任务</span>
             </span>
             <span class="item-ico"><i class="right-jiantou ico"></i> </span>
           </li>
-          <li class="option-item">
+          <li class="option-item" @click="gotoPage(2)">
             <span class="item-desc">
               <i class="checked-task ico"></i>
               <span class="name">任务审核</span>
             </span>
             <span class="item-ico"><i class="right-jiantou ico"></i> </span>
           </li>
-          <li class="option-item">
+          <li class="option-item" @click="gotoPage(3)">
             <span class="item-desc">
               <i class="my-reward ico"></i>
               <span class="name">我的奖励</span>
             </span>
             <span class="item-ico"><i class="right-jiantou ico"></i> </span>
           </li>
-          <li class="option-item">
+          <li class="option-item" @click="gotoPage(4)">
             <span class="item-desc">
               <i class="edit-password ico"></i>
               <span class="name">修改密码</span>
@@ -106,7 +106,7 @@
         </ul>
       </div>
     </div>
-    <bootomTap></bootomTap>
+    <bootomTap :tapName="tapName"></bootomTap>
 	</section>
 </template>
 <script>
@@ -117,13 +117,35 @@ export default {
   components: {bootomTap},
 	data() {
 		return {
-      selected: 'user'
+      tapName: 'user',
 		}
 	},
 	created() {
 	},
 	methods: {
+    gotoPage(id) {
+      if (id == 1){
+        this.$router.replace({
+          path: '/task/list',
+        });
+      }
+      if (id == 2){
 
+        this.$router.replace({
+          path: '/task/check',
+        });
+      }
+      if (id == 3){
+        this.$router.replace({
+          path: '/task/reward',
+        });
+      }
+      if (id == 4){
+        this.$router.replace({
+          path: '/edit_password',
+        });
+      }
+    },
 	},
 	computed:{
 	}

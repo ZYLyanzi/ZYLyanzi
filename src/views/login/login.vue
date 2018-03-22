@@ -38,18 +38,18 @@
 <template>
   <section>
     <mt-header title="登录">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
-      </router-link>
+      <!--<router-link to="/" slot="left">-->
+        <!--<mt-button icon="back">返回</mt-button>-->
+      <!--</router-link>-->
     </mt-header>
     <div class="page-part">
-      <mt-field label="账号" placeholder="请输入账号" :attr="{maxlength:20}" type="tel" v-model="phone" :state='rules.phone.itState'></mt-field>
-      <mt-field label="密码" placeholder="请输入密码" :attr="{maxlength:20}" v-model="code" :state='rules.code.itState'></mt-field>
+      <mt-field label="账号" placeholder="请输入用户名" :attr="{maxlength:20}" v-model="userName" :state='rules.userName.itState'></mt-field>
+      <mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:8}" v-model="password" :state='rules.password.itState'></mt-field>
     </div>
     <div class="login-bottom">
       <mt-button size="large" type="primary" class="login-btn-login"  @click="toLogin">登录</mt-button>
       <div class="line">----------------还没有账号---------------</div>
-      <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce"  @click="toLogin">注册</mt-button>
+      <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce"  @click="toRegist">注册</mt-button>
 
     </div>
   </section>
@@ -57,26 +57,27 @@
 
 <script>
   import util from '@/common/utils/util'
-  //  import {getCode, login, getUserSignup} from '../../../resources/api'
-  //  import * as types from '../../../store/types'
+  import user from '@/resources/user'
+  import md5 from 'js-md5';
+  import * as types from '@/store/types'
   export default {
     data () {
       return {
         btnStatus: false,
         validCount: 0,
         text: '获取验证码',
-        phone: '',
-        code: '',
+        userName: '',
+        password: '',
         token: '12345678',
         rules: {
-          phone: {
+          userName: {
             itRequried: {reg: true, msg: ''},
-            itType: {reg: /^1[3|4|5|7|8][0-9]{9}$/, msg: ''},
-            itLen: {reg: 11, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 20, msg: ''},
             itState: '',
             itMsg: '',
           },
-          code: {
+          password: {
             itRequried: {reg: true, msg: ''},
             itType: {reg: '', msg: ''},
             itLen: {reg: 8, msg: ''},
@@ -100,15 +101,30 @@
         }else {
           let vm = this;
           let para = {
-            phone: vm.phone,
-            code: vm.code,
-            openId: localStorage.openid,
+            userName: vm.userName,
+            password: md5(vm.password)
           };
-          console.log("登录查看vm1", vm);
-          login(para).then((res) => {
 
-          });
+//          请求
+//          user.userLogin(para).then((res) => {
+//            if (res.msgCode == 1){
+//              vm.$store.commit(types.LOGIN, res.token);
+//              let userId = res.userId;
+//              user.queryUserInfo(userId).then((res) => {
+//                if (res.msgCode == 1){
+//                  vm.$store.commit('setUserInfo', res.user);
+//                }
+//              });
+//            }
+//          });
+
+
         }
+      },
+      toRegist(){
+        this.$router.push({
+          path: '/register'
+        })
       }
     }
   }

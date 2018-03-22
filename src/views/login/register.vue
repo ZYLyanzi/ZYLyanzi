@@ -37,48 +37,56 @@
 </style>
 <template>
   <section>
-    <mt-header title="注册">
-      <router-link to="/" slot="left">
-        <mt-button icon="back">返回</mt-button>
+    <mt-header title="免费注册">
+      <router-link to="/login" slot="left">
+        <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
     <div class="page-part">
-      <mt-field label="账号" placeholder="请输入账号" :attr="{maxlength:20}" type="tel" v-model="phone" :state='rules.phone.itState'></mt-field>
-      <mt-field label="密码" placeholder="请输入密码" :attr="{maxlength:20}" v-model="code" :state='rules.code.itState'></mt-field>
-      <mt-field label="确认密码" placeholder="请确认密码" :attr="{maxlength:20}" v-model="confirmCode" :state='rules.code.itState'></mt-field>
+      <mt-field label="账号" placeholder="请输入账号" :attr="{maxlength:20}" v-model="userName" :state='rules.userName.itState'></mt-field>
+      <mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:20}" v-model="password" :state='rules.password.itState'></mt-field>
+      <mt-field label="确认密码" placeholder="请确认密码" type="password" :attr="{maxlength:20}" v-model="confirmPassword" :state='rules.confirmPassword.itState'></mt-field>
     </div>
     <div class="login-bottom">
-      <mt-button size="large" type="primary" class="login-btn-login"  @click="toLogin">免费注册</mt-button>
+      <mt-button size="large" type="primary" class="login-btn-login"  @click="toRegist">免费注册</mt-button>
       <div class="line">----------------已有账号---------------</div>
       <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce"  @click="toLogin">立即登录</mt-button>
-
     </div>
   </section>
 </template>
 
 <script>
   import util from '@/common/utils/util'
-//  import {getCode, login, getUserSignup} from '../../../resources/api'
-//  import * as types from '../../../store/types'
+  import user from '@/resources/user'
+  import md5 from 'js-md5';
+  import * as types from '@/store/types'
+  import { Toast} from 'mint-ui'
   export default {
     data () {
       return {
         btnStatus: false,
         validCount: 0,
         text: '获取验证码',
-        phone: '',
-        code: '',
-        confirmCode:'',
+        userName: '',
+        password: '',
+        confirmPassword: '',
         token: '12345678',
         rules: {
-          phone: {
+          userName: {
             itRequried: {reg: true, msg: ''},
-            itType: {reg: /^1[3|4|5|7|8][0-9]{9}$/, msg: ''},
-            itLen: {reg: 11, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 20, msg: ''},
             itState: '',
             itMsg: '',
           },
-          code: {
+          password: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 8, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+          confirmPassword: {
             itRequried: {reg: true, msg: ''},
             itType: {reg: '', msg: ''},
             itLen: {reg: 8, msg: ''},
@@ -92,7 +100,7 @@
 //      this.$store.commit(types.TITLE, '登录');
     },
     methods:{
-      toLogin() {
+      toRegist() {
         this.validCount = 0;
         for (let objElem in this.rules) {
           this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
@@ -101,16 +109,38 @@
 //          alert("校验不通过")
         }else {
           let vm = this;
-          let para = {
-            phone: vm.phone,
-            code: vm.code,
-            openId: localStorage.openid,
-          };
-          console.log("登录查看vm1", vm);
-          login(para).then((res) => {
-
-          });
+          if (vm.password !== vm.confirmPassword){
+            Toast({
+              message: '两次密码输入不一致',
+              position: 'middle',
+              duration: 2000
+            });
+          }else {
+            let para = {
+              userName: vm.userName,
+              password: vm.password,
+            };
+            console.log("登录查看vm1", vm);
+            vm.$store.commit(types.LOGIN, '123456');
+//          请求
+//            user.userRegister(para).then((res) => {
+//              if (res.msgCode == 1){
+//                vm.$store.commit(types.LOGIN, res.token);
+//                let userId = res.userId;
+//                user.queryUserInfo(userId).then((res) => {
+//                  if (res.msgCode == 1){
+//                    vm.$store.commit('setUserInfo', res.user);
+//                  }
+//                });
+//              }
+//            });
+          }
         }
+      },
+      toLogin(){
+        this.$router.replace({
+          path: '/login'
+        })
       }
     }
   }

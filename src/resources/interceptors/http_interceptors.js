@@ -29,9 +29,9 @@ axios.interceptors.request.use(config => {
 // http response 拦截器
 axios.interceptors.response.use(res => {
   Indicator.close();
-  if(res.data.code < 1){
+  if(res.data.msgCode < 1){
     // let msg = ''
-    // // switch(res.data.code){
+    // // switch(res.data.msgCode){
     // //     case 2: msg = '登陆校验失败';
     // //     case 3: msg = '响应超时';
     // //     case 4: msg = '权限不足';

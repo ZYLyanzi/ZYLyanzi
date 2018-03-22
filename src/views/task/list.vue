@@ -1,14 +1,96 @@
+
+
 <template>
 	<section>
+    <mt-header title="任务列表">
+      <router-link to="/user" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </mt-header>
 		<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-		  	<ul>
-				<li v-for="d in list" @click="detail(d.product_id)">{{d.name}}</li>
-			</ul>
-			<ul>
-				<li v-for="d in hot" @click="detail(d.product_id)">{{d.name}}</li>
-			</ul>
+      <div class="list">
+        <ul>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+
+          </li>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+
+          </li>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+
+          </li>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+          </li>
+          <li>
+            <div class="list-item">
+              <span class="desc">
+                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="time">时间: 3/19-3/28</div>
+                <div class="price">￥15</div>
+              </span>
+              <span class="btn">
+                <mt-button plain type="danger" size="small">马上抢</mt-button>
+              </span>
+            </div>
+
+          </li>
+        </ul>
+
+      </div>
 		</mt-loadmore>
-		
+
 	</section>
 </template>
 <script>
@@ -55,6 +137,6 @@ export default {
 	},
 	computed:{
 	}
-	
+
 }
 </script>
