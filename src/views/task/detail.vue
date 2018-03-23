@@ -50,7 +50,7 @@
 
     <div class="detail-btn">
       <div class="bootom">
-        <div class="sub-btn">
+        <div class="sub-btn" @click="toStart()">
           <label >开始任务</label>
         </div>
       </div>
@@ -62,14 +62,17 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
 	data() {
 		return {
-
+			id: 0,
 		}
 	},
 	created() {
-		const id = this.$route.params.id
-		this.getInfo(id)
+		this.id = this.$route.params.id
+		this.getInfo(this.id)
 	},
 	methods: {
+		toStart(){
+			this.$router.push({path:'/task/start/'+this.id})
+		},
 		...mapActions({
 			getInfo:'product/getInfo'
 		}),

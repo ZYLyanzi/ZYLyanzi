@@ -1,0 +1,71 @@
+<style scoped>
+	.layout{
+		background-color: #ffffff;
+		margin-top: 10px;
+		padding: 10px;
+		padding-left: 15px;
+	}
+	.layout .item{
+		display: flex;
+		flex-direction: row;
+		padding-left: 10px;
+		text-align: left;
+		margin-bottom: 15px;
+	}
+	.rw-feild{
+		margin-bottom: 10px;
+		width: 15%;
+		color: #333333;
+	}
+	.rw-value{
+		margin-left: 10px;
+		width: 82%;
+		color: #888888;
+	}
+</style>
+<template>
+	<section>
+		<mt-header title="提交详情">
+			<router-link to="/user" slot="left">
+				<mt-button icon="back"></mt-button>
+			</router-link>
+		</mt-header>
+		<div class="layout">
+			提交任务的图片
+		</div>
+		<div class="layout">
+			提交任务的图片
+		</div>
+	</section>
+</template>
+<script>
+	import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+	export default {
+		data() {
+			return {
+				id: 0,
+			}
+		},
+		created() {
+			this.id = this.$route.params.id
+			this.getInfo(this.id)
+		},
+		methods: {
+			toStart(){
+				this.$router.push({path:'/task/start/'+this.id})
+			},
+			...mapActions({
+				getInfo:'product/getInfo'
+			}),
+			...mapMutations({
+				getToCart:'cart/addProduct'
+			})
+		},
+		computed:{
+			...mapGetters({
+				detail: 'product/currentDetail'
+			})
+		}
+
+	}
+</script>

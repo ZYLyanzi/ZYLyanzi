@@ -45,7 +45,7 @@
           <li>
             <div class="list-item reward-list">
               <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="title" @click="to">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
               </span>
               <span class="btn">
                 ￥15
