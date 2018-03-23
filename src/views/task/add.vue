@@ -61,20 +61,20 @@
 			<div class="layout task-type">
 				<div class="field">任务类型</div>
 				<div class="part">
-					<el-radio v-model="task.type" label="1">拼多多（砍价）</el-radio>
-					<el-radio v-model="task.type" label="2">拼多多（红包）</el-radio>
+					<el-radio v-model="taskType" label="1">拼多多（砍价）</el-radio>
+					<el-radio v-model="taskType" label="2">拼多多（红包）</el-radio>
 				</div>
 				<div class="part">
-					<el-radio v-model="task.type" label="3">关注</el-radio>
-					<el-radio v-model="task.type" label="4">mp直投</el-radio>
+					<el-radio v-model="taskType" label="3">关注</el-radio>
+					<el-radio v-model="taskType" label="4">mp直投</el-radio>
 				</div>
 				<div class="part">
-					<el-radio v-model="task.type" label="5">第三方直投</el-radio>
-					<el-radio v-model="task.type" label="6">微信阅读量</el-radio>
+					<el-radio v-model="taskType" label="5">第三方直投</el-radio>
+					<el-radio v-model="taskType" label="6">微信阅读量</el-radio>
 				</div>
 				<div class="part">
-					<el-radio v-model="task.type" label="7">微信阅读点赞</el-radio>
-					<el-radio v-model="task.type" label="8">微信阅读评论点赞</el-radio>
+					<el-radio v-model="taskType" label="7">微信阅读点赞</el-radio>
+					<el-radio v-model="taskType" label="8">微信阅读评论点赞</el-radio>
 				</div>
 			</div>
 			<div class="layout">
@@ -95,7 +95,7 @@
 			</div>
 
 			<div class="add-btn">
-				<label>开始任务</label>
+				<label>发布任务</label>
 			</div>
 		</div>
 		<bootomTap :tapName="tapName"></bootomTap>
@@ -112,9 +112,10 @@
 			return {
 				tapName: 'add',
 				username: '',
+				taskType: 0,
 				taskTypes: [
 					{
-						taskType: 0,
+						name: '',
 						taskTypeAttrs:[],
 					}
 				],

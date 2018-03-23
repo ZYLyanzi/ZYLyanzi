@@ -51,7 +51,7 @@
     <div class="detail-btn">
       <div class="bootom">
         <div class="sub-btn">
-          <label >开始任务</label>
+          <label>开始任务</label>
         </div>
       </div>
     </div>
