@@ -37,8 +37,8 @@
       </router-link>
     </mt-header>
       <div class="top-tap">
-        <div class="tap-item selected">待审核</div>
-        <div class="tap-item">已审核</div>
+        <div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">待审核</div>
+        <div class="tap-item"  :class="{'selected': state==4}" @click="changestate(4)">已审核</div>
       </div>
       <div class="list">
         <ul>
@@ -190,31 +190,23 @@
 </template>
 <script>
 // import { Loadmore } from 'mint-ui'
+import task from '@/resources/task'
+
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
 	data() {
 		return {
+      taskId: 0,
+      state: 3,
 			allLoaded:false,
 			list:[],
-			hot:[]
 		}
 	},
 	created() {
-		let vm = this
-		vm.getList({
-			type:'123',
-			pageNum:1,
-			callback:function(res) {
-				vm.list = res
-			}
-		})
-		vm.getList({
-			type:'1qwe',
-			pageNum:1,
-			callback:function(res) {
-				vm.hot = res
-			}
-		})
+    this.taskId = this.$route.params.id;
+    // this.getList();
+
+
 	},
 	methods: {
 		loadTop() {
@@ -223,12 +215,24 @@ export default {
 		loadBottom() {
 
 		},
-		detail(id) {
-			this.$router.push({path:'/product/detail/'+id})
-		},
-		...mapActions({
-			getList:'product/getList'
-		})
+    changestate(type){
+      this.state = type;
+      this.getList();
+    },
+		getList(){
+      let vm = this;
+      let para = {
+        taskId: vm.taskId,
+        state: vm.state
+      }
+      task.queryDistributeTask( para).then((res) => {
+        if (res.msgCode == 1){
+          vm.list = res.taskDistribute;
+
+        }
+      });
+
+    }
 	},
 	computed:{
 	}

@@ -103,7 +103,7 @@ export default {
       if (id == 2){
 
         this.$router.replace({
-          path: '/task/add',
+          path: '/task/add/0',
         });
       }
       if (id == 3){

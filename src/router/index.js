@@ -27,7 +27,7 @@ const router = new Router({
       component: resolve => require([`@/views/login/edit_password`],resolve)
     },
     {
-      path: '/task/add',
+      path: '/task/add/:id',
       name: 'task_add',
       component: resolve => require([`@/views/task/add`],resolve)
     },
@@ -42,12 +42,22 @@ const router = new Router({
       component: resolve => require([`@/views/task/detail`],resolve)
     },
     {
+      path: '/task/dist_detail',
+      name: 'task_detail',
+      component: resolve => require([`@/views/task/dist_detail`],resolve)
+    },
+    {
+      path: '/task/start/:id',
+      name: 'task_start',
+      component: resolve => require([`@/views/task/start`],resolve)
+    },
+    {
       path: '/task/reward',
       name: 'reward_list',
       component: resolve => require([`@/views/task/reward_list`],resolve)
     },
     {
-      path: '/task/check',
+      path: '/task/check/:id',
       name: 'check',
       component: resolve => require([`@/views/task/check_list`],resolve)
     },

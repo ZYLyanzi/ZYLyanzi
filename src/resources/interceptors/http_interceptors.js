@@ -9,11 +9,17 @@ axios.defaults.timeout = config.timeout;
 axios.defaults.baseURL = config.host;
 
 // http request 拦截器
-axios.interceptors.request.use(config => {
+  axios.interceptors.request.use(config => {
   if (store.state.token) {
-    config.headers['Auth-Token'] =  `${store.state.token}`;
+    console.log("http request 拦截器", store.state.token);
+    config.headers['token'] =  `${store.state.token}`;
+    // config.headers['Content-Type'] =  'application/x-www-form-urlencoded';
+
+    // config.headers['content-type'] =  'application/x-www-form-urlencoded';
+    //
     //  config.headers.Authorization =  `token ${store.state.token}`;
   }
+    console.log("http request 拦截器", config);
   Indicator.open();
   return config
 },error => {
@@ -28,6 +34,9 @@ axios.interceptors.request.use(config => {
 
 // http response 拦截器
 axios.interceptors.response.use(res => {
+
+  console.log("http response 拦截器");
+
   Indicator.close();
   if(res.data.msgCode < 1){
     // let msg = ''
@@ -38,16 +47,17 @@ axios.interceptors.response.use(res => {
     // //     case 5: msg = '请求参数错误';
     // //     default : msg = '操作失败'
     // // }
-    // Toast({
-    //   message: res.data.msg,
-    //   position: 'middle',
-    //   duration: 2000
-    // });
+    Toast({
+      message: res.data.msg,
+      position: 'middle',
+      duration: 2000
+    });
   }
   return res.data
 
 },error => {
   Indicator.close();
+  console.log("http response 拦截器 error", error.response)
   // Toast({
   //   message: '请求失败',
   //   position: 'middle',

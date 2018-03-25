@@ -39,7 +39,7 @@
   position: fixed;
   left: 50%;
   bottom: 0;
-  width: 70%;
+  width: 240px;
   border-radius: 5px;
   height: 40px;
   line-height: 40px;
@@ -48,9 +48,13 @@
   text-align: center;
   margin: 20px auto;
   transform: translate3d(-50%, 0, 0);
-
 }
 .sub-btn{
   color: #ffffff;
   font-size: 0.28rem;
+}
+
+
+.mint-button{
+  font-size: 16px;
 }

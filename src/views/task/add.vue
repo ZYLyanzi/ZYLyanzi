@@ -17,14 +17,18 @@
 		margin-bottom: 10px;
 	}
 
-	.task-type div.part {
-		margin-bottom: 20px;
+	.task-type  .part {
+
 		width: 100%;
+    text-align: left;
 		display: flex;
 		flex-direction: row;
+    flex-wrap: wrap;
 	}
 
-	.task-type div.part .el-radio {
+	.task-type .el-radio {
+    margin-left: 0 !important;
+    margin-bottom: 20px;
 		text-align: left;
 		width: 50%;
 	}
@@ -58,50 +62,58 @@
 		<mt-header title="新建任务">
 		</mt-header>
 		<div class="main">
-			<div class="layout task-type">
+			<div class="layout task-type" v-if="!id">
 				<div class="field">任务类型</div>
-				<div class="part">
-					<el-radio v-model="taskType" label="1">拼多多（砍价）</el-radio>
-					<el-radio v-model="taskType" label="2">拼多多（红包）</el-radio>
-				</div>
-				<div class="part">
-					<el-radio v-model="taskType" label="3">关注</el-radio>
-					<el-radio v-model="taskType" label="4">mp直投</el-radio>
-				</div>
-				<div class="part">
-					<el-radio v-model="taskType" label="5">第三方直投</el-radio>
-					<el-radio v-model="taskType" label="6">微信阅读量</el-radio>
-				</div>
-				<div class="part">
-					<el-radio v-model="taskType" label="7">微信阅读点赞</el-radio>
-					<el-radio v-model="taskType" label="8">微信阅读评论点赞</el-radio>
-				</div>
+        <div class="part">
+          <el-radio v-for="item in taskTypes" v-model="taskParams.taskType" :label="item.name" @click="changeType(item)">{{item.name}}</el-radio>
+
+          <!--<el-radio v-model="taskType" label="1">拼多多（砍价）</el-radio>-->
+          <!--<el-radio v-model="taskType" label="2">拼多多（红包）</el-radio>-->
+
+          <!--<el-radio v-model="taskType" label="3">关注</el-radio>-->
+          <!--<el-radio v-model="taskType" label="4">mp直投</el-radio>-->
+
+          <!--<el-radio v-model="taskType" label="5">第三方直投</el-radio>-->
+          <!--<el-radio v-model="taskType" label="6">微信阅读量</el-radio>-->
+
+          <!--<el-radio v-model="taskType" label="7">微信阅读点赞</el-radio>-->
+          <!--<el-radio v-model="taskType" label="8">微信阅读评论点赞</el-radio>-->
+
+        </div>
+
+
 			</div>
 			<div class="layout">
-				<mt-field label="单价" placeholder="请输入单价" v-model="username"></mt-field>
-				<mt-field label="置顶加价" placeholder="请输入置顶加价" type="number" v-model="username"></mt-field>
-				<mt-field label="数量" placeholder="请输入数量" v-model="username"></mt-field>
-				<mt-field label="总价" placeholder="请输入总价" v-model="username"></mt-field>
+				<mt-field label="单价" disabled type="number"  min="1" v-model="unitPrice" :state='rules.unitPrice.itState'></mt-field>
+				<mt-field label="置顶加价" placeholder="请输入置顶加价" type="number" min="1" v-model="markupPrice" :state='rules.markupPrice.itState'></mt-field>
+				<mt-field label="数量" placeholder="请输入数量" type="number" min="1" v-model="totalSum" :state='rules.totalSum.itState'></mt-field>
+				<mt-field label="总价" disabled  type="number" min="1" v-model="totalPrice"></mt-field>
+        <mt-field label="限速" placeholder="请输入限速" type="number" min="1" v-model="taskParams.limitSpeed"></mt-field>
 			</div>
 			<div class="layout">
-				<mt-field label="公众号" placeholder="请输入公众号" v-model="username"></mt-field>
-				<mt-field label="被投人" placeholder="请输入被投人" v-model="username"></mt-field>
-				<mt-field label="链接" placeholder="请输入链接" v-model="username"></mt-field>
-				<mt-field label="限速" placeholder="请输入限速" v-model="username"></mt-field>
-				<mt-field label="备注" placeholder="选填" v-model="username"></mt-field>
+				<mt-field v-for="fieldItem in taskParams.taskTypeAttrs"
+                  :label="fieldItem.fieldCname" :placeholder="fieldItem.fieldCname" v-model="fieldItem.fieldConten"></mt-field>
+
+				<!--<mt-field label="被投人" placeholder="请输入被投人" v-model="username"></mt-field>-->
+				<!--<mt-field label="链接" placeholder="请输入链接" v-model="username"></mt-field>-->
+				<!--<mt-field label="备注" placeholder="选填" v-model="username"></mt-field>-->
+
+
+
 			</div>
 			<div class="layout">
 				<mt-field label="结束时间" placeholder="请选择结束时间" type="date" v-model="username"></mt-field>
 			</div>
 
-			<div class="add-btn">
-				<label>发布任务</label>
+			<div class="add-btn" @click="addTask()">
+				<label>{{btnText}}</label>
 			</div>
 		</div>
 		<bootomTap :tapName="tapName"></bootomTap>
 	</section>
 </template>
 <script>
+  import util from '@/common/utils/util'
 	import task from '@/resources/task'
 	import bootomTap from '@/common/components/bootom_tap.vue'
 	import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
@@ -110,36 +122,158 @@
 		components: {bootomTap},
 		data() {
 			return {
+        username: '',
+        taskType: '',
+
+        id: 0,
+        btnText: '发布任务',
+        validCount: 0,
 				tapName: 'add',
-				username: '',
-				taskType: 0,
-				taskTypes: [
-					{
-						name: '',
-						taskTypeAttrs:[],
-					}
-				],
+
+        unitPrice: 0,
+        markupPrice: 0,
+        totalPrice: 0,
+        totalSum: 0,
+
+        taskParams: {
+          userName: '',
+          taskType: 0,
+
+          limitSpeed: 0,
+          taskTypeAttrs: [],
+        },
+
+				taskTypes: [],
+
+        rules: {
+          unitPrice: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg:'', msg: ''},
+            itLen: {reg: 9, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+          markupPrice: {
+            itRequried: {reg: false, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 9, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+          totalSum: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 9, msg: ''},
+            itState: '',
+            itMsg: '',
+          }
+        }
+
 			}
 		},
 		created() {
-			let vm = this;
-			vm.userName = localStorage.userName;
-			let par = {
-				userName : vm.userName
-			};
-//			task.queryTaskType(par).then((res) => {
-//              if (res.msgCode == 1){
-//                vm.taskTypes = res.taskTypes;
-//              }
-//            });
+
+      if (this.$route.params.id && this.$route.params.id!=0){
+        this.id = this.$route.params.id;
+        this.btnText = '确认修改';
+        this.getInfo();
+      }else{
+
+        let vm = this;
+
+        let para = {
+          userName: localStorage.userName
+        }
+        task.queryTaskType( para).then((res) => {
+          if (res.msgCode == 1){
+            vm.taskTypes = res.taskTypes;
+            vm.taskParams.taskType = res.taskTypes[0].taskType;
+            vm.unitPrice = res.taskTypes[0].defPrice;
+            vm.taskParams.taskTypeAttrs = res.taskTypes[0].taskTypeAttrs;
+
+          }
+        });
+      }
+
 		},
 		methods: {
+      getInfo(){
+        let vm = this;
+        let para = {
+          taskId: vm.id
+        }
+        task.taskDesc( para).then((res) => {
+          if (res.msgCode == 1){
+            vm.taskParams = res.task;
+
+            vm.unitPrice = res.task.unitPrice;
+            vm.markupPrice = res.task.markupPrice;
+            vm.totalPrice = res.task.totalPrice;
+            vm.totalSum = res.task.totalSum;
+
+          }
+        });
+      },
+
+      changeType(itemData) {
+        let vm = this;
+        console.log('itemData', itemData)
+        vm.taskParams.taskType = res.itemData.taskType;
+        vm.unitPrice = res.itemData.defPrice;
+        vm.taskParams.taskTypeAttrs = res.itemData.taskTypeAttrs;
+      },
+
+      addTask(){
+        this.validCount = 0;
+        for (let objElem in this.rules) {
+          this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
+        }
+        if (this.validCount > 0) {
+//          alert("校验不通过")
+        }else {
+        let vm = this;
+        vm.taskParams.userName = localStorage.userName;
+        vm.taskParams.unitPrice = vm.unitPrice;
+        vm.taskParams.markupPrice = vm.markupPrice;
+        vm.taskParams.totalPrice = vm.totalPrice;
+        vm.taskParams.totalSum = vm.totalSum;
+
+
+        if (vm.id){
+          task.addTask(vm.taskParams).then((res) => {
+            if (res.msgCode == 1){
+              alert("修改成功")
+            }
+          });
+
+        }else {
+          task.addTask(vm.taskParams).then((res) => {
+            if (res.msgCode == 1){
+              alert("添加成功")
+            }
+          });
+        }
+
+
+
+
+        }
+        },
 			...mapActions({}),
 			...mapMutations({})
 		},
-		computed: {
-			...mapGetters({})
-		}
+    watch: {
+      // unitPrice: function (val) {
+      //   this.totalPrice = parseInt(val)* parseInt(this.taskParams.totalSum);
+      // },
+      markupPrice: function (val) {
+        // this.unitPrice += parseInt(val);
+        this.totalPrice = (parseInt(this.unitPrice) + parseInt(val))* parseInt(this.taskParams.totalSum);
+      },
+      totalSum: function (val) {
+        this.totalPrice =(parseInt(this.unitPrice) + parseInt(this.markupPrice)) * parseInt(val);
+      }
+    }
 
 	}
 </script>

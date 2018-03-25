@@ -22,6 +22,12 @@
     width: 82%;
     color: #888888;
   }
+  .detail-btn{
+    margin: 20px 0;
+  }
+  .detail-btn .mint-button{
+    margin: 10px;
+  }
 </style>
 <template>
 	<section>
@@ -49,39 +55,56 @@
     </div>
 
     <div class="detail-btn">
-      <div class="bootom">
-        <div class="sub-btn">
-          <label >开始任务</label>
-        </div>
-      </div>
+
+      <mt-button type="danger" @click="toEdit(1)">审核任务</mt-button>
+      <mt-button type="default" @click="toEdit(2)">修改任务</mt-button>
     </div>
+
 	</section>
 </template>
 <script>
+  import task from '@/resources/task'
 import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 export default {
 	data() {
 		return {
+      id: 0,
+      taskDetail: {},
 
 		}
 	},
 	created() {
-		const id = this.$route.params.id
-		this.getInfo(id)
+		this.id = this.$route.params.id
+		this.getInfo()
 	},
 	methods: {
-		...mapActions({
-			getInfo:'product/getInfo'
-		}),
-		...mapMutations({
-			getToCart:'cart/addProduct'
-		})
+    getInfo(){
+      let vm = this;
+      let para = {
+        taskId: vm.id
+      }
+      task.taskDesc( para).then((res) => {
+        if (res.msgCode == 1){
+          vm.taskDetail = res.task;
+
+        }
+      });
+    },
+    toEdit(type){
+      if (type == 1){
+        this.$router.replace({
+          path: '/task/check/'+this.id,
+        });
+      }else if (type == 2){
+        this.$router.replace({
+          path: '/task/add/'+this.id,
+        });
+      }
+
+    }
+
 	},
-	computed:{
-	    ...mapGetters({
-			detail: 'product/currentDetail'
-		})
-	}
+
 
 }
 </script>

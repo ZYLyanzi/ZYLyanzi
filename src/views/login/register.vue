@@ -64,13 +64,10 @@
   export default {
     data () {
       return {
-        btnStatus: false,
         validCount: 0,
-        text: '获取验证码',
         userName: '',
         password: '',
         confirmPassword: '',
-        token: '12345678',
         rules: {
           userName: {
             itRequried: {reg: true, msg: ''},
@@ -118,22 +115,20 @@
           }else {
             let para = {
               userName: vm.userName,
-              password: vm.password,
+              password: md5(vm.password),
             };
-            console.log("登录查看vm1", vm);
-            vm.$store.commit(types.LOGIN, '123456');
 //          请求
-//            user.userRegister(para).then((res) => {
-//              if (res.msgCode == 1){
-//                vm.$store.commit(types.LOGIN, res.token);
-//                let userId = res.userId;
-//                user.queryUserInfo(userId).then((res) => {
-//                  if (res.msgCode == 1){
-//                    vm.$store.commit('setUserInfo', res.user);
-//                  }
-//                });
-//              }
-//            });
+           user.userRegister(para).then((res) => {
+             if (res.msgCode == 1){
+               vm.$store.commit(types.LOGIN, res.token);
+               let userId = res.userId;
+               user.queryUserInfo(userId).then((res) => {
+                 if (res.msgCode == 1){
+                   vm.$store.commit('setUserInfo', res.user);
+                 }
+               });
+             }
+           });
           }
         }
       },

@@ -1,10 +1,18 @@
 <style scoped>
-  .rw-swipe{
+  .rw-swipe {
     width: 100%;
     height: 3rem;
     background-color: #ffd705;
   }
-  .line{
+  .new-user{
+    width: 100%;
+    height: 800px;
+    background: #ffd705;
+  }
+  .get-task{
+    margin: 20px 0;
+  }
+  .line {
     color: #8e8e8e;
     font-size: 0.32rem;
     height: 0.9rem;
@@ -19,128 +27,60 @@
       </router-link>
     </mt-header>
     <div class="main">
-      <mt-swipe :auto="3000" class="rw-swipe">
-        <mt-swipe-item class="rw-swipe-item">新手教程1</mt-swipe-item>
-        <mt-swipe-item class="rw-swipe-item">新手教程2</mt-swipe-item>
-        <mt-swipe-item class="rw-swipe-item">新手教程3</mt-swipe-item>
-      </mt-swipe>
-      <div class="line">----------------任务列表---------------</div>
+      <!--<mt-swipe :auto="3000" class="rw-swipe">-->
+        <!--<mt-swipe-item class="rw-swipe-item">新手教程1</mt-swipe-item>-->
+        <!--<mt-swipe-item class="rw-swipe-item">新手教程2</mt-swipe-item>-->
+        <!--<mt-swipe-item class="rw-swipe-item">新手教程3</mt-swipe-item>-->
+      <!--</mt-swipe>-->
 
-      <div class="list">
-        <!--<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">-->
-          <ul>
-            <li>
-              <div class="list-item" @click="toDetail(2)">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
 
-            </li>
-            <li>
-              <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
-            </li>
-            <li>
-              <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
+      <div class="layout">
 
-            </li>
-            <li>
-              <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
+        <div class="get-task" @click="toDetail()">
+          <mt-button type="danger">开始赚钱</mt-button>
+        </div>
 
-            </li>
-            <li>
-              <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
-            </li>
-            <li>
-              <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-                <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-              </div>
-
-            </li>
-          </ul>
-        <!--</mt-loadmore>-->
-
+        <div class="new-user">新手教程</div>
 
       </div>
+
+
     </div>
     <bootomTap :tapName="tapName"></bootomTap>
   </section>
 </template>
 <script>
+  import task from '@/resources/task'
+
   import bootomTap from '@/common/components/bootom_tap.vue'
+
   export default {
     components: {bootomTap},
     data() {
       return {
+        allLoaded: false,
         tapName: 'home',
+        taskList: [
+          {
+            taskId: 10,
+            taskName: '任务名称任务名称任务名称任务名称任务名称',
+            taskTypeName: '任务类型'
+          }
+        ],
+        page: 1,
+        pageSize: 20,
       }
-    },
-    created() {
     },
     methods: {
-      toDetail(id){
+      toDetail() {
         this.$router.push({
-          path: '/task/detail/'+id
+          path: '/task/dist_detail/'
         })
       }
-      // loadTop() {
-      // ...// 加载更多数据
-      //   this.$refs.loadmore.onTopLoaded();
-      // },
-      // loadBottom() {
-      // ...// 加载更多数据
-      //   this.allLoaded = true;// 若数据已全部获取完毕
-      //   this.$refs.loadmore.onBottomLoaded();
-      // }
     },
+    create() {
+      // this.getList('top');
+    }
   }
 </script>
 <style scoped>

@@ -10,7 +10,7 @@ export default {
     var typeStatus = false;
     var suitableStatus = false;
     //特殊字符校验
-    if (param){
+    if (typeof (param) == 'string'){
       let state = 0;
       suitableStatus += param.indexOf('<') + 1;
       suitableStatus += param.indexOf('>') + 1;
