@@ -32,7 +32,7 @@ body{
 }
 
 .ico{
-  background: url("/static/img/sprite.png") no-repeat;
+  background: url("../img/sprite.png") no-repeat;
   background-size: 150px;
   display: block;
 }

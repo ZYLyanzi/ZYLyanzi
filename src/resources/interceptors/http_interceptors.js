@@ -20,7 +20,7 @@ axios.defaults.baseURL = config.host;
     //  config.headers.Authorization =  `token ${store.state.token}`;
   }
     console.log("http request 拦截器", config);
-  Indicator.open();
+  // Indicator.open();
   return config
 },error => {
   Indicator.close();
