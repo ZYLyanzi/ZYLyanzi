@@ -32,9 +32,10 @@
     <div class="layout">
       <el-upload
         class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
+        action="http://120.78.203.150:8080/api/common/uploadimg"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
+        :on-success="handlePostSuccess"
         :limit="5"
         :file-list="fileList2"
         list-type="picture">
@@ -98,11 +99,21 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
         }
       });
     },
+    //缩略图上传成功钩子
+    handlePostSuccess(res, file) {
+      console.log("文件上传成功钩子", res);
+      let vm = this;
+      if (res.msgCode == 1){
+        vm.imgList.push({name:res.filePath, url:res.filePath})
+      }
+    },
     handleRemove(file, fileList) {
       console.log(file, fileList);
+
     },
     handlePreview(file) {
       console.log(file);
+
     }
 
 	},

@@ -75,8 +75,8 @@
 
 	.item-ico .right-jiantou {
 		position: absolute;
-		width: 25px;
-		height: 25px;
+		width: 22px;
+		height: 22px;
 		top: -3px;
 		right: 0;
 		background-position: 0 -179px;

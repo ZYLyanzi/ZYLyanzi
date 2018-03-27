@@ -7,7 +7,8 @@ export default {
   replyDistributeTask: '/task/replyDistributeTask',
   submitDistributeTask: 'api/task/submitDistributeTask',
   queryDistributeTask: 'api/task/queryDistributeTask',
-  getList: 'api/task/myReleaseTask',//列表
-  // myReleaseTask: '/task/myReleaseTask'//列表
+  comfirmDistributeTask: 'api/task/comfirmDistributeTask',
+  // getList: 'api/task/myReleaseTask',//列表
+  myReleaseTask: '/task/myReleaseTask'//列表
 
 }

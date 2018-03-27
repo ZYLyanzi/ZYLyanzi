@@ -218,12 +218,14 @@
 			let dateNow = new Date();
 			dateNow.setTime(dateNow.getTime()+24*60*60*1000);
 			let endTime = dateNow.getFullYear()+"-" + (dateNow.getMonth()+1) + "-" + dateNow.getDate()+ " " + dateNow.getHours()+ ":" + dateNow.getMinutes()+':00';
-			this.taskParams.endTime = endTime;
+
 			if (this.$route.params.id && this.$route.params.id != 0) {
 				this.id = this.$route.params.id;
 				this.btnText = '确认修改';
 				this.getInfo();
+
 			} else {
+        this.taskParams.endTime = endTime;
 				let vm = this;
 				let para = {
 					userName: localStorage.userName
@@ -253,6 +255,8 @@
 						vm.markupPrice = res.task.markupPrice;
 						vm.totalPrice = res.task.totalPrice;
 						vm.totalSum = res.task.totalSum;
+						vm.setImg('edit')
+
 
 					}
 				});
@@ -282,11 +286,28 @@
 				console.log("文件上传成功钩子", res);
 				let vm = this;
 				if (res.msgCode == 1){
-					vm.imgList.push(res.filePath)
-//					vm.product.detail_image.push({name:res.url, url: vm.imgUrl+res.url})
-//                    vm.product.detail_image.push({name:res.url, url: 'http://wm-staging.b0.upaiyun.com/'+res.url})
+					// vm.imgList.push(res.filePath)
+          vm.imgList.push({name:res.filePath, url:res.filePath})
 				}
 			},
+      setImg(type){
+
+
+			  for(let item of this.taskParams.taskTypeAttrs){
+          if(item.fileType == 'img'){
+            if (type == 'edit'){
+                for (let itemImg of item.fieldConten){
+                  this.imgList.push({name: itemImg, url:itemImg});
+                }
+            }else if (type == 'add'){
+              for (let itemImg of this.imgList){
+                item.fieldConten.push(itemImg.url);
+              }
+            }
+          }
+        }
+
+      },
 
 
 
@@ -321,6 +342,7 @@
 					vm.taskParams.markupPrice = vm.markupPrice;
 					vm.taskParams.totalPrice = vm.totalPrice;
 					vm.taskParams.totalSum = vm.totalSum;
+          vm.setImg('add')
 
 					if (vm.id) {
 						task.addTask(vm.taskParams).then((res) => {
@@ -328,9 +350,8 @@
 								alert("修改成功")
 							}
 						});
-
 					} else {
-						task.addTask(vm.taskParams).then((res) => {
+						task.updateTask(vm.taskParams).then((res) => {
 							if (res.msgCode == 1) {
 								alert("添加成功")
 							}

@@ -64,6 +64,11 @@ const router = new Router({
       component: resolve => require([`@/views/task/check_list`],resolve)
     },
     {
+      path: '/task/check_detail/:id',
+      name: 'check',
+      component: resolve => require([`@/views/task/check_detail`],resolve)
+    },
+    {
       path: '/user',
       name: 'user',
       component: resolve => require([`@/views/user/user`],resolve)

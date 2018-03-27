@@ -9,81 +9,19 @@
       <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
         <ul>
           <li v-for="item in taskList">
-            <div class="list-item" @click="toDetail(item.taskId)">
+            <div class="list-item" @click="toDetail(item.Id)">
               <span class="desc">
                 <div class="title">{{item.taskName}}</div>
-                <div class="time">{{item.taskTypeName}}</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
+                <div class="time">
+                  <span>接受:{{item.accepted}}</span>
+                  <span>完成：{{item.completed}}</span>
+                  <span>放弃：{{item.giveUp}}</span>
+                </div>
+                <div class="price">￥{{item.unitPrice}}</div>
               </span>
             </div>
           </li>
 
-          <li>
-            <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-            </div>
-
-          </li>
-          <li>
-            <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-            </div>
-
-          </li>
-          <li>
-            <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-                <div class="time">时间: 3/19-3/28</div>
-                <div class="price">￥15</div>
-              </span>
-              <span class="btn">
-                <mt-button plain type="danger" size="small">马上抢</mt-button>
-              </span>
-            </div>
-
-          </li>
         </ul>
       </mt-loadmore>
 
@@ -105,8 +43,19 @@ export default {
       taskList: [
         {
           taskId: 10,
-          taskName: '任务名称任务名称任务名称任务名称任务名称',
-          taskTypeName: '任务类型'
+          taskName: '拼多多砍价任务',
+          accepted: 10,
+          completed: 10,
+          giveUp: 10,
+          unitPrice: 100,
+        },
+        {
+          taskId: 10,
+          taskName: '拼多多砍价任务',
+          accepted: 10,
+          completed: 10,
+          giveUp: 10,
+          unitPrice: 100,
         }
       ],
       page: 1,
@@ -114,21 +63,8 @@ export default {
     }
   },
 	created() {
-		let vm = this
-		vm.getList({
-			type:'123',
-			pageNum:1,
-			callback:function(res) {
-				vm.list = res
-			}
-		})
-		vm.getList({
-			type:'1qwe',
-			pageNum:1,
-			callback:function(res) {
-				vm.hot = res
-			}
-		})
+		let vm = this;
+		vm.getList('top');
 	},
 	methods: {
     loadTop() {
@@ -156,7 +92,7 @@ export default {
         pageSize: vm.pageSize,
       }
 
-      task.getList(para).then((res) => {
+      task.myReleaseTask(para).then((res) => {
         if (res.msgCode == 1) {
           if (type == 'top') {
             vm.taskList = res.tasks;
@@ -174,9 +110,9 @@ export default {
         path: '/task/detail/' + id
       })
     },
-		...mapActions({
-			getList:'product/getList'
-		})
+		// ...mapActions({
+		// 	getList:'product/getList'
+		// })
 	},
 	computed:{
 	}

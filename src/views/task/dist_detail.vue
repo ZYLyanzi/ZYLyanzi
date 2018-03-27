@@ -39,39 +39,29 @@
     <div class="layout">
       <div class="item">
         <div class="rw-feild">任务名称</div>
-        <div class="rw-value">hahsahdahs</div>
-        <!--<div class="rw-value">{{taskDetail.taskName}}</div>-->
+        <div class="rw-value">{{taskDetail.taskName}}</div>
       </div>
       <div class="item">
         <div class="rw-feild">任务类型</div>
-        <div class="rw-value">hahsahdahs</div>
-        <!--<div class="rw-value">{{taskDetail.taskTypeName}}</div>-->
+        <div class="rw-value">{{taskDetail.taskTypeName}}</div>
       </div>
       <div class="item">
         <div class="rw-feild">积分</div>
-        <div class="rw-value">10</div>
-        <!--<div class="rw-value">{{taskDetail.unitPrice+taskDetail.markupPrice}}</div>-->
+        <div class="rw-value">{{taskDetail.unitPrice+taskDetail.markupPrice}}</div>
       </div>
 
+      <div class="item" v-for="item in taskDetail.taskTypeAttrs">
+        <div class="rw-feild">{{item.fieldCname}}</div>
 
-      <!--<div class="item" v-for="item in taskDetail.taskDetail">-->
-        <!--<div class="rw-feild">{{item.fieldCname}}</div>-->
-        <!--<div class="rw-value">{{item.fieldConten}}</div>-->
-      <!--</div>-->
-
-
+        <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
+        <div class="rw-value" v-if="item.fieldType == 'img'">
+          <img v-for="item in item.fieldConten" :src="item"/>
+        </div>
+      </div>
     </div>
-    <div class="layout">
-      任务图片
-      <!--<img v-if="taskDetail.picture1" src=""/>-->
-      <!--<img v-if="taskDetail.picture2" src=""/>-->
-      <!--<img v-if="taskDetail.picture3" src=""/>-->
-      <!--<img v-if="taskDetail.picture4" src=""/>-->
-      <!--<img v-if="taskDetail.picture5" src=""/>-->
-    </div>
+
 
     <div class="detail-btn">
-
       <mt-button type="danger" @click="toStart(1)">接受任务</mt-button>
       <mt-button type="default" @click="toStart(2)">放弃任务</mt-button>
 
@@ -90,7 +80,6 @@ export default {
 		}
 	},
 	created() {
-		this.id = this.$route.params.id
 		this.getInfo()
 	},
 	methods: {
@@ -99,36 +88,35 @@ export default {
       task.distributeTask().then((res) => {
         if (res.msgCode == 1){
           vm.taskDetail = res.task;
-
         }
       });
     },
+
     toStart(type){
       let vm = this;
       let para = {
         taskId: vm.taskDetail.taskId,
         state: type,
       };
+      // if (type == 1){
+      //   this.$router.replace({
+      //     path: '/task/start/'+vm.taskDetail.id,
+      //   });
+      // }else if(type == 2){
+      //   vm.getInfo()
+      // }
+      task.replyDistributeTask(para).then((res) => {
+        if (res.msgCode == 1){
+          if (type == 1){
+            this.$router.replace({
+              path: '/task/start/'+vm.taskDetail.id,
+            });
+          }else if(type == 2){
+            vm.getInfo()
+          }
+        }
+      });
 
-      if (type == 1){
-        this.$router.replace({
-          path: '/task/start/2',
-        });
-      }else if(type == 2){
-        vm.getInfo()
-      }
-      //
-      // task.replyDistributeTask(para).then((res) => {
-      //   if (res.msgCode == 1){
-      //     if (type == 1){
-      //       this.$router.replace({
-      //         path: '/task/start/'+vm.taskDetail.taskId,
-      //       });
-      //     }else if(type == 2){
-      //       vm.getInfo()
-      //     }
-      //   }
-      // });
     }
 	},
 

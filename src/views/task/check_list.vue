@@ -42,147 +42,16 @@
       </div>
       <div class="list">
         <ul>
-          <li>
+          <li v-for="item in list">
             <div class="list-item reward-list">
               <span class="desc">
-                <div class="title" @click="to">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="title" @click="toCheckDetail()">{{item.taskName}}</div>
               </span>
               <span class="btn">
-                ￥15
+                ￥{{item.unitPrice}}
               </span>
             </div>
           </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-
 
         </ul>
       </div>
@@ -196,15 +65,22 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
 	data() {
 		return {
-      taskId: 0,
+      page: 1,
+      id: 0,
       state: 3,
 			allLoaded:false,
-			list:[],
+			list:[{
+        id: 10,
+        taskId: 20,
+        taskName: '任务名称',
+        unitPrice: 12,
+      }
+      ],
 		}
 	},
 	created() {
-    this.taskId = this.$route.params.id;
-    // this.getList();
+    this.id = this.$route.params.id;
+    this.getList();
 
 
 	},
@@ -222,16 +98,23 @@ export default {
 		getList(){
       let vm = this;
       let para = {
-        taskId: vm.taskId,
+        page: 1,
+        pageSize: 20,
+        id: vm.id,
         state: vm.state
       }
-      task.queryDistributeTask( para).then((res) => {
+      task.queryDistributeTask(para).then((res) => {
         if (res.msgCode == 1){
           vm.list = res.taskDistribute;
 
         }
       });
 
+    },
+    toCheckDetail(id){
+      this.$router.push({
+        path: '/task/check_detail/'+id,
+      });
     }
 	},
 	computed:{

@@ -14,7 +14,7 @@
   }
   .rw-feild{
     margin-bottom: 10px;
-    width: 15%;
+    width: 20%;
     color: #333333;
   }
   .rw-value{
@@ -32,33 +32,54 @@
 <template>
 	<section>
     <mt-header title="任务详情">
-      <router-link to="/user" slot="left">
+      <router-link to="/task/list" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
     <div class="layout">
+        <div class="item">
+          <div class="rw-feild">任务名称</div>
+          <div class="rw-value">{{taskDetail.taskName}}</div>
+        </div>
+        <div class="item">
+          <div class="rw-feild">任务类型</div>
+          <div class="rw-value">{{taskDetail.taskTypeName}}</div>
+        </div>
+        <div class="item">
+          <div class="rw-feild">单价</div>
+          <div class="rw-value">{{taskDetail.unitPrice}}</div>
+        </div>
+        <div class="item">
+          <div class="rw-feild">置顶加价</div>
+          <div class="rw-value">{{taskDetail.markupPrice}}</div>
+        </div>
       <div class="item">
-        <div class="rw-feild">公众号</div>
-        <div class="rw-value">hahsahdahs</div>
+        <div class="rw-feild">数量</div>
+        <div class="rw-value">{{taskDetail.totalSum}}</div>
       </div>
       <div class="item">
-        <div class="rw-feild">被投人</div>
-        <div class="rw-value">hahsahdahs</div>
+        <div class="rw-feild">总价</div>
+        <div class="rw-value">{{taskDetail.totalPrice}}</div>
       </div>
       <div class="item">
-        <div class="rw-feild">说明</div>
-        <div class="rw-value">这是个说明太安徽大说的话这是个说明太安徽大说的话这是个说明太安徽大说的话这是个说明太安徽大说的话</div>
+        <div class="rw-feild">限速</div>
+        <div class="rw-value">{{taskDetail.limitSpeed}}</div>
       </div>
     </div>
-    <div class="layout">
-      任务图片
+
+    <div class="item" v-for="item in taskDetail.taskTypeAttrs">
+      <div class="rw-feild">{{item.fieldCname}}</div>
+
+      <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
+      <div class="rw-value" v-if="item.fieldType == 'img'">
+        <img v-for="item in item.fieldConten" :src="item"/>
+      </div>
     </div>
+
 
     <div class="detail-btn">
-
-
-      <mt-button type="danger" @click="toEdit(1)">审核任务</mt-button>
-      <mt-button type="default" @click="toEdit(2)">修改任务</mt-button>
+      <mt-button type="danger" @click="toEdit(1)">审核提交任务</mt-button>
+      <mt-button type="default" @click="toEdit(2)">编辑任务</mt-button>
 
     </div>
 
