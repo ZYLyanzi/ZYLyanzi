@@ -73,7 +73,7 @@ axios.interceptors.response.use(res => {
           router.replace(localStorage.url);
         }else{
           router.replace({
-            path: 'login',
+            path: '/login',
             query: {redirect: router.currentRoute.fullPath}
           });
         }

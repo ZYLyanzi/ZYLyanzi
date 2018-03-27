@@ -12,8 +12,8 @@
 .top-tap div.selected{
   border-bottom: 2px solid #ef4f4f;
   color: #ef4f4f;
-
 }
+
 .reward-list{
   height: 1rem;
 }
