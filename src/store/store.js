@@ -15,6 +15,7 @@ export default new Vuex.Store({
   },
   mutations: {
     setUserInfo(state, par) {
+      localStorage.userId = par.userId;
       localStorage.userName = par.userName;
       localStorage.score = par.score;
       // state.activityId = id;

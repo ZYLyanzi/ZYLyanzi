@@ -20,6 +20,7 @@ Vue.use(Mint);
 new Vue({
   el: '#app',
   store,
+  axios,
   router,
   components: { App ,Mint},
   template: '<App/>',

@@ -2,7 +2,11 @@
   .user-name{
     color: #999999;
     font-size: 0.28rem;
-    margin: 30px 0;
+    margin: 30px 0 10px 0;
+  }
+  .user-jifen{
+    color: #ef1d12;
+    margin-top: 0;
   }
   .options{
     background-color: #ffffff;
@@ -73,6 +77,7 @@
     </mt-header>
     <div class="main">
       <div class="user-name">账号：香蕉你个不拿拿</div>
+      <div class="user-name user-jifen">100积分</div>
       <div class="options">
         <ul>
           <li class="option-item" @click="gotoPage(1)">
@@ -92,7 +97,7 @@
           <li class="option-item" @click="gotoPage(3)">
             <span class="item-desc">
               <i class="my-reward ico"></i>
-              <span class="name">我的奖励</span>
+              <span class="name">我的积分</span>
             </span>
             <span class="item-ico"><i class="right-jiantou ico"></i> </span>
           </li>
@@ -132,7 +137,7 @@ export default {
       if (id == 2){
 
         this.$router.replace({
-          path: '/task/check',
+          path: '/task/check/0',
         });
       }
       if (id == 3){

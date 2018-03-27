@@ -63,9 +63,8 @@
   export default {
     data () {
       return {
-        btnStatus: false,
+
         validCount: 0,
-        text: '获取验证码',
         userName: '',
         password: '',
         token: '12345678',
@@ -105,18 +104,24 @@
             password: md5(vm.password)
           };
 
-//          请求
-//          user.userLogin(para).then((res) => {
-//            if (res.msgCode == 1){
-//              vm.$store.commit(types.LOGIN, res.token);
-//              let userId = res.userId;
-//              user.queryUserInfo(userId).then((res) => {
-//                if (res.msgCode == 1){
-//                  vm.$store.commit('setUserInfo', res.user);
-//                }
-//              });
-//            }
-//          });
+         // 请求
+         user.userLogin(para).then((res) => {
+           if (res.msgCode == 1){
+             vm.$store.commit(types.LOGIN, res.token);
+             let para = {
+               userId: res.userId
+             }
+             user.queryUserInfo(para).then((res) => {
+               if (res.msgCode == 1){
+                 vm.$store.commit('setUserInfo', res.user);
+                 this.$router.replace({
+                   path: '/'
+                 })
+
+               }
+             });
+           }
+         });
 
 
         }

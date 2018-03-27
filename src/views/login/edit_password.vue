@@ -1,18 +1,21 @@
 <style>
-  .page-part{
+  .page-part {
     text-align: center;
     margin-top: 20px;
   }
-  .mint-field .mint-cell-title{
+
+  .mint-field .mint-cell-title {
     width: 1.5rem;
   }
-  .login-bottom{
+
+  .login-bottom {
     margin-top: 20px;
     width: 100%;
     height: 50px;
     text-align: center;
   }
-  .login-bottom .login-btn-login{
+
+  .login-bottom .login-btn-login {
     margin-top: 0.6rem;
     color: #ffffff;
     font-size: 0.36rem;
@@ -24,12 +27,14 @@
     line-height: 0.8rem;
     border-radius: 4px;
   }
-  .login-bottom .login-btn-zhuce{
+
+  .login-bottom .login-btn-zhuce {
     margin-top: 0.3rem;
     background-color: #fff;
     color: #26a2ff;
   }
-  .line{
+
+  .line {
     text-align: center;
     margin-top: 0.3rem;
     color: #8e8e8e;
@@ -43,80 +48,83 @@
       </router-link>
     </mt-header>
     <div class="page-part">
-      <mt-field label="原密码" placeholder="请输入原密码" type="password" :attr="{maxlength:20}" v-model="oldPassword" :state='rules.oldPassword.itState'></mt-field>
-      <mt-field label="新密码" placeholder="请输入密码" type="password" :attr="{maxlength:20}" v-model="newPassword" :state='rules.newPassword.itState'></mt-field>
-      <mt-field label="确认密码" placeholder="请确认密码" type="password" :attr="{maxlength:20}" v-model="confirmPassword" :state='rules.confirmPassword.itState'></mt-field>
+      <mt-field label="原密码" placeholder="请输入原密码" type="password" :attr="{maxlength:20}" v-model="oldPassword"
+                :state='rules.oldPassword.itState'></mt-field>
+      <mt-field label="新密码" placeholder="请输入密码" type="password" :attr="{maxlength:20}" v-model="newPassword"
+                :state='rules.newPassword.itState'></mt-field>
+      <mt-field label="确认密码" placeholder="请确认密码" type="password" :attr="{maxlength:20}" v-model="confirmPassword"
+                :state='rules.confirmPassword.itState'></mt-field>
     </div>
     <div class="login-bottom">
-      <mt-button size="large" type="primary" class="login-btn-login"  @click="updateUserInfo">确认修改</mt-button>
+      <mt-button size="large" type="primary" class="login-btn-login" @click="updateUserInfo">确认修改</mt-button>
     </div>
   </section>
 </template>
 
 <script>
-	import util from '@/common/utils/util'
-	import user from '@/resources/user'
-	import md5 from 'js-md5';
-	import * as types from '@/store/types'
-	import { Toast} from 'mint-ui'
+  import util from '@/common/utils/util'
+  import user from '@/resources/user'
+  import md5 from 'js-md5';
+  import * as types from '@/store/types'
+  import {Toast} from 'mint-ui'
+
   export default {
-    data () {
+    data() {
       return {
-          btnStatus: false,
-          validCount: 0,
-	      oldPassword: '',
-	      newPassword: '',
-	      confirmPassword:'',
-	      rules: {
-		      oldPassword: {
-			      itRequried: {reg: true, msg: ''},
-			      itType: {reg: '', msg: ''},
-			      itLen: {reg: 8, msg: ''},
-			      itState: '',
-			      itMsg: '',
-		      },
-		      newPassword: {
-			      itRequried: {reg: true, msg: ''},
-			      itType: {reg: '', msg: ''},
-			      itLen: {reg: 8, msg: ''},
-			      itState: '',
-			      itMsg: '',
-		      },
-		      confirmPassword: {
-			      itRequried: {reg: true, msg: ''},
-			      itType: {reg: '', msg: ''},
-			      itLen: {reg: 8, msg: ''},
-			      itState: '',
-			      itMsg: '',
-		      },
-	      }
+        validCount: 0,
+        oldPassword: '',
+        newPassword: '',
+        confirmPassword: '',
+        rules: {
+          oldPassword: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 8, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+          newPassword: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 8, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+          confirmPassword: {
+            itRequried: {reg: true, msg: ''},
+            itType: {reg: '', msg: ''},
+            itLen: {reg: 8, msg: ''},
+            itState: '',
+            itMsg: '',
+          },
+        }
       }
     },
-    mounted(){
+    mounted() {
     },
-    methods:{
-	    updateUserInfo() {
-		    this.validCount = 0;
-		    for (let objElem in this.rules) {
-			    this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
-		    }
-		    if (this.validCount > 0) {
+    methods: {
+      updateUserInfo() {
+        this.validCount = 0;
+        for (let objElem in this.rules) {
+          this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
+        }
+        if (this.validCount > 0) {
 //          alert("校验不通过")
-		    }else {
-			    let vm = this;
-			    if (vm.newPassword !== vm.confirmPassword){
-				    Toast({
-					    message: '两次密码输入不一致，请重新输入',
-					    position: 'middle',
-					    duration: 2000
-				    });
-			    }else {
-				    let para = {
-					    userName: localStorage.userName,
-					    oldPassword: vm.oldPassword,
-					    newPassword: vm.newPassword,
-				    };
-				    console.log("登录查看vm1", vm);
+        } else {
+          let vm = this;
+          if (vm.newPassword !== vm.confirmPassword) {
+            Toast({
+              message: '两次密码输入不一致，请重新输入',
+              position: 'middle',
+              duration: 2000
+            });
+          } else {
+            let para = {
+              userName: localStorage.userName,
+              oldPassword: vm.oldPassword,
+              newPassword: vm.newPassword,
+            };
+            console.log("登录查看vm1", vm);
 //          请求
 //            user.userRegister(para).then((res) => {
 //              if (res.msgCode == 1){
@@ -129,9 +137,9 @@
 //                });
 //              }
 //            });
-			    }
-		    }
-	    },
+          }
+        }
+      },
     }
   }
 </script>
