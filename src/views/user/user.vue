@@ -85,6 +85,7 @@
 <template>
 	<section>
 		<mt-header title="个人中心">
+			<!--<mt-button slot="right" @click.native="popupStatus = true">排序</mt-button>-->
 		</mt-header>
 		<div class="main">
 			<div class="user-name">账号：{{userName}}</div>
@@ -108,14 +109,14 @@
 					<li class="option-item" @click="gotoPage(3)">
             <span class="item-desc">
               <i class="my-reward ico"></i>
-              <span class="name">我的积分</span>
+              <span class="name">我的积分明细</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
 					<li class="option-item" @click="gotoPage(4)">
             <span class="item-desc">
               <i class="edit-password ico"></i>
-              <span class="name">修改密码</span>
+              <span class="name">个人设置</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
@@ -163,7 +164,7 @@
 				}
 				if (id == 4) {
 					this.$router.replace({
-						path: '/edit_password',
+						path: '/user/set_user',
 					});
 				}
 			},

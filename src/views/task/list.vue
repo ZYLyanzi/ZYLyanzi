@@ -9,7 +9,7 @@
       <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
         <ul>
           <li v-for="item in taskList">
-            <div class="list-item" @click="toDetail(item.Id)">
+            <div class="list-item" @click="toDetail(item.id)">
               <span class="desc">
                 <div class="title">{{item.taskName}}</div>
                 <div class="time">
@@ -70,17 +70,18 @@ export default {
     loadTop() {
       // 刷新
       console.log("刷新");
-      this.getList('top');
-      this.$refs.loadmore.onTopLoaded();
+//      this.getList('top');
+//      this.$refs.loadmore.onTopLoaded();
     },
     loadBottom() {
       // 加载
       console.log("加载");
-      this.getList('bottom');
-      this.allLoaded = true;// 若数据已全部获取完毕
-      this.$refs.loadmore.onBottomLoaded();
+//      this.getList('bottom');
+//      this.allLoaded = true;// 若数据已全部获取完毕
+//      this.$refs.loadmore.onBottomLoaded();
     },
     getList(type) {
+    console.log("sssgetList");
       let vm = this;
       if (type == 'top') {
         vm.page = 1
@@ -92,7 +93,7 @@ export default {
         pageSize: vm.pageSize,
       }
 
-      task.myReleaseTask(para).then((res) => {
+      task.myReleaseTask(par).then((res) => {
         if (res.msgCode == 1) {
           if (type == 'top') {
             vm.taskList = res.tasks;
@@ -110,9 +111,9 @@ export default {
         path: '/task/detail/' + id
       })
     },
-		// ...mapActions({
-		// 	getList:'product/getList'
-		// })
+//		 ...mapActions({
+//		 	getList:'product/getList'
+//		 })
 	},
 	computed:{
 	}

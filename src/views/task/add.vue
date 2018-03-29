@@ -35,17 +35,23 @@
 		line-height: 25px;
 		position: relative;
 	}
-	.rw-radio span{ padding-left: 27px}
-	.radio-icon{
+
+	.rw-radio span {
+		padding-left: 27px
+	}
+
+	.radio-icon {
 		position: absolute;
 		display: block;
 		width: 22px;
 		height: 22px;
 		background-position: 0 -223px
 	}
-	.radio-icon.selected{
+
+	.radio-icon.selected {
 		background-position: 0 -202px
 	}
+
 	.mint-cell-wrapper {
 		font-size: 14px;
 	}
@@ -59,14 +65,17 @@
 		text-align: left;
 		margin-left: 10px;
 	}
-	.upload-part{
+
+	.upload-part {
 		margin-top: 20px;
 		display: flex;
 		flex-direction: row;
 	}
-	.upload-part .title{
+
+	.upload-part .title {
 		width: 75px;
 	}
+
 	.add-btn {
 		width: 70%;
 		border-radius: 5px;
@@ -78,16 +87,21 @@
 		color: #ffffff;
 		margin: 20px auto;
 	}
+  .el-upload-list--picture .el-upload-list__item{
+    padding: 10px 0;
+    width: 70%;
+    text-align: center;
+  }
 </style>
 <template>
 	<section>
-		<mt-header title="新建任务">
+		<mt-header :title="titleText">
 		</mt-header>
 		<div class="main">
 			<div class="layout task-type" v-if="!id">
 				<div class="field">任务类型</div>
 				<div class="part">
-					<div class="rw-radio"  v-for="item in taskTypes"  @click="changeType(item)">
+					<div class="rw-radio" v-for="item in taskTypes" @click="changeType(item)">
 						<i class="ico radio-icon" :class="{'selected': item.id == taskParams.id}"></i><span>{{item.name}}</span>
 					</div>
 				</div>
@@ -95,8 +109,7 @@
 
 			</div>
 			<div class="layout">
-				<mt-field label="名称" type="text" min="1" v-model="taskParams.taskName"
-				          :state='rules.taskName.itState'></mt-field>
+				<mt-field label="名称" type="text" min="1" v-model="taskParams.taskName"></mt-field>
 				<mt-field label="单价" disabled type="number" min="1" v-model="unitPrice"
 				          :state='rules.unitPrice.itState'></mt-field>
 				<mt-field label="置顶加价" placeholder="请输入置顶加价" type="number" min="1" v-model="markupPrice"
@@ -109,14 +122,18 @@
 			</div>
 			<div class="layout">
 				<div v-for="fieldItem in taskParams.taskTypeAttrs">
-					<mt-field v-if="fieldItem.formType == 'text' " :label="fieldItem.fieldCname" :placeholder="fieldItem.fieldCname"
+					<mt-field v-if="fieldItem.formType == 'text' " :label="fieldItem.fieldCname"
+					          :placeholder="fieldItem.fieldCname"
 					          v-model="fieldItem.fieldConten"></mt-field>
 
 					<div v-if="fieldItem.formType == 'img' " class="upload-part">
 						<div class="title">{{fieldItem.fieldCname}}</div>
+
+
+            <!--action="http://127.0.0.1:8080/RddTaskService/api/common/uploadimg"-->
 						<el-upload
 							class="rw-upload"
-							action="http://120.78.203.150:8080/api/common/uploadimg"
+              action="http://120.78.203.150:8080/RddTaskService/api/common/uploadimg"
 							:headers="{'token': token}"
 							:on-preview="handlePreview"
 							:on-remove="handleRemove"
@@ -139,7 +156,7 @@
 				<label>{{btnText}}</label>
 			</div>
 		</div>
-		<bootomTap :tapName="tapName"></bootomTap>
+		<bootomTap :tapName="tapName" v-if="id==0"></bootomTap>
 	</section>
 </template>
 <script>
@@ -158,6 +175,7 @@
 
 				id: 0,
 				token: '',
+				titleText: '发布任务',
 				btnText: '发布任务',
 				validCount: 0,
 				tapName: 'add',
@@ -181,13 +199,13 @@
 				taskTypes: [],
 
 				rules: {
-					taskName: {
-						itRequried: {reg: true, msg: ''},
-						itType: {reg: '', msg: ''},
-						itLen: {reg: 20, msg: ''},
-						itState: '',
-						itMsg: '',
-					},
+//					taskName: {
+//						itRequried: {reg: true, msg: ''},
+//						itType: {reg: '', msg: ''},
+//						itLen: {reg: 20, msg: ''},
+//						itState: '',
+//						itMsg: '',
+//					},
 					unitPrice: {
 						itRequried: {reg: true, msg: ''},
 						itType: {reg: '', msg: ''},
@@ -216,16 +234,17 @@
 		created() {
 			this.token = localStorage.token;
 			let dateNow = new Date();
-			dateNow.setTime(dateNow.getTime()+24*60*60*1000);
-			let endTime = dateNow.getFullYear()+"-" + (dateNow.getMonth()+1) + "-" + dateNow.getDate()+ " " + dateNow.getHours()+ ":" + dateNow.getMinutes()+':00';
+			dateNow.setTime(dateNow.getTime() + 24 * 60 * 60 * 1000);
+			let endTime = dateNow.getFullYear() + "-" + (dateNow.getMonth() + 1) + "-" + dateNow.getDate() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ':00';
 
 			if (this.$route.params.id && this.$route.params.id != 0) {
 				this.id = this.$route.params.id;
 				this.btnText = '确认修改';
+				this.titleText = '编辑任务';
 				this.getInfo();
 
 			} else {
-        this.taskParams.endTime = endTime;
+				this.taskParams.endTime = endTime;
 				let vm = this;
 				let para = {
 					userName: localStorage.userName
@@ -236,7 +255,7 @@
 						vm.taskParams.id = res.taskTypes[0].id;
 						vm.unitPrice = res.taskTypes[0].defPrice;
 						vm.taskParams.taskTypeAttrs = res.taskTypes[0].taskTypeAttrs;
-						vm.taskParams.taskName = res.taskTypes[0].name+'任务';
+						vm.taskParams.taskName = res.taskTypes[0].name + '任务';
 					}
 				});
 			}
@@ -285,31 +304,29 @@
 			handlePostSuccess(res, file) {
 				console.log("文件上传成功钩子", res);
 				let vm = this;
-				if (res.msgCode == 1){
+				if (res.msgCode == 1) {
 					// vm.imgList.push(res.filePath)
-          vm.imgList.push({name:res.filePath, url:res.filePath})
+					vm.imgList.push({name: res.filePath, url: res.filePath})
 				}
 			},
-      setImg(type){
+			setImg(type) {
 
 
-			  for(let item of this.taskParams.taskTypeAttrs){
-          if(item.fileType == 'img'){
-            if (type == 'edit'){
-                for (let itemImg of item.fieldConten){
-                  this.imgList.push({name: itemImg, url:itemImg});
-                }
-            }else if (type == 'add'){
-              for (let itemImg of this.imgList){
-                item.fieldConten.push(itemImg.url);
-              }
-            }
-          }
-        }
+				for (let item of this.taskParams.taskTypeAttrs) {
+					if (item.fileType == 'img') {
+						if (type == 'edit') {
+							for (let itemImg of item.fieldConten) {
+								this.imgList.push({name: itemImg, url: itemImg});
+							}
+						} else if (type == 'add') {
+							for (let itemImg of this.imgList) {
+								item.fieldConten.push(itemImg.url);
+							}
+						}
+					}
+				}
 
-      },
-
-
+			},
 
 
 			handleRemove(file, fileList) {
@@ -324,7 +341,7 @@
 				vm.taskParams.id = itemData.id;
 				vm.unitPrice = itemData.defPrice;
 				vm.taskParams.taskTypeAttrs = itemData.taskTypeAttrs;
-				vm.taskParams.taskName = itemData.name+'任务';
+				vm.taskParams.taskName = itemData.name + '任务';
 			},
 
 			addTask() {
@@ -342,18 +359,24 @@
 					vm.taskParams.markupPrice = vm.markupPrice;
 					vm.taskParams.totalPrice = vm.totalPrice;
 					vm.taskParams.totalSum = vm.totalSum;
-          vm.setImg('add')
+					vm.setImg('add')
 
-					if (vm.id) {
-						task.addTask(vm.taskParams).then((res) => {
+					if (vm.id && vm.id!= 0) {
+						task.updateTask(vm.taskParams).then((res) => {
 							if (res.msgCode == 1) {
 								alert("修改成功")
+                this.$router.replace({
+                  path: '/task/list',
+                });
 							}
 						});
 					} else {
-						task.updateTask(vm.taskParams).then((res) => {
+						task.addTask(vm.taskParams).then((res) => {
 							if (res.msgCode == 1) {
 								alert("添加成功")
+                this.$router.replace({
+                  path: '/task/list',
+                });
 							}
 						});
 					}
@@ -362,7 +385,7 @@
 		},
 		watch: {
 			markupPrice: function (val) {
-				if (parseInt(this.taskParams.totalSum) > 0){
+				if (parseInt(this.taskParams.totalSum) > 0) {
 					this.totalPrice = (parseInt(this.unitPrice) + parseInt(val)) * parseInt(this.taskParams.totalSum);
 				}
 			},

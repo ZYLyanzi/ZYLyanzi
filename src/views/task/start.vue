@@ -32,7 +32,7 @@
     <div class="layout">
       <el-upload
         class="upload-demo"
-        action="http://120.78.203.150:8080/api/common/uploadimg"
+        action="http://120.78.203.150:8080/RddTaskService/api/common/uploadimg"
         :on-preview="handlePreview"
         :on-remove="handleRemove"
         :on-success="handlePostSuccess"
@@ -62,20 +62,20 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 		data() {
 			return {
 				id: 0,
-				fileList2: [
-					{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'},
-					{name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        taskDetail: {},
+        taskParms: {},
+        fileList2: [],
 			}
 		},
 		created() {
-			const id = this.$route.params.id
-			this.getInfo(id)
+			this.id = this.$route.params.id;
+			this.getInfo()
 		},
 	methods: {
     getInfo(){
       let vm = this;
       let para = {
-        taskId: vm.id
+        taskId: parseInt(vm.id)
       }
       task.taskDesc( para).then((res) => {
         if (res.msgCode == 1){
@@ -86,9 +86,7 @@ import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
     },
     toSubmit(){
       let vm = this;
-      let para = {
-        taskId: vm.id
-      }
+      vm.taskParms.id = vm.id;
       task.submitDistributeTask(vm.taskParms).then((res) => {
         if (res.msgCode == 1){
           Toast({

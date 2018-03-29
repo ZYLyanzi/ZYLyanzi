@@ -14,7 +14,7 @@
   }
   .rw-feild{
     margin-bottom: 10px;
-    width: 20%;
+    width: 25%;
     color: #333333;
   }
   .rw-value{
@@ -27,6 +27,7 @@
   }
   .detail-btn .mint-button{
     margin: 10px;
+	  font-size: 0.32rem;
   }
 </style>
 <template>
@@ -61,19 +62,25 @@
         <div class="rw-feild">总价</div>
         <div class="rw-value">{{taskDetail.totalPrice}}</div>
       </div>
+
       <div class="item">
         <div class="rw-feild">限速</div>
         <div class="rw-value">{{taskDetail.limitSpeed}}</div>
       </div>
-    </div>
+      <div class="item">
+        <div class="rw-feild">备注</div>
+        <div class="rw-value">{{taskDetail.remark}}</div>
+      </div>
+
 
     <div class="item" v-for="item in taskDetail.taskTypeAttrs">
       <div class="rw-feild">{{item.fieldCname}}</div>
 
-      <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
-      <div class="rw-value" v-if="item.fieldType == 'img'">
+      <div class="rw-value" v-if="item.formType == 'text' " >{{item.fieldContent}}11</div>
+      <div class="rw-value" v-if="item.fieldType == 'img' ">
         <img v-for="item in item.fieldConten" :src="item"/>
       </div>
+    </div>
     </div>
 
 

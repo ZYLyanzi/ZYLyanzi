@@ -31,190 +31,67 @@
 
 <template>
 	<section>
-    <mt-header title="我的奖励">
+    <mt-header title="我的积分明细">
       <router-link to="/user" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
-      <div class="top-tap">
-        <div class="tap-item selected">待发</div>
-        <div class="tap-item">已发</div>
-      </div>
+      <!--<div class="top-tap">-->
+        <!--<div class="tap-item selected">待发</div>-->
+        <!--<div class="tap-item">已发</div>-->
+      <!--</div>-->
       <div class="list">
         <ul>
-          <li>
+          <li v-for="item in scoreCzs">
             <div class="list-item reward-list">
               <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
+                <div class="title">{{item.remark}}</div>
+                <div class="time">{{item.czTime}}</div>
               </span>
-              <span class="btn">
-                ￥15
+              <span class="btn" v-if="item.inPrice">
+                 +{{item.inPrice}}
+              </span>
+              <span class="btn" v-if="item.payPrice">
+                 -{{item.payPrice}}
               </span>
             </div>
           </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-          <li>
-            <div class="list-item reward-list">
-              <span class="desc">
-                <div class="title">任务标题任务标题任务标题任务标题任务标题任务标题任务标题任务标题</div>
-              </span>
-              <span class="btn">
-                ￥15
-              </span>
-            </div>
-          </li>
-
-
         </ul>
       </div>
 	</section>
 </template>
 <script>
 // import { Loadmore } from 'mint-ui'
+import task from '@/resources/task'
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
 	data() {
 		return {
 			allLoaded:false,
-			list:[],
-			hot:[]
+      scoreCzs:[
+        {
+          czTime: '2018-03-24',
+          payPrice: 0,
+          inPrice: 200,
+          balance: 600,
+          remark: '这是个备注'
+
+        },
+        {
+          czTime: '2018-03-24',
+          payPrice: 200,
+          inPrice: 0,
+          balance: 600,
+          remark: '这是个备注'
+
+        }],
+      page: 1,
+      pageSize: 20,
 		}
 	},
 	created() {
 		let vm = this
-		vm.getList({
-			type:'123',
-			pageNum:1,
-			callback:function(res) {
-				vm.list = res
-			}
-		})
-		vm.getList({
-			type:'1qwe',
-			pageNum:1,
-			callback:function(res) {
-				vm.hot = res
-			}
-		})
+    vm.getList();
 	},
 	methods: {
 		loadTop() {
@@ -223,12 +100,33 @@ export default {
 		loadBottom() {
 
 		},
-		detail(id) {
-			this.$router.push({path:'/product/detail/'+id})
-		},
-		...mapActions({
-			getList:'product/getList'
-		})
+    getList() {
+      console.log("sssgetList");
+      let vm = this;
+      // if (type == 'top') {
+      //   vm.page = 1
+      // } else if (type == 'bottom') {
+      //   vm.page = vm.page++
+      // }
+      let par = {
+        page: vm.page,
+        pageSize: vm.pageSize,
+      }
+
+      task.queryScoreCz(par).then((res) => {
+        if (res.msgCode == 1) {
+          vm.scoreCzs = res.scoreCzs;
+          // if (type == 'top') {
+          //   vm.taskList = res.tasks;
+          // } else if (type == 'bottom') {
+          //   vm.taskList.append(res.tasks);
+          // }
+
+        }
+      });
+
+
+    },
 	},
 	computed:{
 	}

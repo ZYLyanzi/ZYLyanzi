@@ -121,22 +121,30 @@
           } else {
             let para = {
               userName: localStorage.userName,
-              oldPassword: vm.oldPassword,
-              newPassword: vm.newPassword,
+              oldPassword: md5(vm.oldPassword),
+              newPassword: md5(vm.newPassword),
             };
             console.log("登录查看vm1", vm);
 //          请求
-//            user.userRegister(para).then((res) => {
-//              if (res.msgCode == 1){
-//                vm.$store.commit(types.LOGIN, res.token);
-//                let userId = res.userId;
-//                user.queryUserInfo(userId).then((res) => {
-//                  if (res.msgCode == 1){
-//                    vm.$store.commit('setUserInfo', res.user);
-//                  }
-//                });
-//              }
-//            });
+
+            user.updateUserInfo(para).then((res) => {
+	            if (res.msgCode == 1){
+		            vm.$store.commit(types.LOGIN, res.token);
+		            let para = {
+			            userId: res.userId
+		            }
+		            user.queryUserInfo(para).then((res) => {
+			            if (res.msgCode == 1){
+				            vm.$store.commit('setUserInfo', res.user);
+				            this.$router.replace({
+					            path: '/'
+				            })
+
+			            }
+		            });
+	            }
+            });
+
           }
         }
       },
