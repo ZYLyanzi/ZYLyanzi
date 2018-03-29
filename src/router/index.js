@@ -73,6 +73,11 @@ const router = new Router({
       name: 'user',
       component: resolve => require([`@/views/user/user`],resolve)
     },
+	  {
+		  path: '/user/set_user',
+		  name: 'set_user',
+		  component: resolve => require([`@/views/user/set_user`],resolve)
+	  },
   ],
 });
 

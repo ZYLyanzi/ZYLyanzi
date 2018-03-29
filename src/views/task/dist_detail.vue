@@ -3,7 +3,6 @@
     background-color: #ffffff;
     margin-top: 10px;
     padding: 10px;
-    padding-left: 15px;
   }
   .layout .item{
     display: flex;
@@ -14,7 +13,7 @@
   }
   .rw-feild{
     margin-bottom: 10px;
-    width: 20%;
+    width: 25%;
     color: #333333;
   }
   .rw-value{
@@ -47,7 +46,7 @@
       </div>
       <div class="item">
         <div class="rw-feild">积分</div>
-        <div class="rw-value">{{taskDetail.unitPrice+taskDetail.markupPrice}}</div>
+        <div class="rw-value">{{taskDetail.unitPrice}}</div>
       </div>
 
       <div class="item" v-for="item in taskDetail.taskTypeAttrs">
@@ -95,7 +94,7 @@ export default {
     toStart(type){
       let vm = this;
       let para = {
-        taskId: vm.taskDetail.taskId,
+        taskId: vm.taskDetail.id,
         state: type,
       };
       // if (type == 1){

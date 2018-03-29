@@ -14,7 +14,7 @@
   }
   .rw-feild{
     margin-bottom: 10px;
-    width: 20%;
+    width: 25%;
     color: #333333;
   }
   .rw-value{
@@ -27,6 +27,7 @@
   }
   .detail-btn .mint-button{
     margin: 10px;
+	  font-size: 0.32rem;
   }
 </style>
 <template>
