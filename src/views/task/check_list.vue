@@ -69,12 +69,13 @@ export default {
       id: 0,
       state: 3,
 			allLoaded:false,
-			list:[{
-        id: 10,
-        taskId: 20,
-        taskName: '任务名称',
-        unitPrice: 12,
-      }
+			list:[
+		// 	  {
+      //   id: 10,
+      //   taskId: 20,
+      //   taskName: '任务名称',
+      //   unitPrice: 12,
+      // }
       ],
 		}
 	},

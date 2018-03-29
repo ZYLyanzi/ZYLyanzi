@@ -270,7 +270,7 @@
 					if (res.msgCode == 1) {
 						vm.taskParams = res.task;
 
-						vm.unitPrice = res.task.defPrice;
+						vm.unitPrice = res.task.unitPrice;
 						vm.markupPrice = res.task.markupPrice;
 						vm.totalPrice = res.task.totalPrice;
 						vm.totalSum = res.task.totalSum;
