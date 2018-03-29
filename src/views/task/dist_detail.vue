@@ -57,6 +57,11 @@
           <img v-for="item in item.fieldConten" :src="item"/>
         </div>
       </div>
+
+	    <div class="item">
+		    <div class="rw-feild" v-if="taskDetail.remark">说明</div>
+		    <div class="rw-value">{{taskDetail.remark}}</div>
+	    </div>
     </div>
 
 
