@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>任务系统</title><link href=./static/css/app.996c1989b4e65e4cace661f73f374296.css rel=stylesheet></head><script>new function (){
+      var _self = this;
+      _self.width = 750;//设置默认最大宽度
+      _self.fontSize = 100;//默认字体大小
+      _self.widthProportion = function(){
+        var device_width = document.getElementsByTagName("html")[0].offsetWidth;
+        if (device_width > 480){
+          device_width = 480
+        }
+        var p = device_width/_self.width;
+        return p;
+
+      };
+      _self.changePage = function(){
+        var rem = _self.widthProportion()*_self.fontSize;
+        document.getElementsByTagName("html")[0].setAttribute("style","font-size:"+rem+"px !important");
+      }
+      _self.changePage();
+      window.addEventListener("resize",function(){_self.changePage();},false);
+    };</script><body><div id=app></div><script type=text/javascript src=./static/js/manifest.33841c0e13c9debd9831.js></script><script type=text/javascript src=./static/js/vendor.f76f0f9e6a8645f703c9.js></script><script type=text/javascript src=./static/js/app.2d777fb9eecca3ae7cf5.js></script></body></html>
