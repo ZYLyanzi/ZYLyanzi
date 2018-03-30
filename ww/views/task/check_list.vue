@@ -99,7 +99,7 @@ export default {
       let vm = this;
       let para = {
         page: 1,
-        pageSize: 20,
+        pageSize: 100,
         id: vm.id,
         state: vm.state
       }

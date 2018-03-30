@@ -102,7 +102,7 @@
 					<li class="option-item" @click="gotoPage(2)">
             <span class="item-desc">
               <i class="checked-task ico"></i>
-              <span class="name">任务审核</span>
+              <span class="name">我接受的任务</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>

@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 	.main {
 		margin-bottom: 80px;
 	}
@@ -42,14 +42,15 @@
 
 	.radio-icon {
 		position: absolute;
-		display: block;
 		width: 22px;
 		height: 22px;
-		background-position: 0 -223px
+		/*border-radius: 11px;*/
+		/*border: 1px solid #999999;*/
+		background-position: -21px -202px;
 	}
 
 	.radio-icon.selected {
-		background-position: 0 -202px
+		background-position: 0 -202px;
 	}
 
 	.mint-cell-wrapper {
@@ -89,7 +90,7 @@
 	}
   .el-upload-list--picture .el-upload-list__item{
     padding: 10px 0;
-    width: 70%;
+    width: 230px;
     text-align: center;
   }
 </style>
@@ -102,7 +103,7 @@
 				<div class="field">任务类型</div>
 				<div class="part">
 					<div class="rw-radio" v-for="item in taskTypes" @click="changeType(item)">
-						<i class="ico radio-icon" :class="{'selected': item.id == taskParams.id}"></i><span>{{item.name}}</span>
+						<i class="radio-icon ico" :class="{'selected': item.id == taskParams.id}"></i><span>{{item.name}}</span>
 					</div>
 				</div>
 
@@ -310,8 +311,6 @@
 				}
 			},
 			setImg(type) {
-
-
 				for (let item of this.taskParams.taskTypeAttrs) {
 					if (item.fileType == 'img') {
 						if (type == 'edit') {
@@ -385,9 +384,9 @@
 		},
 		watch: {
 			markupPrice: function (val) {
-				if (parseInt(this.taskParams.totalSum) > 0) {
-					this.totalPrice = (parseInt(this.unitPrice) + parseInt(val)) * parseInt(this.taskParams.totalSum);
-				}
+				this.totalPrice = (parseInt(this.unitPrice) + parseInt(val)) * parseInt(this.totalSum);
+
+
 			},
 			totalSum: function (val) {
 				this.totalPrice = (parseInt(this.unitPrice) + parseInt(this.markupPrice)) * parseInt(val);

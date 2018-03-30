@@ -22,9 +22,6 @@
 <template>
   <section>
     <mt-header title="商品详情">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
     </mt-header>
     <div class="main">
       <!--<mt-swipe :auto="3000" class="rw-swipe">-->
@@ -68,7 +65,7 @@
           }
         ],
         page: 1,
-        pageSize: 20,
+        pageSize: 100,
       }
     },
     methods: {
