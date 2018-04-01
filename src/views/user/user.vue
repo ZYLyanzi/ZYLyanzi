@@ -2,12 +2,17 @@
 	.user-name {
 		color: #999999;
 		font-size: 0.28rem;
-		margin: 30px 0 10px 0;
 	}
+  .nick-name{
+    margin: 10px 0;
+  }
+  .account{
+    margin-top: 20px;
+  }
 
 	.user-jifen {
 		color: #ef1d12;
-		margin-top: 0;
+    margin-bottom: 20px;
 	}
 
 	.options {
@@ -84,11 +89,12 @@
 </style>
 <template>
 	<section>
-		<mt-header title="个人中心">
+		<mt-header fixed title="个人中心">
 			<!--<mt-button slot="right" @click.native="popupStatus = true">排序</mt-button>-->
 		</mt-header>
 		<div class="main">
-			<div class="user-name">账号：{{userName}}</div>
+			<div class="user-name account">账号：{{userName}}</div>
+			<div class="nick-name user-name">昵称：{{nickName}}</div>
 			<div class="user-name user-jifen">{{score}}积分</div>
 			<div class="options">
 				<ul>
@@ -102,7 +108,7 @@
 					<li class="option-item" @click="gotoPage(2)">
             <span class="item-desc">
               <i class="checked-task ico"></i>
-              <span class="name">我接受的任务</span>
+              <span class="name">我接收的任务</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
@@ -128,7 +134,8 @@
 </template>
 <script>
 	// import { Loadmore } from 'mint-ui'
-	import bootomTap from '@/common/components/bootom_tap.vue'
+  import user from '@/resources/user'
+  import bootomTap from '@/common/components/bootom_tap.vue'
 	import {mapState, mapGetters, mapActions} from 'vuex'
 
 	export default {
@@ -137,11 +144,22 @@
 			return {
 				tapName: 'user',
 				score: '',
-				userName: ''
+        userName: '',
+        nickName: ''
 			}
 		},
 		created() {
+      let para = {
+        userId: localStorage.userId
+      }
+      let vm = this;
+      user.queryUserInfo(para).then((res) => {
+        if (res.msgCode == 1){
+          vm.$store.commit('setUserInfo', res.user);
+        }
+      });
 			this.score = localStorage.score;
+			this.nickName = localStorage.nickName;
 			this.userName = localStorage.userName;
 		},
 		methods: {

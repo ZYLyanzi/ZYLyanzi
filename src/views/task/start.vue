@@ -25,7 +25,7 @@
 </style>
 <template>
 	<section>
-		<mt-header title="提交任务">
+		<mt-header fixed title="提交任务">
 			<router-link to="/" slot="left">
 				<mt-button icon="back"></mt-button>
 			</router-link>
@@ -72,6 +72,7 @@
 		data() {
 			return {
 				id: 0,
+        taskDistributeId: '',
 				taskDetail: {},
 				taskParms: {
 					remark: '',
@@ -83,6 +84,7 @@
 		created() {
 			this.token = localStorage.token;
 			this.id = this.$route.params.id;
+      this.taskDistributeId = this.$route.query.taskDistributeId;
 			this.getInfo()
 		},
 		methods: {
@@ -100,7 +102,7 @@
 			},
 			toSubmit() {
 				let vm = this;
-				vm.taskParms.id = vm.id;
+				vm.taskParms.id =  vm.taskDistributeId;
 				console.log("vm.fileList2", vm.fileList2);
 				for (let i = 0; i < vm.fileList2.length; i++){
 					let name = 'picture'+ ''+(i+1);

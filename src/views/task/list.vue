@@ -1,6 +1,6 @@
 <template>
 	<section>
-    <mt-header title="任务列表">
+    <mt-header fixed title="任务列表">
       <router-link to="/user" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -12,13 +12,17 @@
             <div class="list-item" @click="toDetail(item.id)">
               <span class="desc">
                 <div class="title">{{item.taskName}}</div>
+                <div class="title">{{item.taskId}}</div>
                 <div class="time">
+                  <span>总数:{{item.totalSum}}</span>
+                  <span>派发:{{item.distribute}}</span>
                   <span>接受:{{item.accepted}}</span>
                   <span>完成：{{item.completed}}</span>
                   <span>放弃：{{item.giveUp}}</span>
                 </div>
-                <div class="price">￥{{item.unitPrice}}</div>
+                <div class="time">创建时间: {{item.createTime}}</div>
               </span>
+              <div class="price">{{item.totalPrice}}积分</div>
             </div>
           </li>
 
@@ -41,22 +45,6 @@ export default {
       allLoaded: false,
       tapName: 'home',
       taskList: [
-        {
-          taskId: 10,
-          taskName: '拼多多砍价任务',
-          accepted: 10,
-          completed: 10,
-          giveUp: 10,
-          unitPrice: 100,
-        },
-        {
-          taskId: 10,
-          taskName: '拼多多砍价任务',
-          accepted: 10,
-          completed: 10,
-          giveUp: 10,
-          unitPrice: 100,
-        }
       ],
       page: 1,
       pageSize: 100,

@@ -31,15 +31,11 @@
 
 <template>
 	<section>
-    <mt-header title="我的积分明细">
+    <mt-header fixed title="我的积分明细">
       <router-link to="/user" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
-      <!--<div class="top-tap">-->
-        <!--<div class="tap-item selected">待发</div>-->
-        <!--<div class="tap-item">已发</div>-->
-      <!--</div>-->
       <div class="list">
         <ul>
           <li v-for="item in scoreCzs">

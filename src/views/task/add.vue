@@ -88,6 +88,10 @@
 		color: #ffffff;
 		margin: 20px auto;
 	}
+  .tips {
+    color: #ef1d12;
+    font-size: 12px;
+  }
   .el-upload-list--picture .el-upload-list__item{
     padding: 10px 0;
     width: 230px;
@@ -96,25 +100,27 @@
 </style>
 <template>
 	<section>
-		<mt-header :title="titleText">
+		<mt-header fixed :title="titleText">
 		</mt-header>
 		<div class="main">
 			<div class="layout task-type" v-if="!id">
 				<div class="field">任务类型</div>
 				<div class="part">
 					<div class="rw-radio" v-for="item in taskTypes" @click="changeType(item)">
-						<i class="radio-icon ico" :class="{'selected': item.id == taskParams.id}"></i><span>{{item.name}}</span>
+						<i class="radio-icon ico" :class="{'selected': item.id == taskParams.taskType}"></i><span>{{item.name}}</span>
 					</div>
 				</div>
 
 
 			</div>
 			<div class="layout">
-				<mt-field label="名称" type="text" min="1" v-model="taskParams.taskName"></mt-field>
-				<mt-field label="单价" disabled type="number" min="1" v-model="unitPrice"
-				          :state='rules.unitPrice.itState'></mt-field>
-				<mt-field label="置顶加价" placeholder="请输入置顶加价" type="number" min="1" v-model="markupPrice"
-				          :state='rules.markupPrice.itState'></mt-field>
+				<mt-field label="名称" type="text" disabled v-model="taskParams.taskName"></mt-field>
+				<mt-field label="单价" disabled type="number" min="1" v-model="unitPrice"></mt-field>
+        <div v-if="rules.markupPrice.itState == 'error' " class="tips">请输入正确的置顶加价</div>
+				<mt-field label="置顶加价" placeholder="请输入置顶加价" type="number"  min="1" max="10"  v-model="markupPrice"
+				          :state='rules.markupPrice.itState'>
+        </mt-field>
+        <div v-if="rules.totalSum.itState == 'error' " class="tips">请输入正确的数量</div>
 				<mt-field label="数量" placeholder="请输入数量" type="number" min="1" v-model="totalSum"
 				          :state='rules.totalSum.itState'></mt-field>
 				<mt-field label="总价" disabled type="number" min="1" v-model="totalPrice"></mt-field>
@@ -125,7 +131,7 @@
 				<div v-for="fieldItem in taskParams.taskTypeAttrs">
 					<mt-field v-if="fieldItem.formType == 'text' " :label="fieldItem.fieldCname"
 					          :placeholder="fieldItem.fieldCname"
-					          v-model="fieldItem.fieldConten"></mt-field>
+					          v-model="fieldItem.fieldContent"></mt-field>
 
 					<div v-if="fieldItem.formType == 'img' " class="upload-part">
 						<div class="title">{{fieldItem.fieldCname}}</div>
@@ -207,23 +213,23 @@
 //						itState: '',
 //						itMsg: '',
 //					},
-					unitPrice: {
-						itRequried: {reg: true, msg: ''},
-						itType: {reg: '', msg: ''},
-						itLen: {reg: 9, msg: ''},
-						itState: '',
-						itMsg: '',
-					},
+// 					unitPrice: {
+// 						itRequried: {reg: true, msg: ''},
+// 						itType: {reg: /^([1-9]\d*|0)(\.\d*[1-9])?$/, msg: ''},
+// 						itLen: {reg: 9, msg: ''},
+// 						itState: '',
+// 						itMsg: '',
+// 					},
 					markupPrice: {
 						itRequried: {reg: false, msg: ''},
-						itType: {reg: '', msg: ''},
+						itType: {reg: /^([1-9]\d*|0)(\.\d*[1-9])?$/, msg: ''},
 						itLen: {reg: 9, msg: ''},
 						itState: '',
 						itMsg: '',
 					},
 					totalSum: {
 						itRequried: {reg: true, msg: ''},
-						itType: {reg: '', msg: ''},
+						itType: {reg: /^([1-9]\d*|0)(\.\d*[1-9])?$/, msg: ''},
 						itLen: {reg: 9, msg: ''},
 						itState: '',
 						itMsg: '',
@@ -253,10 +259,10 @@
 				task.queryTaskType(para).then((res) => {
 					if (res.msgCode == 1) {
 						vm.taskTypes = res.taskTypes;
-						vm.taskParams.id = res.taskTypes[0].id;
+						vm.taskParams.taskType = res.taskTypes[0].id;
 						vm.unitPrice = res.taskTypes[0].defPrice;
 						vm.taskParams.taskTypeAttrs = res.taskTypes[0].taskTypeAttrs;
-						vm.taskParams.taskName = res.taskTypes[0].name + '任务';
+						vm.taskParams.taskName = res.taskTypes[0].name + '任务'+localStorage.nickName;
 					}
 				});
 			}
@@ -337,10 +343,10 @@
 			changeType(itemData) {
 				let vm = this;
 				console.log('itemData', itemData)
-				vm.taskParams.id = itemData.id;
+				vm.taskParams.taskType = itemData.id;
 				vm.unitPrice = itemData.defPrice;
 				vm.taskParams.taskTypeAttrs = itemData.taskTypeAttrs;
-				vm.taskParams.taskName = itemData.name + '任务';
+        vm.taskParams.taskName = itemData.name + '任务'+localStorage.nickName;
 			},
 
 			addTask() {

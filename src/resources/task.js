@@ -21,11 +21,14 @@ export default {
 		return ajax.post(api.replyDistributeTask, params)
 	},
 	submitDistributeTask(params) {
-		return ajax.post(api.replyDistributeTask, params)
+		return ajax.post(api.submitDistributeTask, params)
 	},
 	queryDistributeTask(params) {
-		return ajax.post(api.queryDistributeTask, params)
-	},
+    return ajax.post(api.queryDistributeTask, params)
+  },
+  queryMyDistributeTask(params) {
+    return ajax.post(api.queryMyDistributeTask, params)
+  },
 	updateTask(params) {
 		return ajax.post(api.updateTask, params)
 	},

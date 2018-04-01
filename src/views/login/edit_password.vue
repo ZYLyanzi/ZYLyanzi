@@ -42,7 +42,7 @@
 </style>
 <template>
   <section>
-    <mt-header title="修改密码">
+    <mt-header fixed title="修改密码">
       <router-link to="/user" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
