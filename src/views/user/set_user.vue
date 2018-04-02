@@ -57,7 +57,7 @@
 </style>
 <template>
 	<section>
-		<mt-header title="个人设置">
+		<mt-header fixed title="个人设置">
 			<router-link to="/user" slot="left">
 				<mt-button icon="back"></mt-button>
 			</router-link>

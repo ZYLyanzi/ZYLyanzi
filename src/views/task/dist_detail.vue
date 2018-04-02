@@ -21,6 +21,9 @@
     width: 82%;
     color: #888888;
   }
+  .red{
+    color: #ef4f4f;
+  }
   .detail-btn{
     margin: 20px 0;
   }
@@ -30,7 +33,7 @@
 </style>
 <template>
 	<section>
-    <mt-header title="派发任务详情">
+    <mt-header fixed title="派发任务详情">
       <router-link to="/" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
@@ -45,8 +48,12 @@
         <div class="rw-value">{{taskDetail.taskTypeName}}</div>
       </div>
       <div class="item">
-        <div class="rw-feild">积分</div>
-        <div class="rw-value">{{taskDetail.unitPrice}}</div>
+        <div class="rw-feild">任务号</div>
+        <div class="rw-value">{{taskDetail.taskId}}</div>
+      </div>
+      <div class="item">
+        <div class="rw-feild">可获得积分</div>
+        <div class="rw-value red">{{taskDetail.unitPrice}}</div>
       </div>
 
       <div class="item" v-for="item in taskDetail.taskTypeAttrs">
@@ -54,7 +61,7 @@
 
         <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
         <div class="rw-value" v-if="item.fieldType == 'img'">
-          <img v-for="item in item.fieldConten" :src="item"/>
+          <img v-for="item in item.fieldContent" :src="item"/>
         </div>
       </div>
 
@@ -66,7 +73,7 @@
 
 
     <div class="detail-btn">
-      <mt-button type="danger" @click="toStart(1)">接受任务</mt-button>
+      <mt-button type="danger" @click="toStart(1)">接收任务</mt-button>
       <mt-button type="default" @click="toStart(2)">放弃任务</mt-button>
 
     </div>
@@ -86,6 +93,14 @@ export default {
 	created() {
 		this.getInfo()
 	},
+  destroyed(){
+	  console.log("beforeDestory");
+
+	  if(this.taskDetail.id){
+      this.toStart(2)
+    }
+
+  },
 	methods: {
     getInfo(){
       let vm = this;
@@ -100,6 +115,7 @@ export default {
       let vm = this;
       let para = {
         taskId: vm.taskDetail.id,
+        taskDistributeId: vm.taskDetail.taskDistributeId,
         state: type,
       };
       // if (type == 1){
@@ -114,6 +130,7 @@ export default {
           if (type == 1){
             this.$router.replace({
               path: '/task/start/'+vm.taskDetail.id,
+              query: {taskDistributeId: vm.taskDetail.taskDistributeId,}
             });
           }else if(type == 2){
             vm.getInfo()

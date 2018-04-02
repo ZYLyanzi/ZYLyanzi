@@ -1,5 +1,6 @@
 <style scoped>
 	.top-tap {
+    /*position: absolute;*/
 		height: 35px;
 		display: flex;
 		flex-direction: row;
@@ -7,7 +8,7 @@
 	}
 
 	.top-tap .tap-item {
-		width: 50%;
+		/*width: 50%;*/
 		text-align: center;
 	}
 
@@ -15,9 +16,11 @@
 		border-bottom: 2px solid #ef4f4f;
 		color: #ef4f4f;
 	}
-
+  .list{
+    /*margin-top: 40px;*/
+  }
 	.reward-list {
-		height: 1rem;
+		height: 1.6rem;
 	}
 
 	.reward-list .desc {
@@ -35,31 +38,43 @@
 
 <template>
 	<section>
-		<mt-header :title="title">
+		<mt-header fixed :title="title">
 			<router-link to="/user" slot="left">
 				<mt-button icon="back"></mt-button>
 			</router-link>
 		</mt-header>
 		<div class="top-tap" v-if="id == 0">
 			<div class="tap-item" :class="{'selected': state==0}" @click="changestate(0)">全部</div>
-			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">已接受</div>
+			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">已接收</div>
 			<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">已提交</div>
 			<div class="tap-item" :class="{'selected': state==4}" @click="changestate(4)">已完成</div>
+			<div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
 		</div>
 		<div class="top-tap" v-if="id && id != 0 && id != 'undefined'">
 		<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">待审核</div>
 		<div class="tap-item" :class="{'selected': state==4}" @click="changestate(4)">已审核</div>
-		</div>
+      <div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
+    </div>
 		<div class="list">
 			<ul>
 				<li v-for="item in list">
 					<div class="list-item reward-list">
-              <span class="desc"  @click="toCheckDetail(item.id)">
+              <span class="desc"  @click="toCheckDetail(item.id, item.state)">
                 <div class="title">{{item.taskName}}</div>
+                <div class="title">{{item.taskTaskId}}</div>
+                 <div class="time">接受时间: {{item.acceptTime}}</div>
               </span>
-						<span class="btn">
-                ￥{{item.unitPrice}}
+            <span>
+              	<span class="btn">
+               {{item.unitPrice}}积分
               </span>
+               <div class="state" v-if="item.state == 2">已接收</div>
+               <div class="state" v-if="item.state == 3">已提交</div>
+               <div class="state" v-if="item.state == 4">已完成</div>
+               <div class="state" v-if="item.state == 5">未通过</div>
+               <div class="state" v-if="item.state == 9">已放弃</div>
+            </span>
+
 					</div>
 				</li>
 
@@ -79,7 +94,7 @@
 				page: 1,
 				id: 0,
 				state: 0,
-				type: 0,
+				type: 0,//0jieshou,1fabu
 				title: '接受任务列表',
 				allLoaded: false,
 				list: [
@@ -105,42 +120,45 @@
 			changestate(type) {
 				this.state = type;
 				this.getList();
+
 			},
 			getList() {
 				let vm = this;
 				let para = {
 					page: 1,
 					pageSize: 100,
-					userName: localStorage.userName,
 					state: this.state
 				};
-				if (this.state == 0) {
-					para = {
-						page: 1,
-						pageSize: 100,
-						userName: localStorage.userName,
-					}
+        if (this.state == 0){
+          para = {
+            page: 1,
+            pageSize: 100,
+          };
+        }
+				if (this.type == 0) {
+          task.queryMyDistributeTask(para).then((res) => {
+            if (res.msgCode == 1) {
+              vm.list = res.taskDistributes;
+
+            }
+          });
+
 				}
 				if (this.type == 1) {
-					para = {
-						page: 1,
-						pageSize: 100,
-						id: vm.id,
-						state: this.state
-					};
-				}
-				task.queryDistributeTask(para).then((res) => {
-					if (res.msgCode == 1) {
-						vm.list = res.taskDistributes;
+          task.queryDistributeTask(para).then((res) => {
+            if (res.msgCode == 1) {
+              vm.list = res.taskDistributes;
 
-					}
-				});
+            }
+          });
+
+				}
 
 			},
-			toCheckDetail(id) {
+			toCheckDetail(id, state) {
 				this.$router.push({
 					path: '/task/check_detail/' + id,
-					query: {type: this.type, state:this.state, taskId: this.id}
+					query: {type: this.type, state:state, taskId: this.id}
 				});
 			}
 		},

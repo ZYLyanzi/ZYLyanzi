@@ -7,6 +7,7 @@ export default {
 	replyDistributeTask: 'api/task/replyDistributeTask',
 	submitDistributeTask: 'api/task/submitDistributeTask',
 	queryDistributeTask: 'api/task/queryDistributeTask',
+  queryMyDistributeTask: 'api/task/queryMyDistributeTask',
 	comfirmDistributeTask: 'api/task/comfirmDistributeTask',
   queryScoreCz: 'api/task/queryScoreCz',
 	// getList: 'api/task/myReleaseTask',//列表

@@ -7,7 +7,7 @@
   justify-content: space-between;
   border-bottom: 1px solid #e5e5e5;
   padding: 0.16rem;
-  height: 1.9rem;
+  padding-top: 0.1rem;
 
 }
 .list-item .desc{
@@ -16,6 +16,7 @@
   text-align: left;
 }
 .list-item .desc .title{
+  margin: 0.16rem 0;
   font-size: 0.28rem;
 }
 .list-item .desc .time{
@@ -23,16 +24,18 @@
   color: #8e8e8e;
   margin: 0.16rem 0;
 }
-.list-item .desc .price{
-  font-size: 0.40rem;
+.list-item .price{
   color: #ef4f4f;
-  font-weight: bold;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.32rem;
 }
 .list-item .btn{
   width: 25%;
   height: 1.9rem;
   line-height: 1.9rem;
 }
+
 
 
 .bootom{
