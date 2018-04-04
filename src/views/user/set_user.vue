@@ -58,8 +58,9 @@
 <template>
 	<section>
 		<mt-header fixed title="个人设置">
+			<!--<mt-button icon="back" slot="left"  @click="backUp()"></mt-button>-->
 			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
+			<mt-button icon="back"></mt-button>
 			</router-link>
 		</mt-header>
 		<div class="main">
@@ -72,6 +73,33 @@
 			            </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
+					<li class="option-item" @click="gotoPage(6)">
+			            <span class="item-desc">
+			              <span class="name">充值积分</span>
+			            </span>
+						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
+					</li>
+					<li class="option-item" @click="gotoPage(7)">
+			            <span class="item-desc">
+			              <span class="name">积分提现</span>
+			            </span>
+						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
+					</li>
+
+					<li class="option-item"  @click="gotoPage(5)">
+			            <span class="item-desc">
+					<span class="name">填写邀请码</span>
+					</span>
+					<span class="item-ico"><i class="right-jiantou ico"></i> </span>
+					</li>
+					<li class="option-item">
+			            <span class="item-desc">
+			              <span class="name">我的邀请码</span>
+			              <span class="name">{{inviteCode}}</span>
+			            </span>
+						<span class="item-ico"></span>
+					</li>
+
 				</ul>
 			</div>
 			<mt-button class="login-out" type="danger" @click="loginOut()">注销登录</mt-button>
@@ -88,14 +116,22 @@
 			return {
 				tapName: 'user',
 				score: '',
-				userName: ''
+				userName: '',
+				bindInviteCode: '',
+				inviteCode: ''
 			}
 		},
 		created() {
+			this.bindInviteCode = this.$store.state.bindInviteCode;
+			this.inviteCode = this.$store.state.inviteCode;
 			this.score = localStorage.score;
 			this.userName = localStorage.userName;
 		},
 		methods: {
+//			backUp(){
+////				this.$router.back(1)
+//				this.$router.back(1)
+//			},
 			loginOut(){
 				this.$store.commit(types.LOGOUT);
 				this.$router.replace({
@@ -106,6 +142,21 @@
 				if (id == 4) {
 					this.$router.replace({
 						path: '/edit_password',
+					});
+				}
+				if (id == 5) {
+					this.$router.push({
+						path: '/user/fill_code',
+					});
+				}
+				if (id == 6) {
+					this.$router.replace({
+						path: '/user/pay_jifen',
+					});
+				}
+				if (id == 7) {
+					this.$router.replace({
+						path: '/user/withdrawal_jifen',
 					});
 				}
 			},

@@ -16,5 +16,23 @@ export default {
 	updateUserInfo(params) {
 		return ajax.post(api.updateUserInfo, params)
 	},
+	bindInviteCode(params) {
+		return ajax.post(api.bindInviteCode, params)
+	},
+	addRecharge(params) {
+		return ajax.post(api.addRecharge, params)
+	},
+	queryRecharge(params) {
+		return ajax.post(api.queryRecharge, params)
+	},
+	addApplyCash(params) {
+		return ajax.post(api.addApplyCash, params)
+	},
+	queryApplyCash(params) {
+		return ajax.post(api.queryApplyCash, params)
+	},
+	queryMyInviteUser(params) {
+		return ajax.post(api.queryMyInviteUser, params)
+	},
 
 }

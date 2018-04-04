@@ -176,6 +176,7 @@
 		components: {bootomTap},
 		data() {
 			return {
+				btnStatus: true,
 				username: '',
 				taskType: '',
 
@@ -350,6 +351,10 @@
 			},
 
 			addTask() {
+				if (this.btnStatus == false){
+					return
+				}
+				console.log("触发add")
 				this.validCount = 0;
 				for (let objElem in this.rules) {
 					this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
@@ -357,6 +362,7 @@
 				if (this.validCount > 0) {
 //          alert("校验不通过")
 				} else {
+					this.btnStatus = false;
 					let vm = this;
 
 					vm.taskParams.userName = localStorage.userName;
@@ -368,6 +374,7 @@
 
 					if (vm.id && vm.id!= 0) {
 						task.updateTask(vm.taskParams).then((res) => {
+							vm.btnStatus = true;
 							if (res.msgCode == 1) {
 								alert("修改成功")
                 this.$router.replace({
@@ -377,6 +384,7 @@
 						});
 					} else {
 						task.addTask(vm.taskParams).then((res) => {
+							vm.btnStatus = true;
 							if (res.msgCode == 1) {
 								alert("添加成功")
                 this.$router.replace({
@@ -385,6 +393,7 @@
 							}
 						});
 					}
+
 				}
 			},
 		},

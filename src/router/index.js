@@ -78,6 +78,37 @@ const router = new Router({
 		  name: 'set_user',
 		  component: resolve => require([`@/views/user/set_user`],resolve)
 	  },
+	  {
+		  path: '/user/fill_code',
+		  name: 'fill_code',
+		  component: resolve => require([`@/views/user/fill_code`],resolve)
+	  },
+	  {
+		  path: '/user/pay_jifen',
+		  name: 'pay_jifen',
+		  component: resolve => require([`@/views/user/pay_jifen`],resolve)
+	  },
+	  {
+		  path: '/user/pay_list',
+		  name: 'pay_list',
+		  component: resolve => require([`@/views/user/pay_list`],resolve)
+	  },
+	  {
+		  path: '/user/withdrawal_jifen',
+		  name: 'withdrawal_jifen',
+		  component: resolve => require([`@/views/user/withdrawal_jifen`],resolve)
+	  },
+	  {
+		  path: '/user/withdrawal_list',
+		  name: 'withdrawal_list',
+		  component: resolve => require([`@/views/user/withdrawal_list`],resolve)
+	  },
+	  {
+		  path: '/user/yaoqing_list',
+		  name: 'yaoqing_list',
+		  component: resolve => require([`@/views/user/yaoqing_list`],resolve)
+	  },
+
   ],
 });
 

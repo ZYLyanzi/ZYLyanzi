@@ -8,36 +8,44 @@ export default new Vuex.Store({
 	modules: {
 		user
 	},
-  state: {
-    token: null,
-    title: ''
-  },
-  mutations: {
-    setUserInfo(state, par) {
+	state: {
+		token: null,
+		title: '',
+		bindInviteCode: 0,
+		inviteCode: '',
 
-      localStorage.userId = par.userId;
-      localStorage.userName = par.userName;
-      localStorage.nickName = par.nickName;
-      localStorage.score = par.score;
-      // state.activityId = id;
+	},
+	mutations: {
+		setUserInfo(state, par) {
+			localStorage.userId = par.id;
+			localStorage.userName = par.userName;
+			localStorage.nickName = par.nickName;
+			localStorage.score = par.score;
+			localStorage.releaseScore = par.releaseScore;
+			state.inviteCode = par.inviteCode;
+			// state.activityId = id;
 
-    },
-    [types.LOGIN]: (state, data) => {
-      localStorage.token = data;
-      // sessionStorage.token = data;
-      state.token = data;
-    },
-    [types.LOGOUT]: (state) => {
-      console.log("去掉token");
-      localStorage.removeItem('token');
-      //sessionStorage.removeItem('token');
-      state.token = null
-    },
-    [types.TITLE]: (state, data) => {
-      console.log("改变title", data);
-      console.log("改变title", state.title );
-      // state.title = data;
-      document.title = data;
-    }
-  }
+		},
+		setUserCode(state, par) {
+			state.bindInviteCode = par
+
+		},
+		[types.LOGIN]: (state, data) => {
+			localStorage.token = data;
+			// sessionStorage.token = data;
+			state.token = data;
+		},
+		[types.LOGOUT]: (state) => {
+			console.log("去掉token");
+			localStorage.removeItem('token');
+			//sessionStorage.removeItem('token');
+			state.token = null
+		},
+		[types.TITLE]: (state, data) => {
+			console.log("改变title", data);
+			console.log("改变title", state.title);
+			// state.title = data;
+			document.title = data;
+		}
+	}
 })

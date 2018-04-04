@@ -43,7 +43,7 @@
 <template>
   <section>
     <mt-header fixed title="修改密码">
-      <router-link to="/user" slot="left">
+      <router-link to="/user/set_user" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
@@ -133,15 +133,21 @@
 		            let para = {
 			            userId: res.userId
 		            }
-		            user.queryUserInfo(para).then((res) => {
-			            if (res.msgCode == 1){
-				            vm.$store.commit('setUserInfo', res.user);
-				            this.$router.replace({
-					            path: '/'
-				            })
-
-			            }
+		            Toast({
+			            message: '修改成功',
+			            iconClass: 'icon icon-success'
 		            });
+		            setTimeout(() => {
+			            user.queryUserInfo(para).then((res) => {
+				            if (res.msgCode == 1){
+					            vm.$store.commit('setUserInfo', res.user);
+					            this.$router.replace({
+						            path: '/'
+					            })
+
+				            }
+			            });
+		            }, 2000);
 	            }
             });
 

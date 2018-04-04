@@ -194,7 +194,7 @@
 
         this.$router.replace({
           path: '/task/start/'+this.id,
-          query: {taskDistributeId: this.list.id,}
+          query: {taskDistributeId: this.list.id, type: 2}
         });
 
       }

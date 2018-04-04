@@ -32,36 +32,30 @@
 		line-height: 1rem;
 		font-size: 0.32rem;
 	}
+	.has-yaoqing{
+		font-size: 0.32rem;
+		margin: 10px;
+	}
 </style>
 
 <template>
 	<section>
-		<mt-header fixed title="我的积分明细">
+		<mt-header fixed title="我邀请的用户">
 			<router-link to="/user" slot="left">
 				<mt-button icon="back"></mt-button>
 			</router-link>
 		</mt-header>
-
-		<div class="top-tap">
-			<div class="tap-item" :class="{'selected': state==1}" @click="changestate(1)">发布积分</div>
-			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">奖励积分</div>
-		</div>
+		<div class="has-yaoqing" v-if="list.length > 0">已邀请人数：{{total}}</div>
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">
 			<ul>
-				<li v-for="item in scoreCzs">
+				<li v-for="item in list">
 					<div class="list-item reward-list">
               <span class="desc">
-                <div class="title">{{item.remark}}</div>
-                <div class="title">剩余积分：{{item.balance}}</div>
-                <div class="time">{{item.czTime}}</div>
-              </span>
-						<span class="btn" v-if="item.inPrice">
-                 +{{item.inPrice}}
-              </span>
-						<span class="btn" v-if="item.payPrice">
-                 -{{item.payPrice}}
+                <div class="title">用户名：{{item.userName}}</div>
+                <div class="title">用户昵称：{{item.userName}}</div>
+                <div class="time">注册时间：{{item.registerTime}}</div>
               </span>
 					</div>
 				</li>
@@ -72,31 +66,15 @@
 </template>
 <script>
 	// import { Loadmore } from 'mint-ui'
-	import task from '@/resources/task'
+	import user from '@/resources/user'
 	import {mapState, mapGetters, mapActions} from 'vuex'
 
 	export default {
 		data() {
 			return {
 				allLoaded: false,
-				state: 1,
-				scoreCzs: [
-					{
-						czTime: '2018-03-24',
-						payPrice: 0,
-						inPrice: 200,
-						balance: 600,
-						remark: '这是个备注'
-
-					},
-					{
-						czTime: '2018-03-24',
-						payPrice: 200,
-						inPrice: 0,
-						balance: 600,
-						remark: '这是个备注'
-
-					}],
+				list: [],
+				total: '',
 				page: 1,
 				pageSize: 10,
 			}
@@ -106,11 +84,6 @@
 			vm.getList('top');
 		},
 		methods: {
-			changestate(type) {
-				this.state = type;
-				this.getList('top');
-
-			},
 			loadTop() {
 				this.getList('top');
 				this.$refs.loadmore.onTopLoaded();
@@ -130,16 +103,16 @@
 				let par = {
 					page: vm.page,
 					pageSize: vm.pageSize,
-					state: this.state
 				}
 
-				task.queryScoreCz(par).then((res) => {
+				user.queryMyInviteUser(par).then((res) => {
 					if (res.msgCode == 1) {
+						vm.total = res.total;
 						if (type == 'top') {
-							vm.scoreCzs = res.scoreCzs;
+							vm.list = res.users;
 						} else if (type == 'bottom') {
-							vm.scoreCzs = vm.scoreCzs.concat(res.scoreCzs);
-							if ((res.scoreCzs).length == 0){
+							vm.list = vm.users.concat(res.users);
+							if ((res.users).length == 0){
 								vm.allLoaded = true
 							}
 						}

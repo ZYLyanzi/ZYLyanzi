@@ -72,6 +72,7 @@
 		data() {
 			return {
 				id: 0,
+				type: '',
         taskDistributeId: '',
 				taskDetail: {},
 				taskParms: {
@@ -84,7 +85,8 @@
 		created() {
 			this.token = localStorage.token;
 			this.id = this.$route.params.id;
-      this.taskDistributeId = this.$route.query.taskDistributeId;
+            this.taskDistributeId = this.$route.query.taskDistributeId;
+            this.type = this.$route.query.type;
 			this.getInfo()
 		},
 		methods: {
@@ -108,18 +110,26 @@
 					let name = 'picture'+ ''+(i+1);
 						vm.taskParms[name] = vm.fileList2[i].url;
 				}
+
 				task.submitDistributeTask(vm.taskParms).then((res) => {
 					if (res.msgCode == 1) {
 						Toast({
 							message: '提交成功',
 							iconClass: 'icon icon-success'
 						});
-						this.$router.push({
-							path: '/task/dist_detail/'
-						})
-
+						if (vm.type == 2){
+							this.$router.push({
+								path: '/task/check_detail/' + vm.id,
+								query: {type: 0, state: 3, taskId: vm.id}
+							});
+						}else {
+							this.$router.replace({
+								path: '/task/dist_detail/'
+							})
+						}
 					}
 				});
+
 			},
 			//缩略图上传成功钩子
 			handlePostSuccess(res, file) {

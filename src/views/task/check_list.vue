@@ -1,14 +1,21 @@
 <style scoped>
 	.top-tap {
-    /*position: absolute;*/
-		height: 35px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-	}
+		/*position: absolute;*/
+		position: fixed;
+		width: 100%;
+		top: 40px;
+		background-color: #f2f2f2;
 
+		height: 40px;
+		/*display: flex;*/
+		/*flex-direction: row;*/
+		/*justify-content: space-between;*/
+	}
 	.top-tap .tap-item {
-		/*width: 50%;*/
+		width: 20%;
+		float: left;
+		height: 40px;
+		line-height: 40px;
 		text-align: center;
 	}
 
@@ -16,9 +23,11 @@
 		border-bottom: 2px solid #ef4f4f;
 		color: #ef4f4f;
 	}
-  .list{
-    /*margin-top: 40px;*/
-  }
+
+	.list {
+		margin-top: 40px;
+	}
+
 	.reward-list {
 		height: 1.6rem;
 	}
@@ -51,20 +60,22 @@
 			<div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
 		</div>
 		<div class="top-tap" v-if="id && id != 0 && id != 'undefined'">
-		<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">待审核</div>
-		<div class="tap-item" :class="{'selected': state==4}" @click="changestate(4)">已审核</div>
-      <div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
-    </div>
+			<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">待审核</div>
+			<div class="tap-item" :class="{'selected': state==4}" @click="changestate(4)">已审核</div>
+			<div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
+		</div>
 		<div class="list">
-			<ul>
-				<li v-for="item in list">
-					<div class="list-item reward-list">
-              <span class="desc"  @click="toCheckDetail(item.id, item.state)">
+			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
+			             :auto-fill="false" ref="loadmore">
+				<ul>
+					<li v-for="item in list">
+						<div class="list-item reward-list">
+              <span class="desc" @click="toCheckDetail(item.id, item.state)">
                 <div class="title">{{item.taskName}}</div>
                 <div class="title">{{item.taskTaskId}}</div>
                  <div class="time">接受时间: {{item.acceptTime}}</div>
               </span>
-            <span>
+							<span>
               	<span class="btn">
                {{item.unitPrice}}积分
               </span>
@@ -75,10 +86,10 @@
                <div class="state" v-if="item.state == 9">已放弃</div>
             </span>
 
-					</div>
-				</li>
-
-			</ul>
+						</div>
+					</li>
+				</ul>
+			</mt-loadmore>
 		</div>
 	</section>
 </template>
@@ -92,13 +103,13 @@
 		data() {
 			return {
 				page: 1,
+				pageSize: 10,
 				id: 0,
 				state: 0,
 				type: 0,//0jieshou,1fabu
 				title: '接受任务列表',
 				allLoaded: false,
-				list: [
-				],
+				list: [],
 			}
 		},
 		created() {
@@ -108,49 +119,69 @@
 				this.state = 3;
 				this.type = 1;
 			}
-			this.getList();
+			this.getList('top');
 		},
 		methods: {
 			loadTop() {
-
+				this.getList('top');
+				this.$refs.loadmore.onTopLoaded();
 			},
 			loadBottom() {
-
+				this.getList('bottom');
+				this.$refs.loadmore.onBottomLoaded();
 			},
 			changestate(type) {
 				this.state = type;
-				this.getList();
+				this.getList('top');
 
 			},
-			getList() {
+			getList(type) {
 				let vm = this;
+				if (type == 'top') {
+					vm.page = 1
+				} else if (type == 'bottom') {
+					vm.page = parseInt(vm.page) + 1
+				}
 				let para = {
-					page: 1,
-					pageSize: 100,
+					page: vm.page,
+					pageSize: vm.pageSize,
 					state: this.state
 				};
-        if (this.state == 0){
-          para = {
-            page: 1,
-            pageSize: 100,
-          };
-        }
+				if (this.state == 0) {
+					para = {
+						page: vm.page,
+						pageSize: vm.pageSize,
+					};
+				}
 				if (this.type == 0) {
-          task.queryMyDistributeTask(para).then((res) => {
-            if (res.msgCode == 1) {
-              vm.list = res.taskDistributes;
-
-            }
-          });
+					task.queryMyDistributeTask(para).then((res) => {
+						if (res.msgCode == 1) {
+							if (type == 'top') {
+								vm.list = res.taskDistributes;
+							} else if (type == 'bottom') {
+								vm.list = vm.list.concat(res.taskDistributes);
+								if ((res.taskDistributes).length == 0){
+									vm.allLoaded = true
+								}
+							}
+						}
+					});
 
 				}
 				if (this.type == 1) {
-          task.queryDistributeTask(para).then((res) => {
-            if (res.msgCode == 1) {
-              vm.list = res.taskDistributes;
+					task.queryDistributeTask(para).then((res) => {
+						if (res.msgCode == 1) {
+							if (type == 'top') {
+								vm.list = res.taskDistributes;
+							} else if (type == 'bottom') {
+								vm.list = vm.list.concat(res.taskDistributes);
+								if ((res.taskDistributes).length == 0){
+									vm.allLoaded = true
+								}
+							}
 
-            }
-          });
+						}
+					});
 
 				}
 
@@ -158,7 +189,7 @@
 			toCheckDetail(id, state) {
 				this.$router.push({
 					path: '/task/check_detail/' + id,
-					query: {type: this.type, state:state, taskId: this.id}
+					query: {type: this.type, state: state, taskId: this.id}
 				});
 			}
 		},

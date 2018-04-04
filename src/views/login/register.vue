@@ -47,6 +47,7 @@
       <mt-field label="昵称" placeholder="请输入昵称" :attr="{maxlength:20}" v-model="nickName" :state='rules.nickName.itState'></mt-field>
       <mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:20}" v-model="password" :state='rules.password.itState'></mt-field>
       <mt-field label="确认密码" placeholder="请确认密码" type="password" :attr="{maxlength:20}" v-model="confirmPassword" :state='rules.confirmPassword.itState'></mt-field>
+	  <mt-field label="邀请码" placeholder="请输入昵称" :attr="{maxlength:20}" v-model="inviteCode"></mt-field>
     </div>
     <div class="login-bottom">
       <mt-button size="large" type="primary" class="login-btn-login"  @click="toRegist">免费注册</mt-button>
@@ -70,6 +71,7 @@
         userName: '',
         password: '',
         confirmPassword: '',
+	      inviteCode: '',
         rules: {
           userName: {
             itRequried: {reg: true, msg: ''},
@@ -121,10 +123,29 @@
               position: 'middle',
               duration: 2000
             });
-          }else {
+            return
+          }
+          if ((vm.userName).length < 4 ){
+		        Toast({
+			        message: '用户名长度不能小于4',
+			        position: 'middle',
+			        duration: 2000
+		        });
+	          return
+	        }
+	        if ((vm.password).length < 4 ){
+		        Toast({
+			        message: '密码长度不能小于4',
+			        position: 'middle',
+			        duration: 2000
+		        });
+		        return
+	        }
+
             let para = {
               userName: vm.userName,
               nickName: vm.nickName,
+	            inviteCode: vm.inviteCode,
               password: md5(vm.password),
             };
 //          请求
@@ -152,7 +173,7 @@
 
              }
            });
-          }
+
         }
       },
       toLogin(){

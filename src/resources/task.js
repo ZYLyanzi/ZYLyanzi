@@ -24,20 +24,23 @@ export default {
 		return ajax.post(api.submitDistributeTask, params)
 	},
 	queryDistributeTask(params) {
-    return ajax.post(api.queryDistributeTask, params)
-  },
-  queryMyDistributeTask(params) {
-    return ajax.post(api.queryMyDistributeTask, params)
-  },
+		return ajax.post(api.queryDistributeTask, params)
+	},
+	queryMyDistributeTask(params) {
+		return ajax.post(api.queryMyDistributeTask, params)
+	},
 	updateTask(params) {
 		return ajax.post(api.updateTask, params)
 	},
 	comfirmDistributeTask(params) {
 		return ajax.post(api.comfirmDistributeTask, params)
 	},
-  queryScoreCz(params) {
-    return ajax.post(api.queryScoreCz, params)
-  },
+	queryScoreCz(params) {
+		return ajax.post(api.queryScoreCz, params)
+	},
+	carousel() {
+		return ajax.post(api.carousel)
+	},
 
 
 
