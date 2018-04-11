@@ -73,6 +73,13 @@
 		top: 5px;
 		background-position: -1px -101px;
 	}
+	.option-item .item-desc .tixian{
+		position: absolute;
+		width: 20px;
+		height: 16px;
+		top: 5px;
+		background-position: 0 -133px
+	}
 	.option-item .item-desc .my-reward {
 		position: absolute;
 		width: 20px;
@@ -112,9 +119,9 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="个人中心">
-			<!--<mt-button slot="right" @click.native="popupStatus = true">排序</mt-button>-->
-		</mt-header>
+		<!--<mt-header fixed title="个人中心">-->
+			<!--&lt;!&ndash;<mt-button slot="right" @click.native="popupStatus = true">排序</mt-button>&ndash;&gt;-->
+		<!--</mt-header>-->
 		<div class="main">
 			<div class="header-user">
 				<div>
@@ -123,7 +130,7 @@
 				</div>
 				<div class="part">
 					<div class="user-name user-jifen">奖励积分：{{score}}</div>
-					<div class="user-name user-jifen">充值积分：{{releaseScore}}</div>
+					<div class="user-name user-jifen">发布积分：{{releaseScore}}</div>
 				</div>
 			</div>
 
@@ -132,21 +139,28 @@
 					<li class="option-item" @click="gotoPage(1)">
             <span class="item-desc">
               <i class="my-apply-task ico"></i>
-              <span class="name">我发布的任务</span>
+              <span class="name">任务列表</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
-					<li class="option-item" @click="gotoPage(2)">
-            <span class="item-desc">
-              <i class="checked-task ico"></i>
-              <span class="name">我接收的任务</span>
-            </span>
-						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
-					</li>
+					<!--<li class="option-item" @click="gotoPage(2)">-->
+            <!--<span class="item-desc">-->
+              <!--<i class="checked-task ico"></i>-->
+              <!--<span class="name">我接收的任务</span>-->
+            <!--</span>-->
+						<!--<span class="item-ico"><i class="right-jiantou ico"></i> </span>-->
+					<!--</li>-->
 					<li class="option-item" @click="gotoPage(3)">
             <span class="item-desc">
               <i class="my-reward ico"></i>
               <span class="name">我的积分明细</span>
+            </span>
+						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
+					</li>
+					<li class="option-item" @click="gotoPage(7)">
+            <span class="item-desc">
+              <i class="yaoqing ico"></i>
+              <span class="name">我邀请的用户</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
@@ -159,16 +173,8 @@
 					</li>
 					<li class="option-item" @click="gotoPage(6)">
             <span class="item-desc">
-              <i class="chongzhi ico"></i>
+              <i class="tixian ico"></i>
               <span class="name">提现记录</span>
-            </span>
-						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
-					</li>
-
-					<li class="option-item" @click="gotoPage(7)">
-            <span class="item-desc">
-              <i class="yaoqing ico"></i>
-              <span class="name">我邀请的用户</span>
             </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
@@ -223,11 +229,10 @@
 			gotoPage(id) {
 				if (id == 1) {
 					this.$router.push({
-						path: '/task/list',
+						path: '/set_list',
 					});
 				}
 				if (id == 2) {
-
 					this.$router.push({
 						path: '/task/check/0',
 					});

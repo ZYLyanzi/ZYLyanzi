@@ -42,11 +42,11 @@
 </style>
 <template>
   <section>
-    <mt-header fixed title="修改密码">
-      <router-link to="/user/set_user" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header>
+    <!--<mt-header fixed title="修改密码">-->
+      <!--<router-link to="/user/set_user" slot="left">-->
+        <!--<mt-button icon="back"></mt-button>-->
+      <!--</router-link>-->
+    <!--</mt-header>-->
     <div class="page-part">
       <mt-field label="原密码" placeholder="请输入原密码" type="password" :attr="{maxlength:20}" v-model="oldPassword"
                 :state='rules.oldPassword.itState'></mt-field>

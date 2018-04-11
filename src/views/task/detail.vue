@@ -34,14 +34,17 @@
     margin: 10px;
     font-size: 0.32rem;
   }
+	.value-img{
+		width: 70%;
+	}
 </style>
 <template>
   <section>
-    <mt-header fixed title="任务详情">
-      <router-link to="/task/list" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header>
+    <!--<mt-header fixed title="任务详情">-->
+      <!--<router-link to="/task/list" slot="left">-->
+        <!--<mt-button icon="back"></mt-button>-->
+      <!--</router-link>-->
+    <!--</mt-header>-->
     <div class="layout">
       <div class="item">
         <div class="rw-feild">任务名称</div>
@@ -85,9 +88,9 @@
       <div class="item" v-for="item in taskDetail.taskTypeAttrs">
         <div class="rw-feild">{{item.fieldCname}}</div>
 
-        <div class="rw-value" v-if="item.formType == 'text' ">{{item.fieldContent}}11</div>
-        <div class="rw-value" v-if="item.fieldType == 'img' ">
-          <img v-for="item in item.fieldConten" :src="item"/>
+        <div class="rw-value" v-if="item.formType == 'text' ">{{item.fieldContent}}</div>
+        <div class="rw-value" v-if="item.formType == 'img' ">
+          <img  class="value-img" v-for="item in JSON.parse(item.fieldContent)" :src="item"/>
         </div>
       </div>
     </div>

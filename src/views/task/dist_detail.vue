@@ -33,11 +33,11 @@
 </style>
 <template>
 	<section>
-    <mt-header fixed title="派发任务详情">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header>
+    <!--<mt-header fixed title="派发任务详情">-->
+      <!--<router-link to="/" slot="left">-->
+        <!--<mt-button icon="back"></mt-button>-->
+      <!--</router-link>-->
+    <!--</mt-header>-->
     <div class="layout">
       <div class="item">
         <div class="rw-feild">任务名称</div>

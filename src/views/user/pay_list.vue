@@ -40,11 +40,11 @@
 
 <template>
 	<section>
-		<mt-header fixed title="充值列表">
-			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="充值列表">-->
+			<!--<router-link to="/user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="top-tap">
 			<div class="tap-item" :class="{'selected': state==0}" @click="changestate(0)">全部</div>
 			<div class="tap-item" :class="{'selected': state==1}" @click="changestate(1)">待处理</div>

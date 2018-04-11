@@ -1,10 +1,10 @@
 <template>
 	<section>
-		<mt-header fixed title="任务列表">
-			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="我发布的任务">-->
+			<!--<router-link to="/user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">

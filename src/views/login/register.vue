@@ -37,11 +37,11 @@
 </style>
 <template>
   <section>
-    <mt-header fixed title="免费注册">
-      <router-link to="/login" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header>
+    <!--<mt-header fixed title="免费注册">-->
+      <!--<router-link to="/login" slot="left">-->
+        <!--<mt-button icon="back"></mt-button>-->
+      <!--</router-link>-->
+    <!--</mt-header>-->
     <div class="page-part">
       <mt-field label="账号" placeholder="请输入账号" :attr="{maxlength:20}" v-model="userName" :state='rules.userName.itState'></mt-field>
       <mt-field label="昵称" placeholder="请输入昵称" :attr="{maxlength:20}" v-model="nickName" :state='rules.nickName.itState'></mt-field>

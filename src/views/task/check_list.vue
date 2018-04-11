@@ -47,11 +47,11 @@
 
 <template>
 	<section>
-		<mt-header fixed :title="title">
-			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed :title="title">-->
+			<!--<router-link to="/user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="top-tap" v-if="id == 0">
 			<div class="tap-item" :class="{'selected': state==0}" @click="changestate(0)">全部</div>
 			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">已接收</div>
@@ -70,7 +70,7 @@
 				<ul>
 					<li v-for="item in list">
 						<div class="list-item reward-list">
-              <span class="desc" @click="toCheckDetail(item.id, item.state)">
+              <span class="desc" @click="toCheckDetail(item.id, item.state, item.taskId)">
                 <div class="title">{{item.taskName}}</div>
                 <div class="title">{{item.taskTaskId}}</div>
                  <div class="time">接受时间: {{item.acceptTime}}</div>
@@ -107,7 +107,7 @@
 				id: 0,
 				state: 0,
 				type: 0,//0jieshou,1fabu
-				title: '接受任务列表',
+				title: '我接收的任务',
 				allLoaded: false,
 				list: [],
 			}
@@ -186,10 +186,10 @@
 				}
 
 			},
-			toCheckDetail(id, state) {
+			toCheckDetail(id, state, taskId) {
 				this.$router.push({
 					path: '/task/check_detail/' + id,
-					query: {type: this.type, state: state, taskId: this.id}
+					query: {type: this.type, state: state, taskId: this.taskId}
 				});
 			}
 		},

@@ -40,11 +40,11 @@
 
 <template>
 	<section>
-		<mt-header fixed title="我邀请的用户">
-			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="我邀请的用户">-->
+			<!--<router-link to="/user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="has-yaoqing" v-if="list.length > 0">已邀请人数：{{total}}</div>
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"

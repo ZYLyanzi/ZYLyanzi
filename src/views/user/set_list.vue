@@ -57,7 +57,7 @@
 </style>
 <template>
 	<section>
-		<!--<mt-header fixed title="个人设置">-->
+		<!--<mt-header fixed title="任务列表">-->
 			<!--&lt;!&ndash;<mt-button icon="back" slot="left"  @click="backUp()"></mt-button>&ndash;&gt;-->
 			<!--<router-link to="/user" slot="left">-->
 			<!--<mt-button icon="back"></mt-button>-->
@@ -67,42 +67,21 @@
 
 			<div class="options">
 				<ul>
-					<li class="option-item" @click="gotoPage(4)">
+					<li class="option-item" @click="gotoPage(1)">
 			            <span class="item-desc">
-			              <span class="name">修改密码</span>
+			              <span class="name">我发布的任务</span>
 			            </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
-					<li class="option-item" @click="gotoPage(6)">
+					<li class="option-item" @click="gotoPage(2)">
 			            <span class="item-desc">
-			              <span class="name">充值积分</span>
+			              <span class="name">我接收的任务</span>
 			            </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
-					<!--<li class="option-item" @click="gotoPage(7)">-->
-			            <!--<span class="item-desc">-->
-			              <!--<span class="name">积分提现</span>-->
-			            <!--</span>-->
-						<!--<span class="item-ico"><i class="right-jiantou ico"></i> </span>-->
-					<!--</li>-->
-
-					<li class="option-item"  @click="gotoPage(5)">
-			            <span class="item-desc">
-					<span class="name">填写邀请码</span>
-					</span>
-					<span class="item-ico"><i class="right-jiantou ico"></i> </span>
-					</li>
-					<li class="option-item">
-			            <span class="item-desc">
-			              <span class="name">我的邀请码</span>
-			              <span class="name">{{inviteCode}}</span>
-			            </span>
-						<span class="item-ico"></span>
-					</li>
-
 				</ul>
 			</div>
-			<mt-button class="login-out" type="danger" @click="loginOut()">注销登录</mt-button>
+			
 		</div>
 
 	</section>
@@ -122,41 +101,17 @@
 			}
 		},
 		created() {
-			this.bindInviteCode = this.$store.state.bindInviteCode;
-			this.inviteCode = this.$store.state.inviteCode;
-			this.score = localStorage.score;
-			this.userName = localStorage.userName;
 		},
 		methods: {
-//			backUp(){
-////				this.$router.back(1)
-//				this.$router.back(1)
-//			},
-			loginOut(){
-				this.$store.commit(types.LOGOUT);
-				this.$router.replace({
-					path: '/login'
-				});
-			},
 			gotoPage(id) {
-				if (id == 4) {
+				if (id == 1) {
 					this.$router.replace({
-						path: '/edit_password',
+						path: '/task/list',
 					});
 				}
-				if (id == 5) {
+				if (id == 2) {
 					this.$router.push({
-						path: '/user/fill_code',
-					});
-				}
-				if (id == 6) {
-					this.$router.replace({
-						path: '/user/pay_jifen',
-					});
-				}
-				if (id == 7) {
-					this.$router.replace({
-						path: '/user/withdrawal_jifen',
+						path: '/task/check/0',
 					});
 				}
 			},

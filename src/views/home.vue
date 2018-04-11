@@ -73,8 +73,8 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="互帮宝">
-		</mt-header>
+		<!--<mt-header fixed title="互帮宝">-->
+		<!--</mt-header>-->
 		<div class="main">
 			<mt-swipe :auto="3000" class="rw-swipe">
 				<mt-swipe-item class="rw-swipe-item" v-for="(item, index) in carousels" :key="index" @click="toPage(item)">
@@ -84,18 +84,18 @@
 			<div class="layout center">
 				<div class="row">
 					<div class="box part1" @click="toDetail(1)">
-						<div class="text">开始赚钱</div>
+						<div class="text">接单赚钱</div>
 					</div>
 					<div class="box part2" @click="toDetail(2)">
-						<div class="text">发布任务</div>
+						<div class="text">我的任务</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="box part3" @click="toDetail(3)">
-						<div class="text">接收列表</div>
+						<div class="text">邀请</div>
 					</div>
 					<div class="box part4" @click="toDetail(4)">
-						<div class="text">我的任务</div>
+						<div class="text">积分明细</div>
 					</div>
 				</div>
 			</div>
@@ -154,18 +154,18 @@
 				}
 				if (id == 2) {
 					this.$router.push({
-						path: '/task/add/0'
+						path: '/task/list/'
+
 					})
 				}
 				if (id == 3) {
-					this.$router.push({
-						path: '/task/check/0'
-					})
+//					this.$router.push({
+//						path: '/task/check/0'
+//					})
 				}
 				if (id == 4) {
 					this.$router.push({
-						path: '/task/list/'
-
+						path: '/task/reward'
 					})
 				}
 			},

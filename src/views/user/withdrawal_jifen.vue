@@ -88,11 +88,11 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="提现">
-			<router-link to="/user/set_user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="提现">-->
+			<!--&lt;!&ndash;<router-link to="/user/set_user" slot="left">&ndash;&gt;-->
+				<!--&lt;!&ndash;<mt-button icon="back"></mt-button>&ndash;&gt;-->
+			<!--&lt;!&ndash;</router-link>&ndash;&gt;-->
+		<!--</mt-header>-->
 		<div class="page-part">
 
 			<mt-field label="可提现积分"  type="number" v-model="canJifen" disabled></mt-field>
@@ -106,6 +106,7 @@
 		<div class="login-bottom">
 			<mt-button size="large" type="primary" class="login-btn-login" @click="addRecharge">确认</mt-button>
 		</div>
+		<bootomTap :tapName="tapName"></bootomTap>
 	</section>
 </template>
 
@@ -114,11 +115,14 @@
 	import user from '@/resources/user'
 	import md5 from 'js-md5';
 	import * as types from '@/store/types'
+	import bootomTap from '@/common/components/bootom_tap.vue'
 	import {Toast} from 'mint-ui'
 
 	export default {
+		components: {bootomTap},
 		data() {
 			return {
+				tapName: 'withdrawal',
 				validCount: 0,
 				money: '',
 				jifen: '',

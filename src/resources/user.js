@@ -7,6 +7,9 @@ export default {
     console.log("qingqiuuser");
 		return ajax.post(api.userLogin, params)
 	},
+	userOpenidLogin(params) {
+		return ajax.post(api.userOpenidLogin, params)
+	},
 	userRegister(params) {
 		return ajax.post(api.userRegister, params)
 	},

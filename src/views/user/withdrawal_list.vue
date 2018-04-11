@@ -38,11 +38,11 @@
 
 <template>
 	<section>
-		<mt-header fixed title="提现列表">
-			<router-link to="/user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="提现列表">-->
+			<!--<router-link to="/user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="top-tap">
 			<div class="tap-item" :class="{'selected': state==0}" @click="changestate(0)">全部</div>
 			<div class="tap-item" :class="{'selected': state==1}" @click="changestate(1)">待处理</div>
@@ -58,7 +58,7 @@
                 <span class="desc">
 
                 <div class="title">提现金额：{{item.money}}</div>
-                 <div class="time">提交时间: {{item.summitTime}}</div>
+                 <div class="time">提交时间: {{item.applyTime}}</div>
                  <div class="time" v-if="state==2">通过时间: {{item.rechargeTime}}</div>
               </span>
 
@@ -113,7 +113,7 @@
 			},
 			changestate(type) {
 				this.state = type;
-				this.getList();
+				this.getList('top');
 
 			},
 			getList(type) {
@@ -131,10 +131,10 @@
 				user.queryApplyCash(para).then((res) => {
 					if (res.msgCode == 1) {
 						if (type == 'top') {
-							vm.recharges = res.recharges;
+							vm.list = res.applyCashs;
 						} else if (type == 'bottom') {
-							vm.recharges = vm.recharges.concat(res.recharges);
-							if ((res.recharges).length == 0){
+							vm.list = vm.list.concat(res.applyCashs);
+							if ((res.applyCashs).length == 0){
 								vm.allLoaded = true
 							}
 						}

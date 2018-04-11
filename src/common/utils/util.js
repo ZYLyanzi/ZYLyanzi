@@ -245,5 +245,17 @@ export default {
   getDateDiff(time) {
     //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式
     return time.replace(/\-/g, "/");
-  }
+  },
+
+
+	syncRequest: function(url, type='get', async=false){
+		let xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function(xmlobj){
+
+		};
+		xmlhttp.open(type,url,async);
+		xmlhttp.setRequestHeader('token', localStorage.token);
+		xmlhttp.send(null);
+		return JSON.parse(xmlhttp.responseText);
+	}
 }

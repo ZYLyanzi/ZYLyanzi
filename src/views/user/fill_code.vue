@@ -42,17 +42,21 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="填写邀请码">
-			<router-link to="/user/set_user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="填写邀请码">-->
+			<!--<router-link to="/user/set_user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="page-part">
 			<mt-field label="邀请码" placeholder="请输入邀请码" type="text" :attr="{maxlength: 20}" v-model="inviteCode"
 			          :state='rules.inviteCode.itState'></mt-field>
 		</div>
 		<div class="login-bottom">
 			<mt-button size="large" type="primary" class="login-btn-login" @click="bindInviteCode">确认</mt-button>
+
+			<router-link to="/" v-if="isFirst == 0">
+				<mt-button size="large" type="primary" class="login-btn-login">前往首页</mt-button>
+			</router-link>
 		</div>
 	</section>
 </template>
@@ -69,6 +73,7 @@
 			return {
 				validCount: 0,
 				inviteCode: '',
+				isFirst: '',
 				rules: {
 					inviteCode: {
 						itRequried: {reg: true, msg: ''},
@@ -81,6 +86,9 @@
 			}
 		},
 		mounted() {
+		},
+		created() {
+			this.isFirst = this.$route.query.isFirst;
 		},
 		methods: {
 			bindInviteCode() {

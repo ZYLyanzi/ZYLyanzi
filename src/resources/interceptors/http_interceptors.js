@@ -12,11 +12,12 @@ axios.defaults.baseURL = config.host;
   axios.interceptors.request.use(config => {
   if (store.state.token) {
     // console.log("http request 拦截器", store.state.token);
-    config.headers['token'] =  `${store.state.token}`;
+    config.headers['token'] =  localStorage.token;
+    // config.headers['token'] =  `${store.state.token}`;
     // config.headers['Content-Type'] =  'application/x-www-form-urlencoded';
   }
     // console.log("http request 拦截器", config);
-  // Indicator.open();
+  Indicator.open();
   return config
 },error => {
   Indicator.close();

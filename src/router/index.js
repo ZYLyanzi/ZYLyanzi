@@ -33,6 +33,11 @@ const router = new Router({
       name: 'task_add',
       component: resolve => require([`@/views/task/add`],resolve)
     },
+	  {
+		  path: '/set_list',
+		  name: 'set_list',
+		  component: resolve => require([`@/views/user/set_list`],resolve)
+	  },
     {
       path: '/task/list',
       name: 'task_list',

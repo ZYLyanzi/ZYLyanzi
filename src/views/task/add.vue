@@ -1,4 +1,7 @@
 <style scoped>
+	section{
+		position: relative;
+	}
 	.main {
 		margin-bottom: 80px;
 	}
@@ -86,7 +89,7 @@
 		font-size: 0.28rem;
 		text-align: center;
 		color: #ffffff;
-		margin: 20px auto;
+		margin: 30px auto;
 	}
   .tips {
     color: #ef1d12;
@@ -97,11 +100,16 @@
     width: 230px;
     text-align: center;
   }
+	.pay-btn{
+		position: fixed;
+		bottom: 90px;
+		right: 10px;
+	}
 </style>
 <template>
 	<section>
-		<mt-header fixed :title="titleText">
-		</mt-header>
+		<!--<mt-header fixed :title="titleText">-->
+		<!--</mt-header>-->
 		<div class="main">
 			<div class="layout task-type" v-if="!id">
 				<div class="field">任务类型</div>
@@ -140,14 +148,16 @@
             <!--action="http://127.0.0.1:8080/RddTaskService/api/common/uploadimg"-->
 						<el-upload
 							class="rw-upload"
-              action="http://120.78.203.150:8080/RddTaskService/api/common/uploadimg"
+							action="//upload.qiniu.com"
 							:headers="{'token': token}"
 							:on-preview="handlePreview"
 							:on-remove="handleRemove"
 							:on-success="handlePostSuccess"
+							:before-upload="beforeUpload"
+							:data="uploadForm"
 							:limit="5"
 							:file-list="imgList"
-							list-type="picture">
+							list-type="picture-card">
 							<el-button size="small" type="primary">点击上传</el-button>
 							<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 						</el-upload>
@@ -163,17 +173,25 @@
 				<label>{{btnText}}</label>
 			</div>
 		</div>
+		<div class="pay-btn">
+			<mt-button type="danger" plain @click="toPay()">充值积分</mt-button>
+		</div>
 		<bootomTap :tapName="tapName" v-if="id==0"></bootomTap>
 	</section>
 </template>
 <script>
 	import util from '@/common/utils/util'
 	import task from '@/resources/task'
+	import uploadqi from '@/resources/uploadqi'
+	import config from '@/config'
 	import bootomTap from '@/common/components/bootom_tap.vue'
 	import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+	import MtButton from "../../../node_modules/mint-ui/packages/button/src/button.vue";
 
 	export default {
-		components: {bootomTap},
+		components: {
+			MtButton,
+			bootomTap},
 		data() {
 			return {
 				btnStatus: true,
@@ -187,6 +205,8 @@
 				btnText: '发布任务',
 				validCount: 0,
 				tapName: 'add',
+
+				uploadForm: {},
 
 				imgList: [],
 				unitPrice: 0,
@@ -289,45 +309,45 @@
 				});
 			},
 
-//			//文件上传前钩子
-//			beforeUpload(file) {
-//				console.log("同步请求");
-//				let vm = this;
-//				vm.youPaiYunSign.authorization = "";
-//				vm.youPaiYunSign.policy = "";
+			//文件上传前钩子
+			beforeUpload(file) {
+				console.log("同步请求");
+				let vm = this;
+				let userId = localStorage.userId;
 //				let fileType = file.name.split('.').pop();
-//				let current_time = new Date();
-//
-//				let fileName = current_time.getTime() + parseInt(Math.random()*1000) + "." + fileType;
-//				//同步请求
-//				console.log("同步请求", fileName);
-//				let res = upyun.getUploadSign(fileName, 2);
-//				console.log("同步请求", res);
-//				vm.youPaiYunSign.authorization = res.data.sign;
-//				vm.youPaiYunSign.policy = res.data.policy;
-//				console.log("同步请求", vm.youPaiYunSign);
-//			},
+				let current_time = new Date();
+				let key = userId + '' + current_time.getTime() + '' + parseInt(Math.random() * 1000) + '' + file.name;
+				//同步请求
+				console.log("同步请求", key);
+				let res = uploadqi.getUploadToken();
+				console.log("同步请求", res);
+				vm.uploadForm.key = key;
+				vm.uploadForm.token = res.token;
+			},
 
-			//缩略图上传成功钩子
+			//图上传成功钩子
 			handlePostSuccess(res, file) {
 				console.log("文件上传成功钩子", res);
 				let vm = this;
-				if (res.msgCode == 1) {
+				if (res.key) {
 					// vm.imgList.push(res.filePath)
-					vm.imgList.push({name: res.filePath, url: res.filePath})
+					vm.imgList.push({name: res.key, url: config.imgUrl+'/'+res.key})
 				}
 			},
 			setImg(type) {
 				for (let item of this.taskParams.taskTypeAttrs) {
-					if (item.fileType == 'img') {
+					if (item.formType == 'img') {
 						if (type == 'edit') {
-							for (let itemImg of item.fieldConten) {
+							for (let itemImg of item.fieldContent) {
 								this.imgList.push({name: itemImg, url: itemImg});
 							}
 						} else if (type == 'add') {
+							item.fieldContent = [];
 							for (let itemImg of this.imgList) {
-								item.fieldConten.push(itemImg.url);
+								item.fieldContent.push(itemImg.url);
+								console.log("fieldContent", item.fieldContent)
 							}
+							item.fieldContent = JSON.stringify(item.fieldContent)
 						}
 					}
 				}
@@ -337,7 +357,9 @@
 
 			handleRemove(file, fileList) {
 				console.log(file, fileList);
+				this.imgList = fileList;
 			},
+
 			handlePreview(file) {
 				console.log(file);
 			},
@@ -349,7 +371,11 @@
 				vm.taskParams.taskTypeAttrs = itemData.taskTypeAttrs;
         vm.taskParams.taskName = itemData.name + '任务'+localStorage.nickName;
 			},
-
+			toPay(){
+				this.$router.replace({
+					path: '/user/pay_jifen',
+				});
+			},
 			addTask() {
 				if (this.btnStatus == false){
 					return
@@ -370,6 +396,7 @@
 					vm.taskParams.markupPrice = vm.markupPrice;
 					vm.taskParams.totalPrice = vm.totalPrice;
 					vm.taskParams.totalSum = vm.totalSum;
+
 					vm.setImg('add')
 
 					if (vm.id && vm.id!= 0) {

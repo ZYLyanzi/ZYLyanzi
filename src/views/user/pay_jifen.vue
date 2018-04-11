@@ -88,11 +88,11 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="充值">
-			<router-link to="/user/set_user" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="充值">-->
+			<!--<router-link to="/user/set_user" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
 		<div class="page-part">
 
 			<div class="layout task-type">

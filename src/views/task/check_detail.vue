@@ -48,11 +48,11 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="提交详情">
-			<router-link :to="url" slot="left">
-				<mt-button icon="back"></mt-button>
-			</router-link>
-		</mt-header>
+		<!--<mt-header fixed title="提交详情">-->
+			<!--<router-link :to="url" slot="left">-->
+				<!--<mt-button icon="back"></mt-button>-->
+			<!--</router-link>-->
+		<!--</mt-header>-->
     <div class="layout">
       <div class="item">
         <div class="rw-feild">任务名称</div>
@@ -151,6 +151,9 @@
               if (vm.list.picture1 == "" && vm.list.picture2 == ""  && vm.list.picture3 == ""  && vm.list.picture4 == ""  && vm.list.picture5 == "" ){
                 vm.status = 0;
               }
+	            vm.taskId = vm.list.taskId
+
+	            console.log("taskIdtaskIdtaskId", vm.taskId)
 
             }
           });
@@ -163,7 +166,6 @@
               if (vm.list.picture1 == "" && vm.list.picture2 == ""  && vm.list.picture3 == ""  && vm.list.picture4 == ""  && vm.list.picture5 == "" ){
                 vm.status = 0;
               }
-
             }
           });
 				}
@@ -193,7 +195,7 @@
       toStart(state){
 
         this.$router.replace({
-          path: '/task/start/'+this.id,
+          path: '/task/start/'+this.taskId,
           query: {taskDistributeId: this.list.id, type: 2}
         });
 
