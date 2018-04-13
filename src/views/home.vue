@@ -178,7 +178,32 @@
 		created() {
 			// this.getList('top');
 			console.log("creat")
+			alert('返回参数'+this.$route.query);
+
 			let vm = this;
+			if (this.$route.query){
+				let res = this.$route.query;
+
+				console.log("creatTiaozhuan", res);
+				let para = {
+					nickName: res.nickname,
+					unionid: res.unionid,
+					headImgurl: res.head_imgurl,
+					openid: res.openid,
+				};
+
+				user.userOpenidLogin(para).then((res1) => {
+					if (res1.msgCode == 1) {
+						vm.firstLogin = res1.firstLogin;
+						vm.userId = res1.userId;
+						vm.$store.commit(types.LOGIN, res1.token);
+//						vm.getUserInfo()
+					}
+				});
+			}
+
+
+
 			task.carousel().then((res) => {
 				if (res.msgCode == 1){
 					vm.carousels = res.carousels

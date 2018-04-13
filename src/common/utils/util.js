@@ -247,7 +247,6 @@ export default {
     return time.replace(/\-/g, "/");
   },
 
-
 	syncRequest: function(url, type='get', async=false){
 		let xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function(xmlobj){

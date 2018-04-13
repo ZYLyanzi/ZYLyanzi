@@ -75,13 +75,35 @@
 		<div class="login-bottom">
 			<mt-button size="large" type="primary" class="login-btn-login" @click="toLogin">登录</mt-button>
 
+			<mt-button size="large" type="primary" class="login-btn-login" @click="toTiaozhuan">跳转按钮</mt-button>
+
 			<div class="line">----------------快速登录---------------</div>
+
+
 			<div class="kuaijie">
-				<div class="iocn-login" @click="tokuaijie('QQ')">
+				<!--<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/#/tiaozhuan', '')">-->
+					<!--<img class="qq" src="../../../static/img/qq.png"/>-->
+					<!--<div class="text">QQ</div>-->
+				<!--</div>-->
+				<!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/#/tiaozhuan', '')">-->
+					<!--<img class="weixin" src="../../../static/img/weixin.png"/>-->
+					<!--<div class="text">微信</div>-->
+				<!--</div>-->
+
+				<!--<div class="iocn-login" onclick="BSL.Login('QQ','http://120.78.203.150:8080/dist/#/tiaozhuan', '')">-->
+					<!--<img class="qq" src="../../../static/img/qq.png"/>-->
+					<!--<div class="text">QQ</div>-->
+				<!--</div>-->
+				<!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://120.78.203.150:8080/dist/#/tiaozhuan', '')">-->
+					<!--<img class="weixin" src="../../../static/img/weixin.png"/>-->
+					<!--<div class="text">微信</div>-->
+				<!--</div>-->
+
+				<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">
 					<img class="qq" src="../../../static/img/qq.png"/>
 					<div class="text">QQ</div>
 				</div>
-				<div class="iocn-login" @click="tokuaijie('WEIXIN')">
+				<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/#/tiaozhuan', '')">
 					<img class="weixin" src="../../../static/img/weixin.png"/>
 					<div class="text">微信</div>
 				</div>
@@ -89,9 +111,8 @@
 
 
 
-
 			<div class="line">----------------还没有账号---------------</div>
-			<mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce" @click="toRegist">注册
+			<mt-button size="large" type="primary"  class="login-btn-login login-btn-zhuce" @click="toRegist">注册
 			</mt-button>
 
 		</div>
@@ -134,36 +155,11 @@
 //      this.$store.commit(types.TITLE, '登录');
 		},
 		methods: {
-			tokuaijie(type){
-				BSL.Login(type,function (res) {
 
-					let para = {
-						openid: res.openid,
-
-					};
-					user.userOpenidLogin(para).then((res1) => {
-						if (res.msgCode == 1) {
-							vm.$store.commit(types.LOGIN, res1.token);
-
-							let para2 = {
-								userId: res1.userId
-							}
-							if (res1.firstLogin == 0){
-								this.$router.replace({
-									path: '/user/fill_code',
-									query: {isFirst: 0}
-								})
-							}else if (res1.firstLogin == 1){
-								this.$router.replace({
-									path: '/'
-								})
-							}
-
-						}
-					});
-
-				})
+			toTiaozhuan(){
+				location.href = 'http://120.78.203.150:8080/dist/#/tiaozhuan'
 			},
+
 			toLogin() {
 				this.validCount = 0;
 				for (let objElem in this.rules) {
@@ -188,7 +184,7 @@
 							user.queryUserInfo(para).then((res) => {
 								if (res.msgCode == 1) {
 									vm.$store.commit('setUserInfo', res.user);
-									this.$router.replace({
+									vm.$router.replace({
 										path: '/'
 									})
 

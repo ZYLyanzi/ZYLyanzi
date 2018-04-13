@@ -7,114 +7,119 @@ Vue.use(Router);
 
 const router = new Router({
 
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: resolve => require([`@/views/home`],resolve)
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: resolve => require([`@/views/login/login`],resolve)
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: resolve => require([`@/views/login/register`],resolve)
-    },
-    {
-      path: '/edit_password',
-      name: 'register',
-      component: resolve => require([`@/views/login/edit_password`],resolve)
-    },
-    {
-      path: '/task/add/:id',
-      name: 'task_add',
-      component: resolve => require([`@/views/task/add`],resolve)
-    },
-	  {
-		  path: '/set_list',
-		  name: 'set_list',
-		  component: resolve => require([`@/views/user/set_list`],resolve)
-	  },
-    {
-      path: '/task/list',
-      name: 'task_list',
-      component: resolve => require([`@/views/task/list`],resolve)
-    },
-    {
-      path: '/task/detail/:id',
-      name: 'task_detail',
-      component: resolve => require([`@/views/task/detail`],resolve)
-    },
-    {
-      path: '/task/dist_detail',
-      name: 'task_detail',
-      component: resolve => require([`@/views/task/dist_detail`],resolve)
-    },
-    {
-      path: '/task/start/:id',
-      name: 'task_start',
-      component: resolve => require([`@/views/task/start`],resolve)
-    },
-    {
-      path: '/task/reward',
-      name: 'reward_list',
-      component: resolve => require([`@/views/task/reward_list`],resolve)
-    },
-    {
-      path: '/task/check/:id',
-      name: 'check',
-      component: resolve => require([`@/views/task/check_list`],resolve)
-    },
-    {
-      path: '/task/check_detail/:id',
-      name: 'check',
-      component: resolve => require([`@/views/task/check_detail`],resolve)
-    },
-    {
-      path: '/user',
-      name: 'user',
-      component: resolve => require([`@/views/user/user`],resolve)
-    },
-	  {
-		  path: '/user/set_user',
-		  name: 'set_user',
-		  component: resolve => require([`@/views/user/set_user`],resolve)
-	  },
-	  {
-		  path: '/user/fill_code',
-		  name: 'fill_code',
-		  component: resolve => require([`@/views/user/fill_code`],resolve)
-	  },
-	  {
-		  path: '/user/pay_jifen',
-		  name: 'pay_jifen',
-		  component: resolve => require([`@/views/user/pay_jifen`],resolve)
-	  },
-	  {
-		  path: '/user/pay_list',
-		  name: 'pay_list',
-		  component: resolve => require([`@/views/user/pay_list`],resolve)
-	  },
-	  {
-		  path: '/user/withdrawal_jifen',
-		  name: 'withdrawal_jifen',
-		  component: resolve => require([`@/views/user/withdrawal_jifen`],resolve)
-	  },
-	  {
-		  path: '/user/withdrawal_list',
-		  name: 'withdrawal_list',
-		  component: resolve => require([`@/views/user/withdrawal_list`],resolve)
-	  },
-	  {
-		  path: '/user/yaoqing_list',
-		  name: 'yaoqing_list',
-		  component: resolve => require([`@/views/user/yaoqing_list`],resolve)
-	  },
+	routes: [
+		{
+			path: '/',
+			name: 'home',
+			component: resolve => require([`@/views/home`], resolve)
+		},
+		{
+			path: '/tiaozhuan',
+			name: 'tiaozhuan',
+			component: resolve => require([`@/views/user/tiaozhuan`], resolve)
+		},
+		{
+			path: '/login',
+			name: 'login',
+			component: resolve => require([`@/views/login/login`], resolve)
+		},
+		{
+			path: '/register',
+			name: 'register',
+			component: resolve => require([`@/views/login/register`], resolve)
+		},
+		{
+			path: '/edit_password',
+			name: 'register',
+			component: resolve => require([`@/views/login/edit_password`], resolve)
+		},
+		{
+			path: '/task/add/:id',
+			name: 'task_add',
+			component: resolve => require([`@/views/task/add`], resolve)
+		},
+		{
+			path: '/set_list',
+			name: 'set_list',
+			component: resolve => require([`@/views/user/set_list`], resolve)
+		},
+		{
+			path: '/task/list',
+			name: 'task_list',
+			component: resolve => require([`@/views/task/list`], resolve)
+		},
+		{
+			path: '/task/detail/:id',
+			name: 'task_detail',
+			component: resolve => require([`@/views/task/detail`], resolve)
+		},
+		{
+			path: '/task/dist_detail',
+			name: 'task_detail',
+			component: resolve => require([`@/views/task/dist_detail`], resolve)
+		},
+		{
+			path: '/task/start/:id',
+			name: 'task_start',
+			component: resolve => require([`@/views/task/start`], resolve)
+		},
+		{
+			path: '/task/reward',
+			name: 'reward_list',
+			component: resolve => require([`@/views/task/reward_list`], resolve)
+		},
+		{
+			path: '/task/check/:id',
+			name: 'check',
+			component: resolve => require([`@/views/task/check_list`], resolve)
+		},
+		{
+			path: '/task/check_detail/:id',
+			name: 'check',
+			component: resolve => require([`@/views/task/check_detail`], resolve)
+		},
+		{
+			path: '/user',
+			name: 'user',
+			component: resolve => require([`@/views/user/user`], resolve)
+		},
+		{
+			path: '/user/set_user',
+			name: 'set_user',
+			component: resolve => require([`@/views/user/set_user`], resolve)
+		},
+		{
+			path: '/user/fill_code',
+			name: 'fill_code',
+			component: resolve => require([`@/views/user/fill_code`], resolve)
+		},
+		{
+			path: '/user/pay_jifen',
+			name: 'pay_jifen',
+			component: resolve => require([`@/views/user/pay_jifen`], resolve)
+		},
+		{
+			path: '/user/pay_list',
+			name: 'pay_list',
+			component: resolve => require([`@/views/user/pay_list`], resolve)
+		},
+		{
+			path: '/user/withdrawal_jifen',
+			name: 'withdrawal_jifen',
+			component: resolve => require([`@/views/user/withdrawal_jifen`], resolve)
+		},
+		{
+			path: '/user/withdrawal_list',
+			name: 'withdrawal_list',
+			component: resolve => require([`@/views/user/withdrawal_list`], resolve)
+		},
+		{
+			path: '/user/yaoqing_list',
+			name: 'yaoqing_list',
+			component: resolve => require([`@/views/user/yaoqing_list`], resolve)
+		},
 
-  ],
+	],
 });
 
 // 页面刷新时，重新赋值token

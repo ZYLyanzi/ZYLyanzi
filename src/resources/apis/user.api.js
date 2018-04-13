@@ -1,6 +1,6 @@
 export default {
     userLogin: '/user/userLogin',
-	userOpenidLogin: '/api/user/userOpenidLogin',
+	userOpenidLogin: '/user/userOpenidLogin',
     userRegister: '/user/userRegister',
     queryUserInfo: 'api/user/queryUserInfo',
 	updateUserInfo: 'api/user/updateUserInfo',
