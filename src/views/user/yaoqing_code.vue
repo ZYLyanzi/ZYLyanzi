@@ -55,14 +55,15 @@
             </div>
         </div>
         <div class="footer">
-            <div class="share"  onclick="BSL.ShareImgWithTxt('QQ','分享内容','http://www.appbsl.cn/demo/img/1.png', 'http://www.appbsl.cn/demo/', '分享标题', '')">
+            <div class="share"   @click='toShare(1)'>
                 <img src="../../../static/img/share_qq.png"/>
             </div>
-            <div class="share"  onclick="BSL.ShareImgWithTxt('WEIXIN','分享内容','http://www.appbsl.cn/demo/img/1.png', 'http://www.appbsl.cn/demo/', '分享标题', '')">
+            <div class="share"  @click="toShare(2)">
                 <img src="../../../static/img/share_wexin.png"/>
             </div>
 
         </div>
+
 
         <bootomTap :tapName="tapName"></bootomTap>
     </section>
@@ -84,11 +85,30 @@
         mounted() {
             this.$store.commit(types.TITLE, '邀请');
         },
+        methods: {
+            toShare(type){
+                let type1 = 'QQ';
+                if (type == 2) {
+                    type1 = 'WEIXIN';
+                }
+                const content = '办事不求人，赚钱快过人，我的邀请码'+this.inviteCode;
+                BSL.ShareImgWithTxt(type1, content,'', 'http://www.appbsl.cn/demo/','互帮宝','')
+            },
+
+            // toShare1(){
+            //     const content = '办事不求人，赚钱快过人，我的邀请码'+this.inviteCode
+            //     BSL.ShareImgWithTxt('QQ',content,'', 'http://www.appbsl.cn/demo/','互帮宝','')
+            // },
+            //
+            // toShare2(){
+            //     // const content = '办事不求人，赚钱快过人，我的邀请码'+this.inviteCode
+            //     BSL.ShareImgWithTxt('QQ','办事不求人，赚钱快过人，我的邀请码'+this.inviteCode,'', 'http://www.appbsl.cn/demo/','互帮宝','')
+            // }
+        },
         created() {
             console.log(this.$store.state)
             this.inviteCode = this.$store.state.inviteCode;
         },
-        methods: {},
         computed: {}
 
     }

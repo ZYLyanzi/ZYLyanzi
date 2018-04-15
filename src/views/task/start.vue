@@ -139,26 +139,12 @@
 
 
 		<div class="start-detail-btn">
-            {{taskDetail.remark}}
-            {{shareUrl}}
-            {{taskDetail.taskName}}
 
-            <div class="start-bootom share" onclick="BSL.Share('taskDetail.remark', '', shareUrl+'', taskDetail.taskName+'', '')">
-                <div class="start-sub-btn">
+            <div class="start-bootom share">
+                <div class="start-sub-btn" @click="toShare()">
                     <label>分享任务</label>
                 </div>
             </div>
-            <div class="start-bootom share" onclick="BSL.Share('taskDetail.remark', '', 'shareUrl', '任务名称' , '')">
-                <div class="start-sub-btn">
-                    <label>分享任务</label>
-                </div>
-            </div>
-            <div class="start-bootom share" onclick="BSL.Share('分享内容', '', '分享的网页地址', '任务名称' , '')">
-                <div class="start-sub-btn">
-                    <label>分享任务</label>
-                </div>
-            </div>
-
 
 			<div class="start-bootom" @click="toSubmit()">
 				<div class="start-sub-btn">
@@ -206,7 +192,21 @@
             this.$store.commit(types.TITLE, '开始任务');
         },
 		methods: {
+            toShare(){
+                let content = this.taskDetail.remark;
 
+                if (this.taskDetail.remark == ''){
+                    content = '分享内容';
+                }
+
+                console.log('分享内容', content)
+
+                const url = this.shareUrl;
+                const title = this.taskDetail.taskName;
+
+
+                BSL.Share(content, '', url,title, '');
+            },
 			getInfo() {
 				let vm = this;
 				let para = {
@@ -229,9 +229,6 @@
 					}
 				});
 			},
-            toShare(){
-
-            },
 			toSubmit() {
 				let vm = this;
 				vm.taskParms.id = vm.taskDistributeId;
