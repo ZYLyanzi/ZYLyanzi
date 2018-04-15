@@ -125,7 +125,7 @@
 		<div class="main">
 			<div class="header-user">
 				<div>
-					<div class="user-name account">账号：{{userName}}</div>
+					<div class="user-name account">账号ID：{{userId}}</div>
 					<div class="nick-name user-name">昵称：{{nickName}}</div>
 				</div>
 				<div class="part">
@@ -197,11 +197,12 @@
 	import user from '@/resources/user'
 	import bootomTap from '@/common/components/bootom_tap.vue'
 	import {mapState, mapGetters, mapActions} from 'vuex'
-
+    import * as types from '@/store/types'
 	export default {
 		components: {bootomTap},
 		data() {
 			return {
+                userId: '',
 				tapName: 'user',
 				score: '',
 				releaseScore: '',
@@ -210,6 +211,8 @@
 			}
 		},
 		created() {
+		    this.userId = localStorage.userId;
+		    console.log(localStorage);
 			let para = {
 				userId: localStorage.userId
 			}
@@ -264,6 +267,9 @@
 				}
 			},
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '个人中心');
+        },
 		computed: {}
 
 	}

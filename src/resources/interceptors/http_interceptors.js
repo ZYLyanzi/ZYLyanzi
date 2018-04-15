@@ -32,20 +32,14 @@ axios.defaults.baseURL = config.host;
 // http response 拦截器
 axios.interceptors.response.use(res => {
   Indicator.close();
-  if(res.data.msgCode < 1){
-    // let msg = ''
-    // // switch(res.data.msgCode){
-    // //     case 2: msg = '登陆校验失败';
-    // //     case 3: msg = '响应超时';
-    // //     case 4: msg = '权限不足';
-    // //     case 5: msg = '请求参数错误';
-    // //     default : msg = '操作失败'
-    // // }
-    Toast({
-      message: res.data.msg,
-      position: 'middle',
-      duration: 2000
-    });
+  if(res.data.msgCode != 1){
+    if (res.data.msgCode != 3){
+        Toast({
+            message: res.data.msg,
+            position: 'middle',
+            duration: 2000
+        });
+    }
   }
   return res.data
 
@@ -61,6 +55,7 @@ axios.interceptors.response.use(res => {
       case 401:
         // alert("token过期了");
         // 401 清除token信息并跳转到登录页面
+          console.log("清除token信息并跳转到登录页面")
         store.commit(types.LOGOUT);
         if (localStorage.url) {
           router.replace(localStorage.url);

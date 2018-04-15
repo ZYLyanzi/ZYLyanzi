@@ -28,6 +28,7 @@
 
   .detail-btn {
     margin: 20px 0;
+      font-size: 16px;
   }
 
   .detail-btn .mint-button {
@@ -107,7 +108,7 @@
 <script>
   import task from '@/resources/task'
   import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
-
+  import * as types from '@/store/types'
   export default {
     data() {
       return {
@@ -119,18 +120,23 @@
       this.id = this.$route.params.id
       this.getInfo()
     },
+      mounted() {
+          this.$store.commit(types.TITLE, '任务详情');
+      },
     methods: {
       getInfo() {
         let vm = this;
         let para = {
           taskId: vm.id
-        }
+        };
+
         task.taskDesc(para).then((res) => {
           if (res.msgCode == 1) {
             vm.taskDetail = res.task;
 
           }
         });
+
       },
       toEdit(type) {
         if (type == 1) {

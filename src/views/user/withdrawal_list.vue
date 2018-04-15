@@ -82,7 +82,7 @@
 <script>
 	// import { Loadmore } from 'mint-ui'
 	import user from '@/resources/user'
-
+    import * as types from '@/store/types'
 	import {mapState, mapGetters, mapActions} from 'vuex'
 
 	export default {
@@ -102,6 +102,9 @@
 			let vm = this
 			vm.getList('top');
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '提现列表');
+        },
 		methods: {
 			loadTop() {
 				this.getList('top');

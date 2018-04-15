@@ -117,8 +117,9 @@
 </template>
 <script>
 	import task from '@/resources/task'
-
+    import user from '@/resources/user'
 	import bootomTap from '@/common/components/bootom_tap.vue'
+    import * as types from '@/store/types'
 
 	export default {
 		components: {bootomTap},
@@ -146,6 +147,64 @@
 			}
 		},
 		methods: {
+            getQueryString(name) {
+                // let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                // let reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+                // let r = window.location.search.substr(1).match(reg);
+                // let q = window.location.pathname.substr(1).match(reg_rewrite);
+                // if(r != null){
+                //     return unescape(r[2]);
+                // }else if(q != null){
+                //     return unescape(q[2]);
+                // }else{
+                //     return null;
+                // }
+
+
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                var URL =  decodeURI(window.location.search);
+                var r = URL.substr(1).match(reg);
+                if(r!=null){
+                    //decodeURI() 函数可对 encodeURI() 函数编码过的 URI 进行解码
+                    return  decodeURI(r[2]);
+                };
+                return null;
+
+            },
+
+            getUserInfo(){
+                let vm = this;
+                let para2 = {
+                    userId: vm.userId,
+                }
+
+                user.queryUserInfo(para2).then((res2) => {
+                    console.log("queryUserInfo")
+                    if (res2.msgCode == 1) {
+                        vm.$store.commit('setUserInfo', res2.user);
+
+
+                        if (vm.firstLogin == 0){
+                            vm.$router.replace({
+                                path: '/user/fill_code',
+                                query: {isFirst: 0}
+                            })
+                        }else if (vm.firstLogin == 1){
+                            vm.$router.replace({
+                                path: '/'
+                            })
+                        }
+                    }
+
+                    task.carousel().then((r) => {
+                        if (r.msgCode == 1){
+                            vm.carousels = r.carousels
+                        }
+                    });
+
+
+                });
+            },
 			toDetail(id) {
 				if (id == 1) {
 					this.$router.push({
@@ -159,9 +218,9 @@
 					})
 				}
 				if (id == 3) {
-//					this.$router.push({
-//						path: '/task/check/0'
-//					})
+                    this.$router.replace({
+                        path: '/yaoqing_code',
+                    });
 				}
 				if (id == 4) {
 					this.$router.push({
@@ -176,39 +235,49 @@
 			}
 		},
 		created() {
+            let vm = this;
+            vm.$store.commit(types.TITLE, '主页');
 			// this.getList('top');
 			console.log("creat")
-			alert('返回参数'+this.$route.query);
-
-			let vm = this;
-			if (this.$route.query){
-				let res = this.$route.query;
-
-				console.log("creatTiaozhuan", res);
-				let para = {
-					nickName: res.nickname,
-					unionid: res.unionid,
-					headImgurl: res.head_imgurl,
-					openid: res.openid,
-				};
-
-				user.userOpenidLogin(para).then((res1) => {
-					if (res1.msgCode == 1) {
-						vm.firstLogin = res1.firstLogin;
-						vm.userId = res1.userId;
-						vm.$store.commit(types.LOGIN, res1.token);
-//						vm.getUserInfo()
-					}
-				});
-			}
 
 
 
-			task.carousel().then((res) => {
-				if (res.msgCode == 1){
-					vm.carousels = res.carousels
-				}
-			});
+
+			// alert(window.location);
+
+            let nickName = this.getQueryString('nickname');
+
+            let unionid = this.getQueryString('unionid');
+            let head_imgurl = this.getQueryString('head_imgurl');
+            let openid = this.getQueryString('openid');
+
+            //
+            // alert("nickName+"+nickName);
+            // alert("unionid+"+unionid);
+            // alert("head_imgurl+"+head_imgurl);
+            // alert("openid+"+openid);
+
+            if (openid){
+                // alert("openid111"+openid);
+                let para = {
+                    nickName: nickName,
+                    unionid: unionid,
+                    headImgurl: head_imgurl,
+                    openid: openid,
+                };
+
+                user.userOpenidLogin(para).then((res1) => {
+                    // alert("userOpenidLogin"+JSON.stringify(res1));
+
+                    if (res1.msgCode == 1) {
+                        vm.firstLogin = res1.firstLogin;
+                        vm.userId = res1.userId;
+                        vm.$store.commit(types.LOGIN, res1.token);
+                        vm.getUserInfo()
+                    }
+                });
+            }
+
 		}
 	}
 </script>

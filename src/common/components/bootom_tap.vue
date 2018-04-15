@@ -67,7 +67,7 @@
     background-position: -1px -16px;
   }
   .bootom-tap .selected .yaoqing{
-	  background-position: -1px -16px;
+	  background-position: -33px -15px;
   }
   .bootom-tap .selected .tixian{
 	  background-position: 0 -149px
@@ -81,7 +81,7 @@
           <div class="text">首页</div>
       </div>
       </div>
-    <div class="tap-item" :class="{'selected': tapName=='yaoqing' }" @click="tochangeTab(4)">
+    <div class="tap-item" :class="{'selected': tapName=='share' }" @click="tochangeTab(4)">
 	    <div class="tap-box one">
 		    <i class="yaoqing ico"></i>
 		    <div class="text">邀请</div>
@@ -136,9 +136,9 @@ export default {
         });
       }
 	    if (id == 4){
-//		    this.$router.replace({
-//			    path: '/user',
-//		    });
+		    this.$router.replace({
+			    path: '/yaoqing_code',
+		    });
 	    }
 	    if (id == 5){
 		    this.$router.replace({

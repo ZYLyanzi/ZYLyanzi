@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 	.page-part {
 		text-align: center;
 		margin-top: 20px;
@@ -7,7 +7,9 @@
 		background: #ffffff;
 	}
 
-	.field {
+    .field {
+        width: 75px;
+        margin-left: 10px;
 		text-align: left;
 		font-size: 0.32rem;
 		color: #333333;
@@ -22,18 +24,21 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 	}
+    .part .options{
+
+    }
 
 	.task-type .rw-radio {
 		margin-left: 0 !important;
 		margin-bottom: 20px;
 		text-align: left;
-		width: 30%;
+		width:100%;
 		height: 25px;
 		line-height: 25px;
 		position: relative;
 	}
 
-	.rw-radio span {
+	.rw-radio span{
 		padding-left: 27px
 	}
 
@@ -85,6 +90,38 @@
 		margin-top: 0.3rem;
 		color: #8e8e8e;
 	}
+    .number-input-part{
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+        padding: 0 10px;
+        width: 100%;
+
+
+    }
+    .number-input-part .label{
+        width: 136px;
+        font-size: 16px;
+        height: 48px;
+        line-height: 48px;
+
+    }
+    .number-input-part .number-input{
+        width: 100%;
+        border-bottom: 1px solid #f2f2f2;
+        height: 48px;
+    }
+
+
+     .explain{
+         font-size: 14px;
+         text-align: left;
+         margin: 20px 10px;
+     }
+    .explain .title{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
 </style>
 <template>
 	<section>
@@ -100,24 +137,42 @@
 				<div class="part">
 					<div class="field">支付类型</div>
 
-					<div class="rw-radio" @click="changeType(1)">
-						<i class="radio-icon ico" :class="{'selected': payType == 1}"></i><span>微信</span>
-					</div>
-					<div class="rw-radio" @click="changeType(2)">
-						<i class="radio-icon ico" :class="{'selected': payType == 2}"></i><span>支付宝</span>
-					</div>
+                    <div class="options">
+                        <div class="rw-radio" @click="changeType(1)">
+                            <i class="radio-icon ico" :class="{'selected': payType == 1}"></i><span>微信</span>
+                        </div>
+                        <div class="rw-radio" @click="changeType(2)">
+                            <i class="radio-icon ico" :class="{'selected': payType == 2}"></i><span>支付宝</span>
+                        </div>
+                        <div class="rw-radio" @click="changeType(3)">
+                            <i class="radio-icon ico" :class="{'selected': payType == 3}"></i><span>奖励积分</span>
+                        </div>
+                    </div>
+
+
 				</div>
+                <!--<div  class="number-input-part">-->
+                    <!--<div class="label">充值￥</div>-->
+                    <!--<input  placeholder="请输入充值金额" class="number-input" maxlength="6" v-model="money"/>-->
+                <!--</div>-->
 			</div>
 
-			<mt-field label="充值￥" placeholder="请输入充值金额" type="number" :attr="{minlength: 1}" v-model="money"
-			          :state='rules.money.itState'></mt-field>
-			<mt-field label="积分"  type="number" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
+            <mt-field v-if="payType == 3"  label="奖励积分"  type="number" :attr="{minlength: 1}" v-model="canJifen" disabled></mt-field>
+
+            <mt-field label="充值￥" placeholder="请输入充值金额" type="number" :attr="{minlength: 1}" v-model="money"></mt-field>
+
+            <mt-field label="积分"  type="number" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
 
 
-			<mt-field label="流水号" placeholder="请输入支付流水号" type="text" :attr="{minlength: 1}" v-model="payNum"></mt-field>
+			<mt-field label="流水号" placeholder="请填写支付宝或微信的流水号" type="text" :attr="{minlength: 1}" v-model="payNum"></mt-field>
 
-			<mt-field label="备注" placeholder="请输入备注" type="number" :attr="{minlength: 1}" v-model="remark"></mt-field>
+			<mt-field label="备注" placeholder="可填写支付微信号或支付宝账号" type="number" :attr="{minlength: 1}" v-model="remark"></mt-field>
 
+            <div class="explain">
+                <div class="title">充值说明：</div>
+                <p>充值说明 充值说明充值说明充值说明充值说明充值说明</p>
+
+            </div>
 		</div>
 		<div class="login-bottom">
 			<mt-button size="large" type="primary" class="login-btn-login" @click="addRecharge">确认</mt-button>
@@ -135,9 +190,10 @@
 	export default {
 		data() {
 			return {
+                canJifen: '',
 				validCount: 0,
 				money: '',
-				payType: '',
+				payType: 1,
 				payNum: '',
 				remark: '',
 				jifen: 0,
@@ -152,46 +208,68 @@
 				}
 			}
 		},
-		mounted() {
-		},
+        created(){
+            this.canJifen = localStorage.score;
+        },
+        mounted() {
+            this.$store.commit(types.TITLE, '充值');
+        },
 		methods: {
 			changeType(type){
 				this.payType = type
 			},
 			addRecharge() {
 				this.validCount = 0;
-				for (let objElem in this.rules) {
-					this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
-				}
-				if (this.validCount > 0) {
-//          alert("校验不通过")
-				} else {
-					let vm = this;
-						let para = {
-							money: parseInt(vm.money),
-							payType: vm.payType,
-							payNum:  vm.payNum,
-							remark:  vm.remark,
-						};
-						user.addRecharge(para).then((res) => {
-							if (res.msgCode == 1) {
-								Toast({
-									message: '充值成功',
-									iconClass: 'icon icon-success'
-								});
-								setTimeout(() => {
-									this.$router.replace({
-										path: '/user'
-									})
-								}, 2000);
-							}
-						});
-				}
+				// for (let objElem in this.rules) {
+				// 	this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
+				// }
+				if (this.money<0 || this.money>100000){
+                    Toast({
+                        message: '充值金额不得小于0且不得大于100000',
+                        position: 'middle',
+                        duration: 2000
+                    });
+                    return;
+                }
+                if (this.payNum=='' && this.payType != 3){
+                    Toast({
+                        message: '流水号不得为空',
+                        position: 'middle',
+                        duration: 2000
+                    });
+                    return;
+                }
+
+                let vm = this;
+                    let para = {
+                        money: parseInt(vm.money),
+                        payType: vm.payType,
+                        payNum:  vm.payNum,
+                        remark:  vm.remark,
+                    };
+                    user.addRecharge(para).then((res) => {
+                        if (res.msgCode == 1) {
+                            Toast({
+                                message: '充值成功',
+                                iconClass: 'icon icon-success'
+                            });
+                            setTimeout(() => {
+                                this.$router.replace({
+                                    path: '/user'
+                                })
+                            }, 2000);
+                        }
+                    });
 			},
 		},
 		watch: {
 			money: function (val) {
-				this.jifen = parseInt(val) * 100;
+			    if (parseInt(val) > 0){
+                    this.jifen = parseInt(val) * 110;
+                }else {
+
+                }
+
 			},
 		}
 	}

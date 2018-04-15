@@ -127,6 +127,9 @@
 			this.score = localStorage.score;
 			this.userName = localStorage.userName;
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '个人设置');
+        },
 		methods: {
 //			backUp(){
 ////				this.$router.back(1)

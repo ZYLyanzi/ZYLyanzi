@@ -102,6 +102,9 @@
 		},
 		created() {
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '任务列表');
+        },
 		methods: {
 			gotoPage(id) {
 				if (id == 1) {

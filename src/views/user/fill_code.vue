@@ -85,8 +85,9 @@
 				}
 			}
 		},
-		mounted() {
-		},
+        mounted() {
+            this.$store.commit(types.TITLE, '填写邀请码');
+        },
 		created() {
 			this.isFirst = this.$route.query.isFirst;
 		},
@@ -106,6 +107,18 @@
 						user.bindInviteCode(para).then((res) => {
 							if (res.msgCode == 1) {
 								vm.$store.commit('setUserCode',  1);
+								if(isFirst == 0){
+                                    Toast({
+                                        message: '提交成功',
+                                        iconClass: 'icon icon-success'
+                                    });
+                                    setTimeout(() => {
+                                        this.$router.replace({
+                                            path: '/'
+                                        })
+                                    }, 2000);
+                                }
+
 							}
 						});
 				}

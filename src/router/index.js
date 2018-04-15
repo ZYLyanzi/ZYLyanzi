@@ -14,10 +14,15 @@ const router = new Router({
 			component: resolve => require([`@/views/home`], resolve)
 		},
 		{
-			path: '/tiaozhuan',
-			name: 'tiaozhuan',
-			component: resolve => require([`@/views/user/tiaozhuan`], resolve)
-		},
+            path: '/tiaozhuan',
+            name: 'tiaozhuan',
+            component: resolve => require([`@/views/user/tiaozhuan`], resolve)
+        },
+        {
+            path: '/yaoqing_code',
+            name: 'yaoqing_code',
+            component: resolve => require([`@/views/user/yaoqing_code`], resolve)
+        },
 		{
 			path: '/login',
 			name: 'login',

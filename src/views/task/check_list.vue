@@ -3,13 +3,13 @@
 		/*position: absolute;*/
 		position: fixed;
 		width: 100%;
-		top: 40px;
+		/*top: 40px;*/
 		background-color: #f2f2f2;
 
 		height: 40px;
-		/*display: flex;*/
-		/*flex-direction: row;*/
-		/*justify-content: space-between;*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
 	}
 	.top-tap .tap-item {
 		width: 20%;
@@ -25,8 +25,14 @@
 	}
 
 	.list {
-		margin-top: 40px;
+		padding-top: 40px;
 	}
+    .no-content{
+        padding-top: 100px;
+        font-size: 16px;
+
+
+    }
 
 	.reward-list {
 		height: 1.6rem;
@@ -64,7 +70,12 @@
 			<div class="tap-item" :class="{'selected': state==4}" @click="changestate(4)">已审核</div>
 			<div class="tap-item" :class="{'selected': state==5}" @click="changestate(5)">未通过</div>
 		</div>
-		<div class="list">
+        <div class=" no-content" v-if="list.length <= 0">
+            暂无任务
+        </div>
+
+		<div class="list"  v-if="list.length > 0">
+
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">
 				<ul>
@@ -96,6 +107,7 @@
 <script>
 	// import { Loadmore } from 'mint-ui'
 	import task from '@/resources/task'
+    import * as types from '@/store/types'
 
 	import {mapState, mapGetters, mapActions} from 'vuex'
 
@@ -121,6 +133,9 @@
 			}
 			this.getList('top');
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, this.title);
+        },
 		methods: {
 			loadTop() {
 				this.getList('top');
@@ -169,6 +184,7 @@
 
 				}
 				if (this.type == 1) {
+                    para.taskId = this.id;
 					task.queryDistributeTask(para).then((res) => {
 						if (res.msgCode == 1) {
 							if (type == 'top') {

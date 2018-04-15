@@ -1,146 +1,153 @@
 <style scoped>
-  .layout{
-    background-color: #ffffff;
-    margin-top: 10px;
-    padding: 10px;
-  }
-  .layout .item{
-    display: flex;
-    flex-direction: row;
-    padding-left: 10px;
-    text-align: left;
-    margin-bottom: 15px;
-  }
-  .rw-feild{
-    margin-bottom: 10px;
-    width: 25%;
-    color: #333333;
-  }
-  .rw-value{
-    margin-left: 10px;
-    width: 82%;
-    color: #888888;
-  }
-  .red{
-    color: #ef4f4f;
-  }
-  .detail-btn{
-    margin: 20px 0;
-  }
-  .detail-btn .mint-button{
-    margin: 10px;
-  }
+    .layout {
+        background-color: #ffffff;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .layout .item {
+        display: flex;
+        flex-direction: row;
+        padding-left: 10px;
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .rw-feild {
+        margin-bottom: 10px;
+        width: 25%;
+        color: #333333;
+    }
+
+    .rw-value {
+        margin-left: 10px;
+        width: 82%;
+        color: #888888;
+    }
+
+    .red {
+        color: #ef4f4f;
+    }
+
+    .detail-btn {
+        margin: 20px 0;
+    }
+
+    .detail-btn .mint-button {
+        margin: 10px;
+    }
 </style>
 <template>
-	<section>
-    <!--<mt-header fixed title="派发任务详情">-->
-      <!--<router-link to="/" slot="left">-->
+    <section>
+        <!--<mt-header fixed title="派发任务详情">-->
+        <!--<router-link to="/" slot="left">-->
         <!--<mt-button icon="back"></mt-button>-->
-      <!--</router-link>-->
-    <!--</mt-header>-->
-    <div class="layout">
-      <div class="item">
-        <div class="rw-feild">任务名称</div>
-        <div class="rw-value">{{taskDetail.taskName}}</div>
-      </div>
-      <div class="item">
-        <div class="rw-feild">任务类型</div>
-        <div class="rw-value">{{taskDetail.taskTypeName}}</div>
-      </div>
-      <div class="item">
-        <div class="rw-feild">任务号</div>
-        <div class="rw-value">{{taskDetail.taskId}}</div>
-      </div>
-      <div class="item">
-        <div class="rw-feild">可获得积分</div>
-        <div class="rw-value red">{{taskDetail.unitPrice}}</div>
-      </div>
+        <!--</router-link>-->
+        <!--</mt-header>-->
+        <div class="layout">
+            <div class="item">
+                <div class="rw-feild">任务名称</div>
+                <div class="rw-value">{{taskDetail.taskName}}</div>
+            </div>
+            <div class="item">
+                <div class="rw-feild">任务类型</div>
+                <div class="rw-value">{{taskDetail.taskTypeName}}</div>
+            </div>
+            <div class="item">
+                <div class="rw-feild">任务号</div>
+                <div class="rw-value">{{taskDetail.taskId}}</div>
+            </div>
+            <div class="item">
+                <div class="rw-feild">可获得积分</div>
+                <div class="rw-value red">{{taskDetail.unitPrice}}</div>
+            </div>
 
-      <div class="item" v-for="item in taskDetail.taskTypeAttrs">
-        <div class="rw-feild">{{item.fieldCname}}</div>
+            <div class="item" v-for="item in taskDetail.taskTypeAttrs">
+                <div class="rw-feild">{{item.fieldCname}}</div>
 
-        <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
-        <div class="rw-value" v-if="item.fieldType == 'img'">
-          <img v-for="item in item.fieldContent" :src="item"/>
+                <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
+                <div class="rw-value" v-if="item.fieldType == 'img'">
+                    <img v-for="item in item.fieldContent" :src="item"/>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="rw-feild" v-if="taskDetail.remark">说明</div>
+                <div class="rw-value">{{taskDetail.remark}}</div>
+            </div>
         </div>
-      </div>
-
-	    <div class="item">
-		    <div class="rw-feild" v-if="taskDetail.remark">说明</div>
-		    <div class="rw-value">{{taskDetail.remark}}</div>
-	    </div>
-    </div>
 
 
-    <div class="detail-btn">
-      <mt-button type="danger" @click="toStart(1)">接收任务</mt-button>
-      <mt-button type="default" @click="toStart(2)">放弃任务</mt-button>
+        <div class="detail-btn">
+            <mt-button type="danger" @click="toStart(1)">开始任务</mt-button>
+            <mt-button type="default" @click="toStart(2)">放弃任务</mt-button>
 
-    </div>
-	</section>
+        </div>
+    </section>
 </template>
 <script>
-  import task from '@/resources/task'
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-export default {
-	data() {
-		return {
-      id: 0,
-      taskDetail: {},
+    import task from '@/resources/task'
+    import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+    import * as types from '@/store/types'
+    export default {
+        data() {
+            return {
+                id: 0,
+                itState: '',
+                taskDetail: {},
 
-		}
-	},
-	created() {
-		this.getInfo()
-	},
-  destroyed(){
-	  console.log("beforeDestory");
+            }
+        },
 
-	  if(this.taskDetail.id){
-      this.toStart(2)
+        created() {
+            this.getInfo()
+        },
+        mounted() {
+            this.$store.commit(types.TITLE, '派发任务详情');
+        },
+        destroyed() {
+            if (this.taskDetail.id && this.itState != 1) {
+                this.toStart(2, 3)
+            }
+
+        },
+        methods: {
+            getInfo() {
+                let vm = this;
+                task.distributeTask().then((res) => {
+                    if (res.msgCode == 1) {
+                        vm.taskDetail = res.task;
+                    }
+                });
+            },
+
+            toStart(type, msgType) {
+                let vm = this;
+                let para = {
+                    taskId: vm.taskDetail.id,
+                    taskDistributeId: vm.taskDetail.taskDistributeId,
+                    state: type,
+                };
+                if (msgType == 3) {
+                    para.para = 3;
+                }
+                task.replyDistributeTask(para).then((res) => {
+                    if (res.msgCode == 1) {
+                        if (type == 1) {
+                            vm.itState = 1;
+                            vm.$router.replace({
+                                path: '/task/start/' + vm.taskDetail.id,
+                                query: {taskDistributeId: vm.taskDetail.taskDistributeId,}
+                            });
+                        } else if (type == 2) {
+                            vm.getInfo()
+                        }
+                    }
+                });
+
+            }
+        },
+
+
     }
-
-  },
-	methods: {
-    getInfo(){
-      let vm = this;
-      task.distributeTask().then((res) => {
-        if (res.msgCode == 1){
-          vm.taskDetail = res.task;
-        }
-      });
-    },
-
-    toStart(type){
-      let vm = this;
-      let para = {
-        taskId: vm.taskDetail.id,
-        taskDistributeId: vm.taskDetail.taskDistributeId,
-        state: type,
-      };
-      // if (type == 1){
-      //   this.$router.replace({
-      //     path: '/task/start/'+vm.taskDetail.id,
-      //   });
-      // }else if(type == 2){
-      //   vm.getInfo()
-      // }
-      task.replyDistributeTask(para).then((res) => {
-        if (res.msgCode == 1){
-          if (type == 1){
-            this.$router.replace({
-              path: '/task/start/'+vm.taskDetail.id,
-              query: {taskDistributeId: vm.taskDetail.taskDistributeId,}
-            });
-          }else if(type == 2){
-            vm.getInfo()
-          }
-        }
-      });
-
-    }
-	},
-
-
-}
 </script>

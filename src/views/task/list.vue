@@ -37,7 +37,7 @@
 <script>
 	import user from '@/resources/user'
 	import task from '@/resources/task'
-
+    import * as types from '@/store/types'
 	// import { Loadmore } from 'mint-ui'
 	import {mapState, mapGetters, mapActions} from 'vuex'
 
@@ -55,6 +55,9 @@
 			let vm = this;
 			vm.getList('top');
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '我发布的任务');
+        },
 		methods: {
 			loadTop() {
 				// 下拉刷新

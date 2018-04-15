@@ -76,7 +76,7 @@
 	// import { Loadmore } from 'mint-ui'
 	import task from '@/resources/task'
 	import {mapState, mapGetters, mapActions} from 'vuex'
-
+    import * as types from '@/store/types'
 	export default {
 		data() {
 			return {
@@ -91,6 +91,9 @@
 			let vm = this
 			vm.getList('top');
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '我的积分明细');
+        },
 		methods: {
 			changestate(type) {
 				this.state = type;

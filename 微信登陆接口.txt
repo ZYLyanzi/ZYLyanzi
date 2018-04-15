@@ -16,3 +16,14 @@
 			firstLogin:是否首次登录 (0是 1不是)
 
 https://www.bslyun.com/help/apphelpinfo/reid-37-cid-66-appid-369273-appname-Wapp%E9%AB%98%E7%BA%A7%E7%89%88.html
+
+
+1/优化充值页面
+ 2/发布页面按钮调整
+3/昵称乱码
+4/页面title
+5/发布之后清空可继续发布
+6/修改之后去到任务详情
+7/文件大小限制5M
+8/defRemark修改
+9/所有表单字段居左对齐

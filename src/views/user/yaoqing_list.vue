@@ -68,7 +68,7 @@
 	// import { Loadmore } from 'mint-ui'
 	import user from '@/resources/user'
 	import {mapState, mapGetters, mapActions} from 'vuex'
-
+    import * as types from '@/store/types'
 	export default {
 		data() {
 			return {
@@ -83,6 +83,9 @@
 			let vm = this
 			vm.getList('top');
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '我邀请的用户');
+        },
 		methods: {
 			loadTop() {
 				this.getList('top');

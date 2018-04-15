@@ -14,11 +14,6 @@
 			}
 		},
 		methods: {
-//			getUrlParam(name) {
-//				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-//				let r = window.location.search.substr(1).match(reg);  //匹配目标参数
-//				if (r != null) return unescape(r[2]); return null; //返回参数值
-//			}
 			getUserInfo(){
 				let vm = this;
 				let para2 = {
@@ -46,10 +41,15 @@
 			}
 
 		},
+        mounted() {
+            this.$store.commit(types.TITLE, '互帮宝');
+        },
 		created() {
 			console.log("creatTiaozhuan");
-			alert('返回参数'+this.$route.query);
-		
+            alert("tiaozhuandizhi"+location.href);
+            alert("tiaozhuandizhi"+JSON.stringify(this.$route.query));
+            alert("tiaozhuandizhi"+(this.$route.query.nickname));
+
 				let vm = this;
 				if (this.$route.query){
 					let res = this.$route.query;
@@ -64,9 +64,12 @@
 
 					user.userOpenidLogin(para).then((res1) => {
 						if (res1.msgCode == 1) {
+
 							vm.firstLogin = res1.firstLogin;
 							vm.userId = res1.userId;
 							vm.$store.commit(types.LOGIN, res1.token);
+
+                            alert("userOpenidLogin返回参数"+JSON.stringify(res1))
 							vm.getUserInfo()
 						}
 					});

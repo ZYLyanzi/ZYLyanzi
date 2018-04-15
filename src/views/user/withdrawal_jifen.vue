@@ -96,10 +96,10 @@
 		<div class="page-part">
 
 			<mt-field label="可提现积分"  type="number" v-model="canJifen" disabled></mt-field>
+            <mt-field label="人民币￥"  placeholder="请输入提现积金额"  type="number" :attr="{minlength: 1}" v-model="money" :state='rules.money.itState'></mt-field>
 
-			<mt-field label="提现积分" placeholder="请输入提现积分数" type="number" :attr="{minlength: 1}" v-model="jifen"
-			          :state='rules.jifen.itState'></mt-field>
-			<mt-field label="人民币￥"  type="number" :attr="{minlength: 1}" v-model="money" disabled></mt-field>
+			<mt-field label="提现积分" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
+
 
 
 		</div>
@@ -128,7 +128,7 @@
 				jifen: '',
 				canJifen: '',
 				rules: {
-					jifen: {
+                    money: {
 						itRequried: {reg: true, msg: ''},
 						itType: {reg: /^([1-9]\d*|0)(\.\d*[1-9])?$/, msg: ''},
 						itLen: {reg: 9, msg: ''},
@@ -138,8 +138,9 @@
 				}
 			}
 		},
-		mounted() {
-		},
+        mounted() {
+            this.$store.commit(types.TITLE, '提现');
+        },
 		created(){
 			this.canJifen = localStorage.score;
 		},
@@ -162,7 +163,7 @@
 						user.addApplyCash(para).then((res) => {
 							if (res.msgCode == 1) {
 								Toast({
-									message: '提现成功',
+									message: '提交成功',
 									iconClass: 'icon icon-success'
 								});
 								setTimeout(() => {
@@ -176,8 +177,11 @@
 			},
 		},
 		watch: {
-			jifen: function (val) {
-				this.money = parseInt(val) /100;
+            money: function (val) {
+                if (parseInt(val) > 0) {
+                    this.jifen = parseInt(val) *110;
+                }
+
 			},
 		}
 	}
