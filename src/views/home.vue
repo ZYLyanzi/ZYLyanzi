@@ -161,9 +161,9 @@
                 // }
 
 
-                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-                var URL =  decodeURI(window.location.search);
-                var r = URL.substr(1).match(reg);
+                let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	            let URL =  decodeURI(window.location.search);
+	            let r = URL.substr(1).match(reg);
                 if(r!=null){
                     //decodeURI() 函数可对 encodeURI() 函数编码过的 URI 进行解码
                     return  decodeURI(r[2]);
@@ -240,9 +240,7 @@
 			// this.getList('top');
 			console.log("creat")
 
-
-
-
+			
 			// alert(window.location);
 
             let nickName = this.getQueryString('nickname');
