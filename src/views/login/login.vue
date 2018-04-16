@@ -83,25 +83,25 @@
 
             <div class="kuaijie">
 
-                <!--<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">-->
-                    <!--<img class="qq" src="../../../static/img/qq.png"/>-->
-                    <!--<div class="text">QQ</div>-->
-                <!--</div>-->
-
-                <!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/', '')">-->
-                    <!--<img class="weixin" src="../../../static/img/weixin.png"/>-->
-                    <!--<div class="text">微信</div>-->
-                <!--</div>-->
-
-                <div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/disttest/', '')">
+                <div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">
                     <img class="qq" src="../../../static/img/qq.png"/>
                     <div class="text">QQ</div>
                 </div>
 
-                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/disttest/', '')">
+                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/', '')">
                     <img class="weixin" src="../../../static/img/weixin.png"/>
                     <div class="text">微信</div>
                 </div>
+
+                <!--<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/disttest/', '')">-->
+                    <!--<img class="qq" src="../../../static/img/qq.png"/>-->
+                    <!--<div class="text">QQ</div>-->
+                <!--</div>-->
+
+                <!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/disttest/', '')">-->
+                    <!--<img class="weixin" src="../../../static/img/weixin.png"/>-->
+                    <!--<div class="text">微信</div>-->
+                <!--</div>-->
 
 
             </div>

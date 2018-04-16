@@ -47,7 +47,7 @@
     <section>
         <div class="top">
             <div class="code-img">
-                <img src="http://open-qiniu.appbsl.com/default_img/default_logo.png"/>
+                <img src="../../../static/img/erweima.png"/>
             </div>
             <div class="text">
                 <div class="des">分享，邀请码</div>
