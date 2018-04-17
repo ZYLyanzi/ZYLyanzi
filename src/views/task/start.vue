@@ -75,27 +75,27 @@
                 <div class="rw-feild">任务类型</div>
                 <div class="rw-value">{{taskDetail.taskTypeName}}</div>
             </div>
-            <div class="item">
-                <div class="rw-feild">单价</div>
-                <div class="rw-value">{{taskDetail.unitPrice}}</div>
-            </div>
-            <div class="item">
-                <div class="rw-feild">置顶加价</div>
-                <div class="rw-value">{{taskDetail.markupPrice}}</div>
-            </div>
-            <div class="item">
-                <div class="rw-feild">数量</div>
-                <div class="rw-value">{{taskDetail.totalSum}}</div>
-            </div>
-            <div class="item">
-                <div class="rw-feild">总价</div>
-                <div class="rw-value">{{taskDetail.totalPrice}}</div>
-            </div>
+            <!--<div class="item">-->
+                <!--<div class="rw-feild">单价</div>-->
+                <!--<div class="rw-value">{{taskDetail.unitPrice}}</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="rw-feild">置顶加价</div>-->
+                <!--<div class="rw-value">{{taskDetail.markupPrice}}</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="rw-feild">数量</div>-->
+                <!--<div class="rw-value">{{taskDetail.totalSum}}</div>-->
+            <!--</div>-->
+            <!--<div class="item">-->
+                <!--<div class="rw-feild">总价</div>-->
+                <!--<div class="rw-value">{{taskDetail.totalPrice}}</div>-->
+            <!--</div>-->
 
-            <div class="item">
-                <div class="rw-feild">限速</div>
-                <div class="rw-value">{{taskDetail.limitSpeed}}</div>
-            </div>
+            <!--<div class="item">-->
+                <!--<div class="rw-feild">限速</div>-->
+                <!--<div class="rw-value">{{taskDetail.limitSpeed}}</div>-->
+            <!--</div>-->
             <div class="item">
                 <div class="rw-feild">备注</div>
                 <div class="rw-value">{{taskDetail.remark}}</div>

@@ -59,7 +59,7 @@
             </div>
             <div class="item">
                 <div class="rw-feild">可获得积分</div>
-                <div class="rw-value red">{{taskDetail.unitPrice}}</div>
+                <div class="rw-value red">{{taskDetail.distributePrice}}</div>
             </div>
 
             <div class="item" v-for="item in taskDetail.taskTypeAttrs">

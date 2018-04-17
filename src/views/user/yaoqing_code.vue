@@ -47,7 +47,7 @@
     <section>
         <div class="top">
             <div class="code-img">
-                <img src="http://open-qiniu.appbsl.com/default_img/default_logo.png"/>
+                <img src="../../../static/img/erweima.png"/>
             </div>
             <div class="text">
                 <div class="des">分享，邀请码</div>
@@ -92,7 +92,7 @@
                     type1 = 'WEIXIN';
                 }
                 const content = '办事不求人，赚钱快过人，我的邀请码'+this.inviteCode;
-                BSL.ShareImgWithTxt(type1, content,'', 'http://www.appbsl.cn/demo/','互帮宝','')
+                BSL.ShareImgWithTxt(type1, content,'', 'http://www.daren11.com/dist/download/index.html','互帮宝','')
             },
 
             // toShare1(){

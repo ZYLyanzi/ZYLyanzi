@@ -124,9 +124,10 @@
 		<!--</mt-header>-->
 		<div class="main">
 			<div class="header-user">
+                <div></div>
 				<div>
 					<div class="user-name account">账号ID：{{userId}}</div>
-					<div class="nick-name user-name">昵称：{{nickName}}</div>
+					<div class="nick-name user-name"><span class="user-jifen" v-if="type==1">VIP-</span>昵称：{{nickName}}</div>
 				</div>
 				<div class="part">
 					<div class="user-name user-jifen">奖励积分：{{score}}</div>
@@ -202,6 +203,7 @@
 		components: {bootomTap},
 		data() {
 			return {
+			    type: '',
                 userId: '',
 				tapName: 'user',
 				score: '',
@@ -219,6 +221,7 @@
 			let vm = this;
 			user.queryUserInfo(para).then((res) => {
 				if (res.msgCode == 1) {
+				    vm.type = res.user.type;
 					vm.$store.commit('setUserInfo', res.user);
 					vm.$store.commit('setUserCode', res.user.parentUserid);
 				}

@@ -216,7 +216,16 @@
         },
 		methods: {
 			changeType(type){
-				this.payType = type
+				this.payType = type;
+                if (this.payType == 3){
+                    if (parseInt(this.money) > 0){
+                        this.jifen = parseInt(this.money) * 110;
+                    }
+                }else {
+                    if (parseInt(this.money) > 0){
+                        this.jifen = parseInt(this.money) * 100;
+                    }
+                }
 			},
 			addRecharge() {
 				this.validCount = 0;
@@ -264,10 +273,14 @@
 		},
 		watch: {
 			money: function (val) {
-			    if (parseInt(val) > 0){
-                    this.jifen = parseInt(val) * 110;
+			    if (this.payType == 3){
+                    if (parseInt(val) > 0){
+                        this.jifen = parseInt(val) * 110;
+                    }
                 }else {
-
+                    if (parseInt(val) > 0){
+                        this.jifen = parseInt(val) * 100;
+                    }
                 }
 
 			},
