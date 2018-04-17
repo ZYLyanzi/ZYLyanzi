@@ -122,7 +122,7 @@
 		<div class="layout">
 			<el-upload
 				class="upload-demo"
-				action="http://120.78.203.150:8080/RddTaskService/api/common/uploadimg"
+				action="//upload.qiniu.com"
 				:headers="{'token': token}"
 				:on-preview="handlePreview"
 				:on-remove="handleRemove"
@@ -204,8 +204,8 @@
                 const url = this.shareUrl;
                 const title = this.taskDetail.taskName;
 
-
-                BSL.Share(content, '', url,title, '');
+	            BSL.ShareImgWithTxt('WEIXIN', content, '', url, title,'')
+//                BSL.Share(content, '', url,title, '');
             },
 			getInfo() {
 				let vm = this;

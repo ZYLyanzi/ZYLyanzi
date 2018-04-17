@@ -240,7 +240,7 @@
 			// this.getList('top');
 			console.log("creat")
 
-			
+
 			// alert(window.location);
 
             let nickName = this.getQueryString('nickname');

@@ -166,6 +166,7 @@
                                 :on-preview="handlePreview"
                                 :on-remove="handleRemove"
                                 :on-success="handlePostSuccess"
+                                :on-error="handlePostError"
                                 :before-upload="beforeUpload"
                                 :data="uploadForm"
                                 :limit="5"
@@ -372,6 +373,9 @@
                     vm.imgList.push({name: res.key, url: config.imgUrl + '/' + res.key})
                 }
             },
+	        handlePostError(res){
+		        console.log("文件上传失败钩子", res);
+	        },
             setImg(type) {
                 for (let item of this.taskParams.taskTypeAttrs) {
                     if (item.formType == 'img') {
