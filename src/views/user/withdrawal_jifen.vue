@@ -1,7 +1,7 @@
 <style>
 	.page-part {
 		text-align: center;
-		margin-top: 20px;
+		margin-top: 60px;
 	}
 	.layout{
 		background: #ffffff;
@@ -88,15 +88,12 @@
 </style>
 <template>
 	<section>
-		<!--<mt-header fixed title="提现">-->
-			<!--&lt;!&ndash;<router-link to="/user/set_user" slot="left">&ndash;&gt;-->
-				<!--&lt;!&ndash;<mt-button icon="back"></mt-button>&ndash;&gt;-->
-			<!--&lt;!&ndash;</router-link>&ndash;&gt;-->
-		<!--</mt-header>-->
-		<div class="page-part">
+		<mt-header fixed title="提现">
+		</mt-header>
+		<div class="page-part need-top">
 
 			<mt-field label="可提现积分"  type="number" v-model="canJifen" disabled></mt-field>
-            <mt-field label="人民币￥"  placeholder="请输入提现积金额"  type="number" :attr="{minlength: 1}" v-model="money" :state='rules.money.itState'></mt-field>
+            <mt-field label="人民币(元)"  placeholder="请输入提现积金额"  type="number" :attr="{minlength: 1}" v-model="money" :state='rules.money.itState'></mt-field>
 
 			<mt-field label="提现积分" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
 
@@ -139,6 +136,7 @@
 			}
 		},
         mounted() {
+            BSL.AppTop(0,0);
             this.$store.commit(types.TITLE, '提现');
         },
 		created(){

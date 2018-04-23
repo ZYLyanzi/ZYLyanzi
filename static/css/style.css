@@ -57,10 +57,13 @@
   font-size: 0.28rem;
 }
 
-.mint-cell-title{
+.minit-title .mint-cell-title{
     text-align: left;
     width: 75px !important;
 }
 .mint-button{
   font-size: 16px;
+}
+.need-top{
+    margin-top: 40px;
 }

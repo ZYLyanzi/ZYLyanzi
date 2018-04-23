@@ -73,9 +73,9 @@
 </style>
 <template>
 	<section>
-		<!--<mt-header fixed title="互帮宝">-->
-		<!--</mt-header>-->
-		<div class="main">
+		<mt-header fixed title="主页">
+		</mt-header>
+		<div class="main need-top">
 			<mt-swipe :auto="3000" class="rw-swipe">
 				<mt-swipe-item class="rw-swipe-item" v-for="(item, index) in carousels" :key="index" @click="toPage(item)">
 					<img  class="swip-img" :src="item.picture"/>
@@ -129,10 +129,10 @@
 				tapName: 'home',
 				carousels: [
 					{
-						picture: 'https://bpic.588ku.com/element_banner/20/18/03/73a446cf80e62582cb48834ea0b959a5.jpg',
+						picture: '',
 					},
 					{
-						picture: 'https://bpic.588ku.com/element_banner/20/18/04/9a05e70fbb2e65292a5763e004300968.jpg',
+						picture: '',
 					}
 				],
 				taskList: [
@@ -195,14 +195,11 @@
                             })
                         }
                     }
-
                     task.carousel().then((r) => {
                         if (r.msgCode == 1){
                             vm.carousels = r.carousels
                         }
                     });
-
-
                 });
             },
 			toDetail(id) {
@@ -213,7 +210,7 @@
 				}
 				if (id == 2) {
 					this.$router.push({
-						path: '/task/list/'
+						path: '/set_list'
 
 					})
 				}
@@ -235,6 +232,7 @@
 			}
 		},
 		created() {
+            BSL.AppTop(0,0);
             let vm = this;
             vm.$store.commit(types.TITLE, '主页');
 			// this.getList('top');

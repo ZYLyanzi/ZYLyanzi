@@ -67,18 +67,24 @@
 
 			<div class="options">
 				<ul>
-					<li class="option-item" @click="gotoPage(4)">
-			            <span class="item-desc">
-			              <span class="name">修改密码</span>
-			            </span>
-						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
-					</li>
+					<!--<li class="option-item" @click="gotoPage(4)">-->
+			            <!--<span class="item-desc">-->
+			              <!--<span class="name">修改密码</span>-->
+			            <!--</span>-->
+						<!--<span class="item-ico"><i class="right-jiantou ico"></i> </span>-->
+					<!--</li>-->
 					<li class="option-item" @click="gotoPage(6)">
 			            <span class="item-desc">
 			              <span class="name">充值积分</span>
 			            </span>
 						<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
+                    <li class="option-item" @click="gotoPage(8)">
+			            <span class="item-desc">
+			              <span class="name">奖励积分兑换</span>
+			            </span>
+                        <span class="item-ico"><i class="right-jiantou ico"></i> </span>
+                    </li>
 					<!--<li class="option-item" @click="gotoPage(7)">-->
 			            <!--<span class="item-desc">-->
 			              <!--<span class="name">积分提现</span>-->
@@ -162,6 +168,11 @@
 						path: '/user/withdrawal_jifen',
 					});
 				}
+                if (id == 8) {
+                    this.$router.replace({
+                        path: '/user/pay_jifen_bycode',
+                    });
+                }
 			},
 		},
 		computed: {}

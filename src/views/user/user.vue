@@ -17,7 +17,7 @@
 	}
 
 	.account {
-		margin-top: 20px;
+		margin-top: 60px;
 	}
 
 	.user-jifen {
@@ -119,10 +119,9 @@
 </style>
 <template>
 	<section>
-		<!--<mt-header fixed title="个人中心">-->
-			<!--&lt;!&ndash;<mt-button slot="right" @click.native="popupStatus = true">排序</mt-button>&ndash;&gt;-->
-		<!--</mt-header>-->
-		<div class="main">
+		<mt-header fixed title="个人中心">
+		</mt-header>
+		<div class="main need-top">
 			<div class="header-user">
                 <div></div>
 				<div>
@@ -213,6 +212,7 @@
 			}
 		},
 		created() {
+            BSL.AppTop(0,0);
 		    this.userId = localStorage.userId;
 		    console.log(localStorage);
 			let para = {

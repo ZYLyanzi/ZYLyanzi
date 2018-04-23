@@ -59,7 +59,7 @@
 						<div class="list-item reward-list">
               <span class="desc">
 
-                <div class="title">充值金额：{{item.money}}</div>
+                <div class="title">充值金额：{{item.money}}元</div>
                 <div class="title">支付流水号：{{item.payNum}}</div>
 	                  <div class="title" v-if="item.payType == 1">充值方式：微信</div>
 	                  <div class="title" v-if="item.payType == 2">充值方式：支付宝</div>

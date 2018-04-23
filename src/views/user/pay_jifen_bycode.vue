@@ -134,43 +134,19 @@
 
 			<div class="layout task-type">
 
-				<div class="part">
-					<div class="field">支付类型</div>
 
-                    <div class="options">
-                        <div class="rw-radio" @click="changeType(1)">
-                            <i class="radio-icon ico" :class="{'selected': payType == 1}"></i><span>微信</span>
-                        </div>
-                        <div class="rw-radio" @click="changeType(2)">
-                            <i class="radio-icon ico" :class="{'selected': payType == 2}"></i><span>支付宝</span>
-                        </div>
-                        <!--<div class="rw-radio" @click="changeType(3)">-->
-                            <!--<i class="radio-icon ico" :class="{'selected': payType == 3}"></i><span>奖励积分</span>-->
-                        <!--</div>-->
-                    </div>
-
-
-				</div>
-                <!--<div  class="number-input-part">-->
-                    <!--<div class="label">充值￥</div>-->
-                    <!--<input  placeholder="请输入充值金额" class="number-input" maxlength="6" v-model="money"/>-->
-                <!--</div>-->
 			</div>
 
-            <mt-field v-if="payType == 3"  label="奖励积分"  type="number" :attr="{minlength: 1}" v-model="canJifen" disabled></mt-field>
+            <mt-field label="奖励积分总数"  type="number" :attr="{minlength: 1}" v-model="canJifen" disabled></mt-field>
 
-            <mt-field label="充值￥" placeholder="请输入充值金额" type="number" :attr="{minlength: 1}" v-model="money"></mt-field>
+            <mt-field label="充值积分"  placeholder="请输入充值积分数" type="number" :attr="{minlength: 1}" v-model="payScroe"></mt-field>
 
-            <mt-field label="积分"  type="number" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
+			<mt-field label="转赠用户id" placeholder="输入用户id可转赠给该用户" type="text" :attr="{minlength: 1}" v-model="giveUserId"></mt-field>
 
-
-			<mt-field label="流水号" placeholder="请填写支付宝或微信的流水号" type="text" :attr="{minlength: 1}" v-model="payNum"></mt-field>
-
-			<mt-field label="备注" placeholder="可填写支付微信号或支付宝账号" type="number" :attr="{minlength: 1}" v-model="remark"></mt-field>
+			<mt-field label="备注" placeholder="请输入备注" type="number" :attr="{minlength: 1}" v-model="remark"></mt-field>
 
             <div class="explain">
-                <div class="title">充值说明：</div>
-                <!--<p>充值说明 充值说明充值说明充值说明充值说明充值说明</p>-->
+
 
             </div>
 		</div>
@@ -192,11 +168,10 @@
 			return {
                 canJifen: '',
 				validCount: 0,
-				money: '',
-				payType: 1,
-				payNum: '',
+                giveUserId: '',
+				payType: 3,
 				remark: '',
-				jifen: 0,
+                payScroe: 0,
 				rules: {
 					money: {
 						itRequried: {reg: true, msg: ''},
@@ -210,39 +185,17 @@
 		},
         created(){
             this.canJifen = localStorage.score;
+            this.payScroe = this.canJifen;
         },
         mounted() {
-            this.$store.commit(types.TITLE, '充值');
+            this.$store.commit(types.TITLE, '积分兑换');
         },
 		methods: {
-			changeType(type){
-				this.payType = type;
-                if (this.payType == 3){
-                    if (parseInt(this.money) > 0){
-                        this.jifen = parseInt(this.money) * 110;
-                    }
-                }else {
-                    if (parseInt(this.money) > 0){
-                        this.jifen = parseInt(this.money) * 100;
-                    }
-                }
-			},
 			addRecharge() {
 				this.validCount = 0;
-				// for (let objElem in this.rules) {
-				// 	this.validCount += util.byOneValid(this[objElem], this.rules[objElem]);
-				// }
-				if (this.money<0 || this.money>100000){
+				if (this.payScroe > this.canJifen){
                     Toast({
-                        message: '充值金额不得小于0且不得大于100000',
-                        position: 'middle',
-                        duration: 2000
-                    });
-                    return;
-                }
-                if (this.payNum=='' && this.payType != 3){
-                    Toast({
-                        message: '流水号不得为空',
+                        message: '充值积分不得大于奖励积分总数',
                         position: 'middle',
                         duration: 2000
                     });
@@ -251,29 +204,29 @@
 
                 let vm = this;
                     let para = {
-                        money: parseInt(vm.money),
-                        payType: vm.payType,
-                        payNum:  vm.payNum,
+                        payScroe: parseInt(vm.payScroe),
+                        payType: 3,
+                        giveUserId:  vm.giveUserId,
                         remark:  vm.remark,
                     };
                     user.addRecharge(para).then((res) => {
                         if (res.msgCode == 1) {
                             Toast({
-                                message: '充值成功',
+                                message: '兑换成功',
                                 iconClass: 'icon icon-success'
                             });
-                            setTimeout(() => {
-                                this.$router.replace({
-                                    path: '/user'
-                                })
-                            }, 2000);
+                            // setTimeout(() => {
+                            //     this.$router.replace({
+                            //         path: '/user'
+                            //     })
+                            // }, 2000);
                         }
                     });
 			},
 		},
 		watch: {
-			money: function (val) {
-			    if (this.payType == 3){
+            money: function (val) {
+                if (this.payType == 3){
                     if (parseInt(val) > 0){
                         this.jifen = parseInt(val) * 110;
                     }
@@ -283,7 +236,7 @@
                     }
                 }
 
-			},
+            },
 		}
 	}
 </script>

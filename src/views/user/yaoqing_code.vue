@@ -45,7 +45,9 @@
 
 <template>
     <section>
-        <div class="top">
+        <mt-header fixed title="邀请">
+        </mt-header>
+        <div class="top need-top">
             <div class="code-img">
                 <img src="../../../static/img/erweima.png"/>
             </div>
@@ -55,9 +57,9 @@
             </div>
         </div>
         <div class="footer">
-            <div class="share"   @click='toShare(1)'>
-                <img src="../../../static/img/share_qq.png"/>
-            </div>
+            <!--<div class="share"   @click='toShare(1)'>-->
+                <!--<img src="../../../static/img/share_qq.png"/>-->
+            <!--</div>-->
             <div class="share"  @click="toShare(2)">
                 <img src="../../../static/img/share_wexin.png"/>
             </div>
@@ -106,6 +108,7 @@
             // }
         },
         created() {
+            BSL.AppTop(0,0);
             console.log(this.$store.state)
             this.inviteCode = this.$store.state.inviteCode;
         },

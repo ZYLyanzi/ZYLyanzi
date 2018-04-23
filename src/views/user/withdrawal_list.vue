@@ -57,14 +57,14 @@
 					<div class="list-item reward-list">
                 <span class="desc">
 
-                <div class="title">提现金额：{{item.money}}</div>
+                <div class="title">提现金额：{{item.money}}元</div>
                  <div class="time">提交时间: {{item.applyTime}}</div>
                  <div class="time" v-if="state==2">通过时间: {{item.rechargeTime}}</div>
               </span>
 
 						<span>
               	<span class="btn">
-               ￥{{item.inScroe}}
+               {{item.inScroe}}积分
               </span>
                <div class="state" v-if="item.state == 1">待处理</div>
                <div class="state" v-if="item.state == 2">提现成功</div>

@@ -13,7 +13,9 @@
         padding: 10px;
         padding-left: 15px;
     }
-
+    .task-type{
+        margin-top: 50px;
+    }
     .field {
         text-align: left;
         font-size: 0.32rem;
@@ -118,9 +120,9 @@
 </style>
 <template>
     <section>
-        <!--<mt-header fixed :title="titleText">-->
-        <!--</mt-header>-->
-        <div class="main">
+        <mt-header fixed :title="titleText">
+        </mt-header>
+        <div class="main need-top">
             <div class="layout task-type" v-if="!id">
                 <div class="field">任务类型</div>
                 <div class="part">
@@ -131,7 +133,7 @@
 
 
             </div>
-            <div class="layout">
+            <div class="layout minit-title">
                 <mt-field label="名称" type="text" disabled v-model="taskParams.taskName"></mt-field>
                 <mt-field label="单价" disabled type="number" min="1" v-model="unitPrice"></mt-field>
 
@@ -178,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <div class="layout">
+            <div class="layout minit-title">
 
                 <mt-field label="结束时间" type="text" v-model="taskParams.endTime" disabled></mt-field>
                 <mt-field label="备注" type="textarea" v-model="taskParams.remark"></mt-field>
@@ -272,9 +274,10 @@
             }
         },
         mounted() {
-            this.$store.commit(types.TITLE, '发布任务');
+            this.$store.commit(types.TITLE, vm.titleText);
         },
         created() {
+            BSL.AppTop(0,0);
             this.token = localStorage.token;
 
             if (this.$route.params.id && this.$route.params.id != 0) {

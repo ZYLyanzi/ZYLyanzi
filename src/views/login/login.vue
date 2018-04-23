@@ -9,7 +9,7 @@
     }
 
     .login-bottom {
-        margin-top: 20px;
+        margin-top: 60px;
         width: 100%;
         height: 50px;
         text-align: center;
@@ -64,31 +64,29 @@
 </style>
 <template>
     <section>
-        <!--<mt-header fixed title="登录">-->
-        <!--&lt;!&ndash;<router-link to="/" slot="left">&ndash;&gt;-->
-        <!--&lt;!&ndash;<mt-button icon="back">返回</mt-button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</router-link>&ndash;&gt;-->
-        <!--</mt-header>-->
-        <div class="page-part">
-            <mt-field label="账号" placeholder="请输入用户名" :attr="{maxlength:20}" v-model="userName"
-                      :state='rules.userName.itState'></mt-field>
-            <mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:8}" v-model="password"
-                      :state='rules.password.itState'></mt-field>
-        </div>
-        <div class="login-bottom">
-            <mt-button size="large" type="primary" class="login-btn-login" @click="toLogin">登录</mt-button>
+        <mt-header fixed title="登录">
+
+        </mt-header>
+        <!--<div class="page-part">-->
+            <!--<mt-field label="账号" placeholder="请输入用户名" :attr="{maxlength:20}" v-model="userName"-->
+                      <!--:state='rules.userName.itState'></mt-field>-->
+            <!--<mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:8}" v-model="password"-->
+                      <!--:state='rules.password.itState'></mt-field>-->
+        <!--</div>-->
+        <div class="login-bottom need-top">
+            <!--<mt-button size="large" type="primary" class="login-btn-login" @click="toLogin">登录</mt-button>-->
 
             <div class="line">----------------快速登录---------------</div>
 
 
             <div class="kuaijie">
 
-                <div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">
-                    <img class="qq" src="../../../static/img/qq.png"/>
-                    <div class="text">QQ</div>
-                </div>
+                <!--<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">-->
+                    <!--<img class="qq" src="../../../static/img/qq.png"/>-->
+                    <!--<div class="text">QQ</div>-->
+                <!--</div>-->
 
-                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/', '')">
+                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://47.106.112.59:80/dist/', '')">
                     <img class="weixin" src="../../../static/img/weixin.png"/>
                     <div class="text">微信</div>
                 </div>
@@ -106,9 +104,9 @@
             </div>
 
 
-            <div class="line">----------------还没有账号---------------</div>
-            <mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce" @click="toRegist">注册
-            </mt-button>
+            <!--<div class="line">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;还没有账号-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div>-->
+            <!--<mt-button size="large" type="primary" class="login-btn-login login-btn-zhuce" @click="toRegist">注册-->
+            <!--</mt-button>-->
 
         </div>
     </section>
@@ -147,7 +145,11 @@
             }
         },
         mounted() {
+
             this.$store.commit(types.TITLE, '登录');
+        },
+        created(){
+            BSL.AppTop(0,0)
         },
         methods: {
 

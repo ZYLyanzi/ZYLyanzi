@@ -103,6 +103,11 @@ const router = new Router({
 			name: 'pay_jifen',
 			component: resolve => require([`@/views/user/pay_jifen`], resolve)
 		},
+        {
+            path: '/user/pay_jifen_bycode',
+            name: 'pay_jifen_bycode',
+            component: resolve => require([`@/views/user/pay_jifen_bycode`], resolve)
+        },
 		{
 			path: '/user/pay_list',
 			name: 'pay_list',
