@@ -160,17 +160,17 @@
 					});
 				}
 				if (id == 6) {
-					this.$router.replace({
+					this.$router.push({
 						path: '/user/pay_jifen',
 					});
 				}
 				if (id == 7) {
-					this.$router.replace({
+					this.$router.push({
 						path: '/user/withdrawal_jifen',
 					});
 				}
                 if (id == 8) {
-                    this.$router.replace({
+                    this.$router.push({
                         path: '/user/pay_jifen_bycode',
                     });
                 }

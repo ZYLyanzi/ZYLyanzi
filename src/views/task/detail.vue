@@ -141,11 +141,11 @@
       },
       toEdit(type) {
         if (type == 1) {
-          this.$router.replace({
+          this.$router.push({
             path: '/task/check/' + this.id,
           });
         } else if (type == 2) {
-          this.$router.replace({
+          this.$router.push({
             path: '/task/add/' + this.id,
           });
         }

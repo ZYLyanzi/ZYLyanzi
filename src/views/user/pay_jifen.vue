@@ -163,10 +163,9 @@
 
             <mt-field label="积分"  type="number" :attr="{minlength: 1}" v-model="jifen" disabled></mt-field>
 
+			<mt-field label="流水号" placeholder="请填写支付宝或微信的流水号" type="text" :attr="{maxLength: 64}" v-model="payNum"></mt-field>
 
-			<mt-field label="流水号" placeholder="请填写支付宝或微信的流水号" type="text" :attr="{minlength: 1}" v-model="payNum"></mt-field>
-
-			<mt-field label="备注" placeholder="可填写支付微信号或支付宝账号" type="number" :attr="{minlength: 1}" v-model="remark"></mt-field>
+			<mt-field label="备注" placeholder="可填写支付微信号或支付宝账号" type="text" :attr="{maxLength: 64}" v-model="remark"></mt-field>
 
             <div class="explain">
                 <div class="title">充值说明：</div>

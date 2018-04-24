@@ -85,8 +85,8 @@
                     <!--<div class="text">QQ</div>-->
                 <!--</div>-->
 
-                <!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/disttest/', '')">-->
-                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/', '')">
+                <div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://47.106.112.59/dist/', '')">
+                <!--<div class="iocn-login" onclick="BSL.Login('WEIXIN', 'http://www.daren11.com/dist/', '')">-->
                     <img class="weixin" src="../../../static/img/weixin.png"/>
                     <div class="text">微信</div>
                 </div>

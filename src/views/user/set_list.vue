@@ -109,7 +109,7 @@
 		methods: {
 			gotoPage(id) {
 				if (id == 1) {
-					this.$router.replace({
+					this.$router.push({
 						path: '/task/list',
 					});
 				}

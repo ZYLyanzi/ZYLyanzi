@@ -34,6 +34,9 @@ axios.interceptors.response.use(res => {
   Indicator.close();
   if(res.data.msgCode != 1){
     if (res.data.msgCode != 3){
+        if(res.data.msg == "请求失败"){
+            res.data.msg = "服务器忙，稍后再试";
+        }
         Toast({
             message: res.data.msg,
             position: 'middle',

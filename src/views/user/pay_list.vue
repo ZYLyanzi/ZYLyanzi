@@ -2,6 +2,7 @@
 	.top-tap {
 		/*position: absolute;*/
 		height: 35px;
+		line-height: 35px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;

@@ -275,7 +275,11 @@
         },
         mounted() {
             this.$store.commit(types.TITLE, this.titleText);
-	        this.$store.commit('setTop', 0);
+	        if (this.titleText == '编辑任务') {
+                this.$store.commit('setTop', 1);
+            }else {
+                this.$store.commit('setTop', 0);
+            }
         },
         created() {
             this.token = localStorage.token;

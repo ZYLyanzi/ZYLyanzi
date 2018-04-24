@@ -231,7 +231,7 @@
 //				alert("nickName"+nickName)
 //				alert("unionid"+unionid)
 //				alert("head_imgurl"+head_imgurl)
-				alert("openid"+openid)
+// 				alert("openid"+openid)
 
 				if (openid){
 					let para = {
