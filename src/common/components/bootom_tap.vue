@@ -119,6 +119,7 @@ export default {
 	},
 	methods: {
     tochangeTab(id){
+    	console.log("tochangeTab");
       if (id == 1){
         this.$router.replace({
           path: '/',

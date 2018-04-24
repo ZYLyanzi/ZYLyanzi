@@ -134,6 +134,7 @@
 			this.userName = localStorage.userName;
 		},
         mounted() {
+	        this.$store.commit('setTop', 1);
             this.$store.commit(types.TITLE, '个人设置');
         },
 		methods: {

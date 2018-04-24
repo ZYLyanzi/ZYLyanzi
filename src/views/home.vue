@@ -78,7 +78,7 @@
 		<div class="main need-top">
 			<mt-swipe :auto="3000" class="rw-swipe">
 				<mt-swipe-item class="rw-swipe-item" v-for="(item, index) in carousels" :key="index" @click="toPage(item)">
-					<img  class="swip-img" :src="item.picture"/>
+					<img  class="swip-img" :src="item.picture"/>{{item.picture}}
 				</mt-swipe-item>
 			</mt-swipe>
 			<div class="layout center">
@@ -128,12 +128,6 @@
 				allLoaded: false,
 				tapName: 'home',
 				carousels: [
-					{
-						picture: '',
-					},
-					{
-						picture: '',
-					}
 				],
 				taskList: [
 					{
@@ -144,23 +138,11 @@
 				],
 				page: 1,
 				pageSize: 100,
+				firstLogin: '',
 			}
 		},
 		methods: {
             getQueryString(name) {
-                // let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-                // let reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
-                // let r = window.location.search.substr(1).match(reg);
-                // let q = window.location.pathname.substr(1).match(reg_rewrite);
-                // if(r != null){
-                //     return unescape(r[2]);
-                // }else if(q != null){
-                //     return unescape(q[2]);
-                // }else{
-                //     return null;
-                // }
-
-
                 let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 	            let URL =  decodeURI(window.location.search);
 	            let r = URL.substr(1).match(reg);
@@ -177,30 +159,30 @@
                 let para2 = {
                     userId: vm.userId,
                 }
+	            task.carousel().then((r) => {
+			            vm.carousels = r.carousels
+			            console.log("carousels",  vm.carousels);
+//						alert("获取carousels")
+			            user.queryUserInfo(para2).then((res2) => {
+				            console.log("queryUserInfo")
+//				            alert("获取UserInfo")
+				            if (res2.msgCode == 1) {
+					            vm.$store.commit('setUserInfo', res2.user);
+					            if (vm.firstLogin === 0){
+						            vm.$router.replace({
+							            path: '/user/fill_code',
+							            query: {isFirst: 0}
+						            })
+					            }else if (vm.firstLogin === 1){
+						            vm.$router.replace({
+							            path: '/'
+						            })
+					            }
+				            }
+			            });
 
-                user.queryUserInfo(para2).then((res2) => {
-                    console.log("queryUserInfo")
-                    if (res2.msgCode == 1) {
-                        vm.$store.commit('setUserInfo', res2.user);
+	            });
 
-
-                        if (vm.firstLogin == 0){
-                            vm.$router.replace({
-                                path: '/user/fill_code',
-                                query: {isFirst: 0}
-                            })
-                        }else if (vm.firstLogin == 1){
-                            vm.$router.replace({
-                                path: '/'
-                            })
-                        }
-                    }
-                    task.carousel().then((r) => {
-                        if (r.msgCode == 1){
-                            vm.carousels = r.carousels
-                        }
-                    });
-                });
             },
 			toDetail(id) {
 				if (id == 1) {
@@ -232,47 +214,47 @@
 			}
 		},
 		created() {
-            BSL.AppTop(0,0);
-            let vm = this;
-            vm.$store.commit(types.TITLE, '主页');
-			// this.getList('top');
-			console.log("creat")
+			let vm = this;
+			vm.$store.commit('setTop', 0);
+			vm.$store.commit(types.TITLE, '主页');
+
+			if (localStorage.token && localStorage.userId){
+//				alert("有token"+localStorage.token+"和userId"+localStorage.userId)
+				vm.getUserInfo()
+			}else {
+//				alert("URL"+window.location.search);
+				let nickName = this.getQueryString('nickname');
+				let unionid = this.getQueryString('unionid');
+				let head_imgurl = this.getQueryString('head_imgurl');
+				let openid = this.getQueryString('openid');
+
+//				alert("nickName"+nickName)
+//				alert("unionid"+unionid)
+//				alert("head_imgurl"+head_imgurl)
+				alert("openid"+openid)
+
+				if (openid){
+					let para = {
+						nickName: nickName,
+						unionid: unionid,
+						headImgurl: head_imgurl,
+						openid: openid,
+					};
+
+					user.userOpenidLogin(para).then((res1) => {
+//						 alert("userOpenidLogin"+JSON.stringify(res1));
+
+						if (res1.msgCode == 1) {
+							vm.firstLogin = res1.firstLogin;
+							vm.userId = res1.userId;
+							vm.$store.commit(types.LOGIN, res1.token);
+							vm.getUserInfo()
+						}
+					});
+				}
+			}
 
 
-			// alert(window.location);
-
-            let nickName = this.getQueryString('nickname');
-
-            let unionid = this.getQueryString('unionid');
-            let head_imgurl = this.getQueryString('head_imgurl');
-            let openid = this.getQueryString('openid');
-
-            //
-            // alert("nickName+"+nickName);
-            // alert("unionid+"+unionid);
-            // alert("head_imgurl+"+head_imgurl);
-            // alert("openid+"+openid);
-
-            if (openid){
-                // alert("openid111"+openid);
-                let para = {
-                    nickName: nickName,
-                    unionid: unionid,
-                    headImgurl: head_imgurl,
-                    openid: openid,
-                };
-
-                user.userOpenidLogin(para).then((res1) => {
-                    // alert("userOpenidLogin"+JSON.stringify(res1));
-
-                    if (res1.msgCode == 1) {
-                        vm.firstLogin = res1.firstLogin;
-                        vm.userId = res1.userId;
-                        vm.$store.commit(types.LOGIN, res1.token);
-                        vm.getUserInfo()
-                    }
-                });
-            }
 
 		}
 	}

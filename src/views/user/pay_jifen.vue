@@ -212,6 +212,7 @@
             this.canJifen = localStorage.score;
         },
         mounted() {
+	        this.$store.commit('setTop', 1);
             this.$store.commit(types.TITLE, '充值');
         },
 		methods: {

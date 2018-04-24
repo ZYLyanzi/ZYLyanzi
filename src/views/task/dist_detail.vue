@@ -103,6 +103,7 @@
             this.getInfo()
         },
         mounted() {
+	        this.$store.commit('setTop', 1);
             this.$store.commit(types.TITLE, '派发任务详情');
         },
         destroyed() {

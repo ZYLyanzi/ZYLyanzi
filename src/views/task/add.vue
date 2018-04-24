@@ -274,10 +274,10 @@
             }
         },
         mounted() {
-            this.$store.commit(types.TITLE, vm.titleText);
+            this.$store.commit(types.TITLE, this.titleText);
+	        this.$store.commit('setTop', 0);
         },
         created() {
-            BSL.AppTop(0,0);
             this.token = localStorage.token;
 
             if (this.$route.params.id && this.$route.params.id != 0) {

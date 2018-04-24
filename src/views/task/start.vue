@@ -189,6 +189,7 @@
 			this.getInfo()
 		},
         mounted() {
+	        this.$store.commit('setTop', 1);
             this.$store.commit(types.TITLE, '开始任务');
         },
 		methods: {

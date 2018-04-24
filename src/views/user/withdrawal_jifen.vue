@@ -136,7 +136,7 @@
 			}
 		},
         mounted() {
-            BSL.AppTop(0,0);
+	        this.$store.commit('setTop', 0);
             this.$store.commit(types.TITLE, '提现');
         },
 		created(){

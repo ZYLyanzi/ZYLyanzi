@@ -85,6 +85,7 @@
             }
         },
         mounted() {
+	        this.$store.commit('setTop', 0);
             this.$store.commit(types.TITLE, '邀请');
         },
         methods: {
@@ -108,7 +109,6 @@
             // }
         },
         created() {
-            BSL.AppTop(0,0);
             console.log(this.$store.state)
             this.inviteCode = this.$store.state.inviteCode;
         },

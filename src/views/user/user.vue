@@ -212,7 +212,6 @@
 			}
 		},
 		created() {
-            BSL.AppTop(0,0);
 		    this.userId = localStorage.userId;
 		    console.log(localStorage);
 			let para = {
@@ -271,6 +270,7 @@
 			},
 		},
         mounted() {
+	        this.$store.commit('setTop', 0);
             this.$store.commit(types.TITLE, '个人中心');
         },
 		computed: {}

@@ -13,7 +13,13 @@ export default new Vuex.Store({
 		title: '',
 		bindInviteCode: 0,
 		inviteCode: '',
+		topStatus: 1,
 
+	},
+	getters: {
+		topStatus(state) {
+			return state.topStatus
+		},
 	},
 	mutations: {
 		setUserInfo(state, par) {
@@ -29,6 +35,9 @@ export default new Vuex.Store({
 		setUserCode(state, par) {
 			state.bindInviteCode = par
 
+		},
+		setTop(state, par){
+			state.topStatus = par
 		},
 		[types.LOGIN]: (state, data) => {
 			localStorage.token = data;

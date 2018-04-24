@@ -5,11 +5,25 @@
 </template>
 
 <script>
+	import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
   export default {
     name: 'App',
-    created() {
 
-    }
+	  create() {
+	    console.log("topStatus", this.topStatus)
+    },
+	  computed:{
+		  ...mapGetters({
+			  topStatus: 'topStatus',
+		  }),
+
+	  },
+	  watch: {
+		  topStatus: function (val) {
+			  console.log("topStatus", val);
+			  BSL.AppTop(val, 1)
+		  },
+	  }
   };
 </script>
 

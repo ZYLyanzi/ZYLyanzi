@@ -188,6 +188,7 @@
             this.payScroe = this.canJifen;
         },
         mounted() {
+	        this.$store.commit('setTop', 1);
             this.$store.commit(types.TITLE, '积分兑换');
         },
 		methods: {
