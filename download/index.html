@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+
+	<title>互帮宝软件下载</title>
+	<script>
+		new function () {
+			var _self = this;
+			_self.width = 750;//设置默认最大宽度
+			_self.fontSize = 100;//默认字体大小
+			_self.widthProportion = function () {
+				var device_width = document.getElementsByTagName("html")[0].offsetWidth;
+				var p = device_width / _self.width;
+				return p;
+			};
+			_self.changePage = function () {
+				var rem = _self.widthProportion() * _self.fontSize;
+				document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + rem + "px !important");
+			}
+			_self.changePage();
+			window.addEventListener("resize", function () {
+				_self.changePage();
+			}, false);
+		};
+	</script>
+	<style>
+		.home-layout{
+			width: 100%;
+			box-sizing: border-box;
+			padding: 0 0.32rem;
+			margin-top: 5%;
+			text-align: left;
+			color: #282828;
+			font-size: 0.32rem;
+		}
+		.home-layout .title{
+			margin-bottom: 5%;
+		}
+		.home-layout .btn{
+			text-align: center;
+		}
+		.home-layout .btn .type{
+			margin: 5% 0;
+			text-align: center;
+			font-size: 0.28rem;
+			color: #409EFF;
+			border-radius: 4px;
+
+		}
+		.home-layout img{
+			margin-top: 5%;
+			width:60%;
+			border-radius: 4px;
+		}
+		.home-layout .first-btn{
+			margin-bottom: 0.32rem;
+		}
+	</style>
+</head>
+
+<body class="home-body">
+<section class="home">
+
+	<div class="main">
+		<div class="home-layout">
+			<!--<div class="title">扫一扫下载互帮宝App</div>-->
+				<div class="btn first-btn">
+					<img src="http://open-qiniu.appbsl.com/sources/187272/369273/qr.png?t=1524645289">
+					<div class="type">扫一扫下载互帮宝App</div>
+				</div>
+				<!--<div class="btn">-->
+					<!--<img src="android.png">-->
+					<!--<div class="type">ios下载</div>-->
+				<!--</div>-->
+		</div>
+	</div>
+</section>
+
+
+</body>
+</html>

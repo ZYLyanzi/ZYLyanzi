@@ -329,7 +329,6 @@
                 task.taskDesc(para).then((res) => {
                     if (res.msgCode == 1) {
                         vm.taskParams = res.task;
-
                         vm.taskParams.defRemark = res.task.defRemark;
                         vm.unitPrice = res.task.unitPrice;
                         vm.markupPrice = res.task.markupPrice;
