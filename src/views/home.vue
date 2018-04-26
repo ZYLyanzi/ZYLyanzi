@@ -7,11 +7,18 @@
 
 	.new-user {
 		width: 100%;
-		height: 150px;
-		background: #ffd705;
-	}
+        text-align: left;
 
-	.get-task {
+		/*height: 150px;*/
+		/*background: #ffd705;*/
+	}
+    .new-user .title{
+        margin: 10px 0;
+        font-size: 16px;
+        margin-left: 10px;
+    }
+
+    .get-task {
 		margin: 20px 0;
 	}
 
@@ -69,6 +76,10 @@
 	.swip-img{
 		height: 3rem;
 	}
+    .bootom-video{
+        height: 400px;
+        margin-bottom: 100px;
+    }
 
 </style>
 <template>
@@ -100,13 +111,18 @@
 				</div>
 			</div>
 
-			<div class="layout">
+			<div class="layout bootom-video">
 
 				<!--<div class="get-task" @click="toDetail()">-->
 				<!--<mt-button type="danger">开始赚钱</mt-button>-->
 				<!--</div>-->
+                <!--<iframe class="video_iframe" style="z-index:1;" src="https://v.qq.com/x/page/g0638xbe6et.html?vid=m0137rrajuc&amp;width=300&amp;height=200&amp;auto=0" allowfullscreen="" frameborder="0" height="200" width="300"></iframe>-->
+				<div class="new-user">
+                    <div class="title">新手教程</div>
+                    <!--<iframe class="video_iframe" style=" z-index:1; " src="https://v.qq.com/x/page/g0638xbe6et.html?vid=k0015trfczz&amp;width=300&amp;height=200&amp;auto=0" allowfullscreen="" frameborder="0" height="200" width="300"></iframe>-->
+                    <embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0638xbe6et&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+                </div>
 
-				<div class="new-user">新手教程</div>
 
 			</div>
 
