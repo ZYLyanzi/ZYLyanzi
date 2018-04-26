@@ -84,7 +84,7 @@
 </style>
 <template>
 	<section>
-		<mt-header fixed title="主页">
+		<mt-header fixed title="互帮宝">
 		</mt-header>
 		<div class="main need-top">
 			<mt-swipe :auto="3000" class="rw-swipe">
@@ -232,7 +232,7 @@
 		created() {
 			let vm = this;
 			vm.$store.commit('setTop', 0);
-			vm.$store.commit(types.TITLE, '主页');
+			vm.$store.commit(types.TITLE, '互帮宝');
 
 			if (localStorage.token && localStorage.userId){
 //				alert("有token"+localStorage.token+"和userId"+localStorage.userId)
@@ -266,6 +266,10 @@
 							vm.$store.commit(types.LOGIN, res1.token);
 							vm.getUserInfo()
 						}
+					});
+				}else {
+					this.$router.replace({
+						path: '/login'
 					});
 				}
 			}

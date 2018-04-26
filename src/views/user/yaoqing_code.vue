@@ -95,7 +95,7 @@
                     type1 = 'WEIXIN';
                 }
                 const content = '办事不求人，赚钱快过人，我的邀请码'+this.inviteCode;
-                BSL.ShareImgWithTxt(type1, content,'', 'http://www.daren11.com/dist/download/index.html','互帮宝','')
+                BSL.ShareImgWithTxt(type1, content,'', 'http://www.daren11.com/download/index.html','互帮宝','')
             },
 
             // toShare1(){
