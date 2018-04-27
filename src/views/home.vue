@@ -106,7 +106,11 @@
 				<!--<mt-button type="danger">开始赚钱</mt-button>-->
 				<!--</div>-->
 
-				<div class="new-user">新手教程</div>
+				<video width="320" height="240" controls>
+					<object data="https://www.bilibili.com/video/av22599418" width="320" height="240">
+						<embed src="https://www.bilibili.com/video/av22599418" width="320" height="240">
+					</object>
+				</video>
 
 			</div>
 
