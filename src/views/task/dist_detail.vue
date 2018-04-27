@@ -65,7 +65,7 @@
             <div class="item" v-for="item in taskDetail.taskTypeAttrs">
                 <div class="rw-feild">{{item.fieldCname}}</div>
 
-                <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldConten}}</div>
+                <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldContent}}</div>
                 <div class="rw-value" v-if="item.fieldType == 'img'">
                     <img v-for="item in item.fieldContent" :src="item"/>
                 </div>

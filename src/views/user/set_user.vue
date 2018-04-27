@@ -94,7 +94,7 @@
 
 					<li class="option-item"  @click="gotoPage(5)">
 			            <span class="item-desc">
-					<span class="name">填写邀请码</span>
+					<span class="name">填写邀请码与VIP兑换</span>
 					</span>
 					<span class="item-ico"><i class="right-jiantou ico"></i> </span>
 					</li>
