@@ -48,11 +48,11 @@ axios.interceptors.response.use(res => {
 
 },error => {
   Indicator.close();
-  Toast({
-    message: '请求失败',
-    position: 'middle',
-    duration: 2000
-  });
+  // Toast({
+  //   message: '请求失败',
+  //   position: 'middle',
+  //   duration: 2000
+  // });
   if (error.response) {
     switch (error.response.status) {
       case 401:
