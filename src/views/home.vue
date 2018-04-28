@@ -72,14 +72,15 @@
 
 	.new-user {
 		margin-top: 0.4rem;
+		height: 6.8rem;
+		margin-bottom: 1rem;
 	}
 	.swip-img{
 		height: 3rem;
 	}
-    .bootom-video{
-        height: 400px;
-        margin-bottom: 100px;
-    }
+    /*.bootom-video{*/
+        /*height: 6.4rem;*/
+    /*}*/
 
 </style>
 <template>
@@ -117,12 +118,13 @@
 				<!--<mt-button type="danger">开始赚钱</mt-button>-->
 				<!--</div>-->
                 <!--<iframe class="video_iframe" style="z-index:1;" src="https://v.qq.com/x/page/g0638xbe6et.html?vid=m0137rrajuc&amp;width=300&amp;height=200&amp;auto=0" allowfullscreen="" frameborder="0" height="200" width="300"></iframe>-->
+
+
 				<div class="new-user">
                     <div class="title">新手教程</div>
-                    <!--<iframe class="video_iframe" style=" z-index:1; " src="https://v.qq.com/x/page/g0638xbe6et.html?vid=k0015trfczz&amp;width=300&amp;height=200&amp;auto=0" allowfullscreen="" frameborder="0" height="200" width="300"></iframe>-->
-                    <embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0638xbe6et&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
+					<iframe style="width: 7.5rem; height: 4.8rem" frameborder="0"  src="https://v.qq.com/iframe/player.html?vid=g0638xbe6et&tiny=0&auto=0" allowfullscreen></iframe>
+                    <!--<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0638xbe6et&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>-->
                 </div>
-
 			</div>
 
 
@@ -233,45 +235,45 @@
 			vm.$store.commit('setTop', 0);
 			vm.$store.commit(types.TITLE, '互帮宝');
 
-			if (localStorage.token && localStorage.userId){
-//				alert("有token"+localStorage.token+"和userId"+localStorage.userId)
-				vm.getUserInfo()
-			}else {
-//				alert("URL"+window.location.search);
-				let nickName = this.getQueryString('nickname');
-				let unionid = this.getQueryString('unionid');
-				let head_imgurl = this.getQueryString('head_imgurl');
-				let openid = this.getQueryString('openid');
-
-//				alert("nickName"+nickName)
-//				alert("unionid"+unionid)
-//				alert("head_imgurl"+head_imgurl)
-// 				alert("openid"+openid)
-
-				if (openid){
-					let para = {
-						nickName: nickName,
-						unionid: unionid,
-						headImgurl: head_imgurl,
-						openid: openid,
-					};
-
-					user.userOpenidLogin(para).then((res1) => {
-//						 alert("userOpenidLogin"+JSON.stringify(res1));
-
-						if (res1.msgCode == 1) {
-							vm.firstLogin = res1.firstLogin;
-							vm.userId = res1.userId;
-							vm.$store.commit(types.LOGIN, res1.token);
-							vm.getUserInfo()
-						}
-					});
-				}else {
-					this.$router.replace({
-						path: '/login'
-					});
-				}
-			}
+//			if (localStorage.token && localStorage.userId){
+////				alert("有token"+localStorage.token+"和userId"+localStorage.userId)
+//				vm.getUserInfo()
+//			}else {
+////				alert("URL"+window.location.search);
+//				let nickName = this.getQueryString('nickname');
+//				let unionid = this.getQueryString('unionid');
+//				let head_imgurl = this.getQueryString('head_imgurl');
+//				let openid = this.getQueryString('openid');
+//
+////				alert("nickName"+nickName)
+////				alert("unionid"+unionid)
+////				alert("head_imgurl"+head_imgurl)
+//// 				alert("openid"+openid)
+//
+//				if (openid){
+//					let para = {
+//						nickName: nickName,
+//						unionid: unionid,
+//						headImgurl: head_imgurl,
+//						openid: openid,
+//					};
+//
+//					user.userOpenidLogin(para).then((res1) => {
+////						 alert("userOpenidLogin"+JSON.stringify(res1));
+//
+//						if (res1.msgCode == 1) {
+//							vm.firstLogin = res1.firstLogin;
+//							vm.userId = res1.userId;
+//							vm.$store.commit(types.LOGIN, res1.token);
+//							vm.getUserInfo()
+//						}
+//					});
+//				}else {
+//					this.$router.replace({
+//						path: '/login'
+//					});
+//				}
+//			}
 
 
 

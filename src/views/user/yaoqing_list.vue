@@ -53,7 +53,7 @@
 				<li v-for="item in list">
 					<div class="list-item reward-list">
               <span class="desc">
-                <div class="title">用户名：{{item.userName}}</div>
+                <div class="title">用ID：{{item.id}}</div>
                 <div class="title">用户昵称：{{item.userName}}</div>
                 <div class="time">注册时间：{{item.registerTime}}</div>
               </span>
