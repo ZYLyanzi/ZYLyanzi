@@ -194,7 +194,7 @@
 		methods: {
 			addRecharge() {
 				this.validCount = 0;
-				if (this.payScroe > this.canJifen){
+				if (parseInt(this.payScroe) > parseInt(this.canJifen)){
                     Toast({
                         message: '充值积分不得大于奖励积分总数',
                         position: 'middle',
@@ -226,18 +226,18 @@
 			},
 		},
 		watch: {
-            money: function (val) {
-                if (this.payType == 3){
-                    if (parseInt(val) > 0){
-                        this.jifen = parseInt(val) * 110;
-                    }
-                }else {
-                    if (parseInt(val) > 0){
-                        this.jifen = parseInt(val) * 100;
-                    }
-                }
-
-            },
+            // money: function (val) {
+            //     if (this.payType == 3){
+            //         if (parseInt(val) > 0){
+            //             this.jifen = parseInt(val) * 110;
+            //         }
+            //     }else {
+            //         if (parseInt(val) > 0){
+            //             this.jifen = parseInt(val) * 100;
+            //         }
+            //     }
+            //
+            // },
 		}
 	}
 </script>

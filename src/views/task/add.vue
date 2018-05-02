@@ -422,7 +422,7 @@
                 vm.taskParams.taskName = itemData.name + '任务' + localStorage.nickName;
             },
             toPay() {
-                this.$router.replace({
+                this.$router.push({
                     path: '/user/pay_jifen',
                 });
             },

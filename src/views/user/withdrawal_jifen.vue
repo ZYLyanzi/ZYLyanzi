@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 	.page-part {
 		text-align: center;
 		margin-top: 60px;
@@ -19,8 +19,8 @@
 		width:1.5rem;
 		margin-left: 10px;
 		text-align: right;
-		font-size: 0.28rem;
-		color: #333333;
+		font-size: 0.32rem;
+		color: #2c3e50;
 		margin-right: 15px;
 	}
 
@@ -92,9 +92,9 @@
 	}
 
 	.login-bottom {
-		margin-top: 20px;
+		margin: 20px 0;
 		width: 100%;
-		height: 50px;
+		height: 100px;
 		text-align: center;
 	}
 
@@ -155,7 +155,7 @@
 				</div>
 			</div>
 
-			<mt-field label="收款账号" :attr="{minlength: 1}" v-model="payNum" disabled></mt-field>
+			<mt-field label="收款账号" placeholder="请输入收款账号" :attr="{maxLength: 16}" v-model="payNum"></mt-field>
 
 		</div>
 
@@ -165,6 +165,7 @@
 			<p>（2）每位用户每天可提现一次 ，目前为人工打款，有稍微延时；</p>
 			<p>（3）每人每天提现金额不能大于300，超出部分第二天再提；</p>
 			<p>（4）优先支付宝提现。</p>
+			<p>（5）官方指定客服：ZHQHBB02（微信）</p>
 		</div>
 
 		<div class="login-bottom">
@@ -190,6 +191,7 @@
 				validCount: 0,
 				money: '',
 				jifen: '',
+                payNum: '',
 				canJifen: '',
 				payType: 2,
 				rules: {
@@ -235,7 +237,7 @@
 									iconClass: 'icon icon-success'
 								});
 								setTimeout(() => {
-									this.$router.replace({
+									this.$router.push({
 										path: '/user'
 									})
 								}, 2000);

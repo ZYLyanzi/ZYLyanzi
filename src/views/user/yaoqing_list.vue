@@ -45,6 +45,9 @@
 				<!--<mt-button icon="back"></mt-button>-->
 			<!--</router-link>-->
 		<!--</mt-header>-->
+
+        <div class="has-yaoqing" v-if="list.length <= 0">暂无数据</div>
+
 		<div class="has-yaoqing" v-if="list.length > 0">已邀请人数：{{total}}</div>
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
@@ -54,7 +57,7 @@
 					<div class="list-item reward-list">
               <span class="desc">
                 <div class="title">用ID：{{item.id}}</div>
-                <div class="title">用户昵称：{{item.userName}}</div>
+                <div class="title">用户昵称：{{item.nickName}}</div>
                 <div class="time">注册时间：{{item.registerTime}}</div>
               </span>
 					</div>

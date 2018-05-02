@@ -233,6 +233,9 @@
 			toSubmit() {
 				let vm = this;
 				vm.taskParms.id = vm.taskDistributeId;
+				if(vm.type == 5 ){
+                    vm.taskParms.isUpdate = 1;
+                }
 				console.log("vm.fileList2", vm.fileList2);
 				for (let i = 0; i < vm.fileList2.length; i++) {
 					let name = 'picture' + '' + (i + 1);
@@ -245,7 +248,7 @@
 							message: '提交成功',
 							iconClass: 'icon icon-success'
 						});
-						if (vm.type == 2) {
+						if (vm.type == 5 || vm.type == 2) {
 							this.$router.push({
 								path: '/task/check_detail/' + vm.taskDistributeId,
 								query: {type: 0, state: 3, taskId: vm.id}

@@ -12,6 +12,7 @@ export default {
 	queryScoreCz: 'api/task/queryScoreCz',
 	carousel: 'api/common/carousel',
 	// getList: 'api/task/myReleaseTask',//列表
-	myReleaseTask: 'api/task/myReleaseTask'//列表
+	myReleaseTask: 'api/task/myReleaseTask',//列表
+    appealTask: 'api/task/appealTask'//列表
 
 }

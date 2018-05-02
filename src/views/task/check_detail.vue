@@ -53,6 +53,14 @@
     <section>
 
         <div class="layout">
+            <div class="item" v-if="type == 1 && state==3">
+                <div class="rw-feild">用户ID</div>
+                <div class="rw-value">{{list.acceptUserId}}</div>
+            </div>
+            <div class="item" v-if="type == 1 && state==3">
+                <div class="rw-feild">用户昵称</div>
+                <div class="rw-value">{{list.acceptNickName}}</div>
+            </div>
             <div class="item">
                 <div class="rw-feild">任务名称</div>
                 <div class="rw-value">{{list.taskName}}</div>
@@ -99,7 +107,8 @@
         </div>
 
         <div class="detail-btn" v-if="type == 0 && state==5">
-            <mt-button type="danger" @click="checked(5)">修改任务</mt-button>
+            <!--<mt-button type="default" @click="checked(5)">修改任务</mt-button>-->
+            <mt-button type="danger" @click="shensu()">申诉</mt-button>
         </div>
 
 
@@ -172,7 +181,26 @@
                 }
 
             },
+            shensu(){
+                let vm = this;
+                let para = {
+                    distributeId : vm.id,
+                }
+                task.appealTask(para).then((res) => {
+                    if (res.msgCode == 1) {
+                        Toast({
+                            message: '提交成功',
+                            iconClass: 'icon icon-success'
+                        });
+                        // setTimeout(() => {
+                        //     this.$router.push({
+                        //         path: '/task/check/' + vm.taskId,
+                        //     });
+                        // }, 2000);
 
+                    }
+                });
+            },
             checked(state) {
                 let vm = this;
                 let para = {
@@ -195,10 +223,9 @@
                 });
             },
             toStart(state) {
-
-                this.$router.replace({
+                this.$router.push({
                     path: '/task/start/' + this.taskId,
-                    query: {taskDistributeId: this.list.id, type: 2}
+                    query: {taskDistributeId: this.list.id, type: state}
                 });
 
             }

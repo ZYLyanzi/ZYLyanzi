@@ -37,6 +37,11 @@
 		line-height: 1rem;
 		font-size: 0.32rem;
 	}
+    .no-content {
+        padding-top: 100px;
+        font-size: 16px;
+
+    }
 </style>
 
 <template>
@@ -52,6 +57,9 @@
 			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">充值成功</div>
 			<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">充值失败</div>
 		</div>
+        <div class=" no-content" v-if="list.length <= 0">
+            暂无数据
+        </div>
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">

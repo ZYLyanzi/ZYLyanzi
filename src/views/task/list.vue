@@ -1,3 +1,10 @@
+<style scoped>
+    .no-content {
+        padding-top: 100px;
+        font-size: 16px;
+
+    }
+</style>
 <template>
 	<section>
 		<!--<mt-header fixed title="我发布的任务">-->
@@ -5,7 +12,9 @@
 				<!--<mt-button icon="back"></mt-button>-->
 			<!--</router-link>-->
 		<!--</mt-header>-->
+        <div class="no-content" v-if="taskList.length < 1">暂无任务</div>
 		<div class="list">
+
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">
 				<ul>

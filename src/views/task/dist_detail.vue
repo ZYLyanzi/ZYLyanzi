@@ -32,7 +32,15 @@
     .detail-btn {
         margin: 20px 0;
     }
-
+    .explain{
+        font-size: 14px;
+        text-align: left;
+        margin: 20px 10px;
+    }
+    .explain .title{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
     .detail-btn .mint-button {
         margin: 10px;
     }
@@ -65,9 +73,9 @@
             <div class="item" v-for="item in taskDetail.taskTypeAttrs">
                 <div class="rw-feild">{{item.fieldCname}}</div>
 
-                <div class="rw-value" v-if="item.fieldType == 'text'">{{item.fieldContent}}</div>
-                <div class="rw-value" v-if="item.fieldType == 'img'">
-                    <img v-for="item in item.fieldContent" :src="item"/>
+                <div class="rw-value" v-if="item.formType == 'text'">{{item.fieldContent}}</div>
+                <div class="rw-value" v-if="item.formType == 'img'">
+                    <img v-for="d in JSON.parse(item.fieldContent)" :src="d"/>
                 </div>
             </div>
 
@@ -82,6 +90,11 @@
             <mt-button type="danger" @click="toStart(1)">开始任务</mt-button>
             <mt-button type="default" @click="toStart(2)">放弃任务</mt-button>
 
+        </div>
+        <div class="explain">
+            <div class="title">提示说明：</div>
+            <p>（1）点击开始任务才能开始做任务；</p>
+            <p>（2）只有点击开始任务或放弃任务后才能做下一个任务；</p>
         </div>
     </section>
 </template>
@@ -145,10 +158,7 @@
                         }
                     }
                 });
-
             }
         },
-
-
     }
 </script>

@@ -39,8 +39,11 @@ export default {
 		return ajax.post(api.queryScoreCz, params)
 	},
 	carousel() {
-		return ajax.post(api.carousel)
-	},
+        return ajax.post(api.carousel)
+    },
+    appealTask(para) {
+        return ajax.post(api.appealTask, para)
+    },
 
 
 

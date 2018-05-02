@@ -108,17 +108,15 @@
 						user.bindInviteCode(para).then((res) => {
 							if (res.msgCode == 1) {
 								vm.$store.commit('setUserCode',  1);
-								if(isFirst == 0){
-                                    Toast({
-                                        message: '提交成功',
-                                        iconClass: 'icon icon-success'
-                                    });
-                                    setTimeout(() => {
-                                        this.$router.replace({
-                                            path: '/'
-                                        })
-                                    }, 2000);
-                                }
+                                Toast({
+                                    message: '绑定成功',
+                                    iconClass: 'icon icon-success'
+                                });
+                                setTimeout(() => {
+                                    this.$router.replace({
+                                        path: '/'
+                                    })
+                                }, 2000);
 
 							}
 						});

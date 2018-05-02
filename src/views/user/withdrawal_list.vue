@@ -21,7 +21,7 @@
 		/*margin-top: 40px;*/
 	}
 	.reward-list {
-		height: 1.6rem;
+		height: 2.2rem;
 	}
 
 	.reward-list .desc {
@@ -35,6 +35,12 @@
 		line-height: 1rem;
 		font-size: 0.32rem;
 	}
+
+    .no-content {
+        padding-top: 100px;
+        font-size: 16px;
+
+    }
 </style>
 
 <template>
@@ -50,6 +56,9 @@
 			<div class="tap-item" :class="{'selected': state==2}" @click="changestate(2)">提现成功</div>
 			<div class="tap-item" :class="{'selected': state==3}" @click="changestate(3)">提现失败</div>
 		</div>
+        <div class=" no-content" v-if="list.length <= 0">
+            暂无数据
+        </div>
 		<div class="list">
 			<mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded"
 			             :auto-fill="false" ref="loadmore">
@@ -59,6 +68,9 @@
                 <span class="desc">
 
                 <div class="title">提现金额：{{item.money}}元</div>
+                <div class="time" v-if="item.payType==2">收款方式：支付宝</div>
+                <div class="time" v-if="item.payType==1">收款方式：微信</div>
+                 <div class="time">收款账号: {{item.payNum}}</div>
                  <div class="time">提交时间: {{item.applyTime}}</div>
                  <div class="time" v-if="state==2">通过时间: {{item.rechargeTime}}</div>
               </span>
