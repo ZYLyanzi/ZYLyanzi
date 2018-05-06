@@ -212,7 +212,7 @@
             toCheckDetail(id, state, taskId) {
                 this.$router.push({
                     path: '/task/check_detail/' + id,
-                    query: {type: this.type, state: state, taskId: this.taskId}
+                    query: {type: this.type, state: state, taskId: taskId}
                 });
             }
         },
