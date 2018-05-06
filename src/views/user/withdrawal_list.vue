@@ -21,7 +21,7 @@
 		/*margin-top: 40px;*/
 	}
 	.reward-list {
-		height: 2.2rem;
+		height: 2.6rem;
 	}
 
 	.reward-list .desc {
@@ -72,7 +72,7 @@
                 <div class="time" v-if="item.payType==1">收款方式：微信</div>
                  <div class="time">收款账号: {{item.payNum}}</div>
                  <div class="time">提交时间: {{item.applyTime}}</div>
-                 <div class="time" v-if="state==2">通过时间: {{item.rechargeTime}}</div>
+                 <div class="time" v-if="item.checkRemark">处理结果: {{item.checkRemark}}</div>
               </span>
 
 						<span>

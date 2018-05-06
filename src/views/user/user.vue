@@ -132,6 +132,9 @@
 					<div class="user-name user-jifen">奖励积分：{{score}}</div>
 					<div class="user-name user-jifen">发布积分：{{releaseScore}}</div>
 				</div>
+                <div class="part" v-if="user.remark">
+                    <div class="user-name user-jifen">{{user.remark}}</div>
+                </div>
 			</div>
 
 			<div class="options">
@@ -202,6 +205,7 @@
 		components: {bootomTap},
 		data() {
 			return {
+			    user: '',
 			    type: '',
                 userId: '',
 				tapName: 'user',
@@ -220,6 +224,7 @@
 			let vm = this;
 			user.queryUserInfo(para).then((res) => {
 				if (res.msgCode == 1) {
+				    vm.user = res.user;
 				    vm.type = res.user.type;
 					vm.$store.commit('setUserInfo', res.user);
 					vm.$store.commit('setUserCode', res.user.parentUserid);

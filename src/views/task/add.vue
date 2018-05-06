@@ -417,9 +417,11 @@
                 let vm = this;
                 console.log('itemData', itemData)
                 vm.taskParams.taskType = itemData.id;
+                vm.taskParams.defRemark = itemData.defRemark;
                 vm.unitPrice = itemData.defPrice;
                 vm.taskParams.taskTypeAttrs = itemData.taskTypeAttrs;
                 vm.taskParams.taskName = itemData.name + '任务' + localStorage.nickName;
+                console.log(" vm.taskParams.defRemark",  vm.taskParams.defRemark)
             },
             toPay() {
                 this.$router.push({

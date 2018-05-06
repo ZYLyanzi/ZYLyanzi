@@ -137,6 +137,9 @@
 			</el-upload>
 		</div>
 
+        <div class="layout" v-if="submitEndTime">
+            {{submitEndTime}}
+        </div>
 
 		<div class="start-detail-btn">
 
@@ -169,6 +172,7 @@
                 status: '',
 				type: '',
                 shareUrl: '',
+                submitEndTime: '',
 
 				taskDistributeId: '',
 				uploadForm: {},
@@ -185,6 +189,7 @@
 			this.token = localStorage.token;
 			this.id = this.$route.params.id;
 			this.taskDistributeId = this.$route.query.taskDistributeId;
+			this.submitEndTime = this.$route.query.submitEndTime;
 			this.type = this.$route.query.type;
 			this.getInfo()
 		},

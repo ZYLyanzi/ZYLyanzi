@@ -44,6 +44,28 @@
     .detail-btn .mint-button {
         margin: 10px;
     }
+
+    .add-btn {
+        position: fixed;
+        bottom: 60px;
+        right: 20px;
+        width: 60px;
+        border-radius: 30px;
+        height: 60px;
+        /*line-height: 60px;*/
+        background-color: #ef1d12;
+        text-align: center;
+        color: #ffffff;
+    }
+    .pay-btn{
+        background-color: #409EFF;
+        opacity:0.8;
+    }
+    .txt{
+        position: absolute;
+        top: 10px;
+        left: 16px;
+    }
 </style>
 <template>
     <section>
@@ -85,6 +107,12 @@
             </div>
         </div>
 
+        <div class="add-btn pay-btn">
+            <label class="txt" @click="toHome()">
+                <div>返回</div>
+                <div>首页</div>
+            </label>
+        </div>
 
         <div class="detail-btn">
             <mt-button type="danger" @click="toStart(1)">开始任务</mt-button>
@@ -114,10 +142,11 @@
 
         created() {
             this.getInfo()
+            this.$store.commit('setTop', 1);
+            this.$store.commit(types.TITLE, '派发任务详情');
         },
         mounted() {
-	        this.$store.commit('setTop', 1);
-            this.$store.commit(types.TITLE, '派发任务详情');
+
         },
         destroyed() {
             if (this.taskDetail.id && this.itState != 1) {
@@ -126,6 +155,11 @@
 
         },
         methods: {
+            toHome(){
+                this.$router.replace({
+                    path: '/',
+                });
+            },
             getInfo() {
                 let vm = this;
                 task.distributeTask().then((res) => {
@@ -151,7 +185,7 @@
                             vm.itState = 1;
                             vm.$router.replace({
                                 path: '/task/start/' + vm.taskDetail.id,
-                                query: {taskDistributeId: vm.taskDetail.taskDistributeId,}
+                                query: {taskDistributeId: vm.taskDetail.taskDistributeId, submitEndTime: res.submitEndTime}
                             });
                         } else if (type == 2) {
                             vm.getInfo()

@@ -54,6 +54,27 @@
 		font-size: 0.32rem;
 		margin-top: 50px;
 	}
+    .add-btn {
+        position: fixed;
+        bottom: 60px;
+        right: 20px;
+        width: 60px;
+        border-radius: 30px;
+        height: 60px;
+        /*line-height: 60px;*/
+        background-color: #ef1d12;
+        text-align: center;
+        color: #ffffff;
+    }
+    .pay-btn{
+        background-color: #409EFF;
+        opacity:0.8;
+    }
+    .txt{
+        position: absolute;
+        top: 10px;
+        left: 16px;
+    }
 </style>
 <template>
 	<section>
@@ -81,6 +102,12 @@
 					</li>
 				</ul>
 			</div>
+            <div class="add-btn pay-btn">
+                <label class="txt" @click="toHome()">
+                    <div>返回</div>
+                    <div>首页</div>
+                </label>
+            </div>
 			
 		</div>
 
@@ -107,6 +134,11 @@
             this.$store.commit(types.TITLE, '任务列表');
         },
 		methods: {
+            toHome(){
+                this.$router.replace({
+                    path: '/',
+                });
+            },
 			gotoPage(id) {
 				if (id == 1) {
 					this.$router.push({

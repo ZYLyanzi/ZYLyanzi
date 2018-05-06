@@ -123,7 +123,7 @@
 				<div class="new-user">
                     <div class="title">新手教程</div>
 					<!--<iframe style="width: 7.5rem; height: 4.8rem" frameborder="0"  src="https://v.qq.com/iframe/player.html?vid=g0638xbe6et&tiny=0&auto=0" allowfullscreen></iframe>-->
-                    <iframe  style="width: 7.5rem; height: 4.8rem" src="//jqaaa.com/jx.php?url=https://v.qq.com/x/page/p06402qwss3.html" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+                    <iframe  style="width: 7.5rem; height: 4.8rem" :src="videoUrl" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
                     <!--<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0638xbe6et&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>-->
                 </div>
 			</div>
@@ -145,6 +145,7 @@
 			return {
 				allLoaded: false,
 				tapName: 'home',
+                videoUrl: '//jqaaa.com/jx.php?url=https://v.qq.com/x/page/p06402qwss3.html',
 				carousels: [
 				],
 				taskList: [
@@ -178,7 +179,8 @@
                     userId: vm.userId,
                 }
 	            task.carousel().then((r) => {
-			            vm.carousels = r.carousels
+			            vm.carousels = r.carousels;
+			            vm.videoUrl = r.videoUrl;
 			            console.log("carousels",  vm.carousels);
 //						alert("获取carousels")
 			            user.queryUserInfo(para2).then((res2) => {
