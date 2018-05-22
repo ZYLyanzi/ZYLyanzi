@@ -149,9 +149,9 @@
 					<div class="rw-radio" @click="changeType(2)">
 						<i class="radio-icon ico" :class="{'selected': payType == 2}"></i><span>支付宝</span>
 					</div>
-					<div class="rw-radio" @click="changeType(1)">
-						<i class="radio-icon ico" :class="{'selected': payType == 1}"></i><span>微信</span>
-					</div>
+					<!--<div class="rw-radio" @click="changeType(1)">-->
+						<!--<i class="radio-icon ico" :class="{'selected': payType == 1}"></i><span>微信</span>-->
+					<!--</div>-->
 				</div>
 			</div>
 

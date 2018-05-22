@@ -44,6 +44,9 @@ export default {
     appealTask(para) {
         return ajax.post(api.appealTask, para)
     },
+	taskOffShelf(para) {
+		return ajax.post(api.taskOffShelf, para)
+	},
 
 
 

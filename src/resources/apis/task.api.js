@@ -13,6 +13,7 @@ export default {
 	carousel: 'api/common/carousel',
 	// getList: 'api/task/myReleaseTask',//列表
 	myReleaseTask: 'api/task/myReleaseTask',//列表
-    appealTask: 'api/task/appealTask'//列表
+    appealTask: 'api/task/appealTask',//列表
+	taskOffShelf: 'api/task/taskOffShelf',//列表
 
 }

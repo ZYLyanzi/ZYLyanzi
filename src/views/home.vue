@@ -8,11 +8,15 @@
 	.new-user {
 		width: 100%;
         text-align: left;
-
+		margin-top: 0.4rem;
+		height: 6.8rem;
+		margin-bottom: 1rem;
 		/*height: 150px;*/
 		/*background: #ffd705;*/
 	}
+
     .new-user .title{
+	    color: #26a2ff;
         margin: 10px 0;
         font-size: 16px;
         margin-left: 10px;
@@ -121,9 +125,11 @@
 
 
 				<div class="new-user">
-                    <div class="title">新手教程</div>
+					<router-link to="/task/new_course" class="title" >
+					观看新手教程
+					</router-link>
 					<!--<iframe style="width: 7.5rem; height: 4.8rem" frameborder="0"  src="https://v.qq.com/iframe/player.html?vid=g0638xbe6et&tiny=0&auto=0" allowfullscreen></iframe>-->
-                    <iframe  style="width: 7.5rem; height: 4.8rem" :src="videoUrl" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+                    <!--<iframe  style="width: 7.5rem; height: 4.8rem" :src="videoUrl" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>-->
                     <!--<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=g0638xbe6et&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>-->
                 </div>
 			</div>

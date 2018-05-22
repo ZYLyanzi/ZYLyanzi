@@ -67,3 +67,25 @@
 .need-top{
     margin-top: 40px;
 }
+
+.add-btn {
+	position: fixed;
+	bottom: 60px;
+	right: 20px;
+	width: 60px;
+	border-radius: 30px;
+	height: 60px;
+	/*line-height: 60px;*/
+	background-color: #ef1d12;
+	text-align: center;
+	color: #ffffff;
+}
+.pay-btn{
+	background-color: #409EFF;
+	opacity:0.8;
+}
+.txt{
+	position: absolute;
+	top: 10px;
+	left: 16px;
+}

@@ -47,6 +47,14 @@
       <!--</router-link>-->
     <!--</mt-header>-->
     <div class="layout">
+	    <div class="item">
+		    <div class="rw-feild">下架时间</div>
+		    <div class="rw-value" v-if="taskDetail.offShelfTime">{{taskDetail.offShelfTime}}</div>
+	    </div>
+	    <div class="item"  v-if="taskDetail.offRemark">
+		    <div class="rw-feild">下架说明</div>
+		    <div class="rw-value">{{taskDetail.offRemark}}</div>
+	    </div>
       <div class="item">
         <div class="rw-feild">任务名称</div>
         <div class="rw-value">{{taskDetail.taskName}}</div>
@@ -98,8 +106,9 @@
 
 
     <div class="detail-btn">
-      <mt-button type="danger" @click="toEdit(1)">审核提交任务</mt-button>
-      <mt-button type="default" @click="toEdit(2)">编辑任务</mt-button>
+      <mt-button type="danger" size="small" @click="toEdit(1)">审核提交任务</mt-button>
+      <mt-button type="primary" size="small"  @click="toEdit(2)">编辑</mt-button>
+      <mt-button type="default"  size="small"  @click="offSelf(2)" v-if="taskDetail.state == 1 || taskDetail.state == 2">下架</mt-button>
 
     </div>
 
@@ -125,6 +134,27 @@
           this.$store.commit(types.TITLE, '任务详情');
       },
     methods: {
+	    offSelf(){
+		    let vm = this;
+		    let para = {
+			    taskId: vm.id
+		    };
+
+		    task.taskOffShelf(para).then((res) => {
+			    if (res.msgCode == 1) {
+				    Toast({
+					    message: '操作成功',
+					    iconClass: 'icon icon-success'
+				    });
+				    setTimeout(() => {
+					    this.$router.push({
+						    path: '/user'
+					    })
+				    }, 2000);
+
+			    }
+		    });
+	    },
       getInfo() {
         let vm = this;
         let para = {
