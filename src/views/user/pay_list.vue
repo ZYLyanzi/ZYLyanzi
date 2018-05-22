@@ -74,7 +74,7 @@
 	                  <div class="title" v-if="item.payType == 2">充值方式：支付宝</div>
 	               <div class="time">充值备注: {{item.remark}}</div>
                  <div class="time">提交时间: {{item.summitTime}}</div>
-                 <div class="time" v-if="state==2">充值时间: {{item.rechargeTime}}</div>
+                 <div class="time" v-if="item.checkRemark" >处理结果: {{item.checkRemark}}</div>
               </span>
 							<span>
               	<span class="btn">

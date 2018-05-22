@@ -214,7 +214,7 @@
                             iconClass: 'icon icon-success'
                         });
                         setTimeout(() => {
-                            this.$router.push({
+                            this.$router.replace({
                                 path: '/task/check/' + vm.taskId,
                             });
                         }, 2000);

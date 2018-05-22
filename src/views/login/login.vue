@@ -66,20 +66,18 @@
     <section>
         <mt-header fixed title="登录">
         </mt-header>
-        <div class="page-part">
+        <!--<div class="page-part">-->
             <!--<mt-field label="账号" placeholder="请输入用户名" :attr="{maxlength:20}" v-model="userName"-->
                       <!--:state='rules.userName.itState'></mt-field>-->
             <!--<mt-field label="密码" placeholder="请输入密码" type="password" :attr="{maxlength:8}" v-model="password"-->
                       <!--:state='rules.password.itState'></mt-field>-->
-        </div>
+        <!--</div>-->
         <div class="login-bottom need-top">
             <!--<mt-button size="large" type="primary" class="login-btn-login" @click="toLogin">登录</mt-button>-->
 
             <div class="line">----------------快速登录---------------</div>
 
-
             <div class="kuaijie">
-
                 <!--<div class="iocn-login" onclick="BSL.Login('QQ','http://www.daren11.com/dist/', '')">-->
                     <!--<img class="qq" src="../../../static/img/qq.png"/>-->
                     <!--<div class="text">QQ</div>-->

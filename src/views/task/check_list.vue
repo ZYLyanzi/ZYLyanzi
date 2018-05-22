@@ -99,6 +99,7 @@
                <div class="state" v-if="item.state == 3">已提交</div>
                <div class="state" v-if="item.state == 4">已完成</div>
                <div class="state" v-if="item.state == 5">未通过</div>
+               <div class="state" v-if="item.state == 8">超时未提交</div>
                <div class="state" v-if="item.state == 9">已放弃</div>
                <div class="state exp" v-if="item.exceptionCode == 1">申诉中</div>
                <div class="state exp" v-if="item.exceptionCode == 2">申诉成功</div>
@@ -211,7 +212,7 @@
             toCheckDetail(id, state, taskId) {
                 this.$router.push({
                     path: '/task/check_detail/' + id,
-                    query: {type: this.type, state: state, taskId: this.taskId}
+                    query: {type: this.type, state: state, taskId: taskId}
                 });
             }
         },

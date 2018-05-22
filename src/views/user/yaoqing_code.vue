@@ -41,6 +41,15 @@
         width: 2.8rem;
         margin: 0.4rem;
     }
+    .explain{
+        font-size: 14px;
+        text-align: left;
+        margin: 20px 10px;
+    }
+    .explain .title{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
 </style>
 
 <template>
@@ -65,6 +74,11 @@
             </div>
 
         </div>
+        <div class="explain">
+            <div class="title">邀请用户，下载互帮宝，并填写你的邀请码，实现躺赚。</div>
+            <p>例如：你邀请的人每做一个砍价任务奖励1积分，每发布一个任务0.8*数量。 奖励相当可观，快快邀请朋友下载互帮宝吧~</p>
+        </div>
+
 
 
         <bootomTap :tapName="tapName"></bootomTap>
