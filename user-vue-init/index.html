@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="format-detection" content="telephone=yes"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" href="./static/favicon.ico" type="image/x-icon" id="page_favionc">
+	<title>vue管理系统pc</title>
+	<script>
+		new function (){
+			var _self = this;
+			_self.width = 750;//设置默认最大宽度
+			_self.fontSize = 100;//默认字体大小
+			_self.widthProportion = function(){
+				var device_width = document.getElementsByTagName("html")[0].offsetWidth;
+				var p = device_width/_self.width;
+				return p;
+			};
+			_self.changePage = function(){
+				var rem = _self.widthProportion()*_self.fontSize;
+				document.getElementsByTagName("html")[0].setAttribute("style","font-size:"+rem+"px !important");
+			}
+			_self.changePage();
+			window.addEventListener("resize",function(){_self.changePage();},false);
+		};
+	</script>
+</head>
+<body>
+
+<div id="app"></div>
+<!--错误监控-->
+<!--<script type="text/javascript" src="//www.17weima.com/as/public/static/common/js-log.js"></script>-->
+<!--<script>-->
+	<!--window.log = new Log({-->
+		<!--monitor:['script','js','ajax','load','link'],-->
+		<!--debug:false-->
+	<!--});-->
+<!--</script>-->
+</body>
+</html>

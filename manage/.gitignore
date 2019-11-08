@@ -1,0 +1,22 @@
+.DS_Store
+node_modules
+/dist
+example.html
+favicon.ico
+# Levi_liu
+.env.local
+.env.*.local
+
+# Levi_liu
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Levi_liu
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
